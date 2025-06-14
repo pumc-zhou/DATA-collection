@@ -1,0 +1,640 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第四章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Jul 2024, 10:08:11
+
+{com}. do "C:\Users\XuQi\AppData\Local\Temp\STD2670_000000.tmp"
+{txt}
+{com}. use "C:\Users\XuQi\Desktop\cfps2010.dta", clear
+{txt}
+{com}. 
+. *查看变量
+. describe
+
+{txt}Contains data from {res}C:\Users\XuQi\Desktop\cfps2010.dta
+{txt} Observations:{res}         4,137                  
+{txt}    Variables:{res}            12                  5 Aug 2022 19:25
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:pid            }{txt}{bind: double  }{bind:%12.0g    }{space 1}{bind:pid      }{bind:  }{res}{res}个人id{p_end}
+{p 0 48}{bind:provcd         }{txt}{bind: double  }{bind:%24.0g    }{space 1}{bind:provcd   }{bind:  }{res}{res}省国标码{p_end}
+{p 0 48}{bind:gender         }{txt}{bind: double  }{bind:%12.0g    }{space 1}{bind:gender   }{bind:  }{res}{res}性别{p_end}
+{p 0 48}{bind:age            }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}年龄{p_end}
+{p 0 48}{bind:age2           }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}年龄平方{p_end}
+{p 0 48}{bind:age3           }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}年龄三次方{p_end}
+{p 0 48}{bind:lninc          }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}收入对数{p_end}
+{p 0 48}{bind:college        }{txt}{bind: double  }{bind:%9.0g     }{space 1}{bind:yesorno  }{bind:  }{res}{res}是否上大学{p_end}
+{p 0 48}{bind:hukou          }{txt}{bind: double  }{bind:%12.0g    }{space 1}{bind:hukou    }{bind:  }{res}{res}3岁时户口性质{p_end}
+{p 0 48}{bind:sibling        }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:yesorno  }{bind:  }{res}{res}是否独生子女{p_end}
+{p 0 48}{bind:race           }{txt}{bind: double  }{bind:%9.0g     }{space 1}{bind:yesorno  }{bind:  }{res}{res}是否汉族{p_end}
+{p 0 48}{bind:fmedu          }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:fmedu    }{bind:  }{res}{res}父母是否上过高中{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. 
+. *一元线性回归
+. reg lninc college
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     4,137
+{txt}{hline 13}{c +}{hline 34}   F(1, 4135)      = {res}   508.22
+{txt}       Model {c |} {res} 671.883317         1  671.883317   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 5466.56371     4,135  1.32202266   {txt}R-squared       ={res}    0.1095
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1092
+{txt}       Total {c |} {res} 6138.44703     4,136  1.48415063   {txt}Root MSE        =   {res} 1.1498
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0365338{col 37}{space 1}   22.54{col 46}{space 3}0.000{col 54}{space 4} .7519861{col 67}{space 3}  .895238
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .0230235{col 37}{space 1}  406.25{col 46}{space 3}0.000{col 54}{space 4} 9.308051{col 67}{space 3} 9.398327
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. reg lninc college, vce(robust)   // 异方差稳健标准误
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 4135)        =  {res}   582.05
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1095
+                                                {txt}Root MSE          =    {res} 1.1498
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0341385{col 37}{space 1}   24.13{col 46}{space 3}0.000{col 54}{space 4} .7566823{col 67}{space 3} .8905418
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .0256882{col 37}{space 1}  364.10{col 46}{space 3}0.000{col 54}{space 4} 9.302826{col 67}{space 3} 9.403552
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college, vce(cluster provcd)   //聚类稳健标准误
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   271.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1095
+                                                {txt}Root MSE          =    {res} 1.1498
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0500155{col 37}{space 1}   16.47{col 46}{space 3}0.000{col 54}{space 4} .7203851{col 67}{space 3}  .926839
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .1084703{col 37}{space 1}   86.23{col 46}{space 3}0.000{col 54}{space 4} 9.129317{col 67}{space 3} 9.577061
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. *多元线性回归
+. reg lninc college hukou, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(2, 24)          =  {res}   219.69
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1169
+                                                {txt}Root MSE          =    {res} 1.1451
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .798281{col 26}{space 2} .0451727{col 37}{space 1}   17.67{col 46}{space 3}0.000{col 54}{space 4} .7050491{col 67}{space 3}  .891513
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .2155333{col 26}{space 2} .0611855{col 37}{space 1}    3.52{col 46}{space 3}0.002{col 54}{space 4} .0892526{col 67}{space 3} .3418141
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  9.27541{col 26}{space 2} .0993474{col 37}{space 1}   93.36{col 46}{space 3}0.000{col 54}{space 4} 9.070367{col 67}{space 3} 9.480453
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *理解偏回归系数
+. reg college hukou, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}    27.84
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0137
+                                                {txt}Root MSE          =    {res} .48606
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}     college{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}hukou {c |}{col 14}{res}{space 2}  .116539{col 26}{space 2} .0220861{col 37}{space 1}    5.28{col 46}{space 3}0.000{col 54}{space 4} .0709555{col 67}{space 3} .1621224
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .3496532{col 26}{space 2} .0161816{col 37}{space 1}   21.61{col 46}{space 3}0.000{col 54}{space 4} .3162561{col 67}{space 3} .3830504
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict e, residuals
+{txt}
+{com}. 
+. reg lninc e, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   321.05
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1014
+                                                {txt}Root MSE          =    {res}  1.155
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}e {c |}{col 14}{res}{space 2}  .798281{col 26}{space 2}  .044552{col 37}{space 1}   17.92{col 46}{space 3}0.000{col 54}{space 4} .7063302{col 67}{space 3} .8902318
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.680285{col 26}{space 2} .1232655{col 37}{space 1}   78.53{col 46}{space 3}0.000{col 54}{space 4} 9.425877{col 67}{space 3} 9.934692
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *遗漏变量公式
+. dis .823612-.798281
+{res}.025331
+{txt}
+{com}. 
+. reg hukou college, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}    33.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0137
+                                                {txt}Root MSE          =    {res} .48812
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       hukou{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .1175271{col 26}{space 2} .0204066{col 37}{space 1}    5.76{col 46}{space 3}0.000{col 54}{space 4} .0754099{col 67}{space 3} .1596443
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .3608661{col 26}{space 2} .0559186{col 37}{space 1}    6.45{col 46}{space 3}0.000{col 54}{space 4} .2454558{col 67}{space 3} .4762764
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. dis .1175271*.2155333
+{res}.025331
+{txt}
+{com}. 
+. 
+. *纳入更多控制变量
+. reg lninc college hukou##i.age, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}{help j_robustsingular:F(23, 24) }        =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.1501
+                                                {txt}Root MSE          =    {res} 1.1316
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .7477749{col 26}{space 2} .0544757{col 37}{space 1}   13.73{col 46}{space 3}0.000{col 54}{space 4} .6353425{col 67}{space 3} .8602073
+{txt}{space 12} {c |}
+{space 7}hukou {c |}
+{space 3}城镇户口  {c |}{col 14}{res}{space 2}-.0787305{col 26}{space 2} .1418798{col 37}{space 1}   -0.55{col 46}{space 3}0.584{col 54}{space 4}-.3715559{col 67}{space 3} .2140949
+{txt}{space 12} {c |}
+{space 9}age {c |}
+{space 9}26  {c |}{col 14}{res}{space 2} .3980867{col 26}{space 2} .1481415{col 37}{space 1}    2.69{col 46}{space 3}0.013{col 54}{space 4} .0923376{col 67}{space 3} .7038358
+{txt}{space 9}27  {c |}{col 14}{res}{space 2} .2684265{col 26}{space 2} .2134622{col 37}{space 1}    1.26{col 46}{space 3}0.221{col 54}{space 4}-.1721377{col 67}{space 3} .7089908
+{txt}{space 9}28  {c |}{col 14}{res}{space 2} .4034527{col 26}{space 2} .1960134{col 37}{space 1}    2.06{col 46}{space 3}0.051{col 54}{space 4}-.0010991{col 67}{space 3} .8080045
+{txt}{space 9}29  {c |}{col 14}{res}{space 2} .3063752{col 26}{space 2} .2061596{col 37}{space 1}    1.49{col 46}{space 3}0.150{col 54}{space 4}-.1191172{col 67}{space 3} .7318677
+{txt}{space 9}30  {c |}{col 14}{res}{space 2}  .808574{col 26}{space 2}  .138855{col 37}{space 1}    5.82{col 46}{space 3}0.000{col 54}{space 4} .5219914{col 67}{space 3} 1.095157
+{txt}{space 9}31  {c |}{col 14}{res}{space 2} .6390432{col 26}{space 2} .1597057{col 37}{space 1}    4.00{col 46}{space 3}0.001{col 54}{space 4} .3094269{col 67}{space 3} .9686596
+{txt}{space 9}32  {c |}{col 14}{res}{space 2} .3162257{col 26}{space 2} .1835314{col 37}{space 1}    1.72{col 46}{space 3}0.098{col 54}{space 4}-.0625646{col 67}{space 3} .6950159
+{txt}{space 9}33  {c |}{col 14}{res}{space 2} .5423168{col 26}{space 2} .1908591{col 37}{space 1}    2.84{col 46}{space 3}0.009{col 54}{space 4}  .148403{col 67}{space 3} .9362305
+{txt}{space 9}34  {c |}{col 14}{res}{space 2} .4480384{col 26}{space 2} .1642828{col 37}{space 1}    2.73{col 46}{space 3}0.012{col 54}{space 4} .1089753{col 67}{space 3} .7871016
+{txt}{space 9}35  {c |}{col 14}{res}{space 2} .4871379{col 26}{space 2} .1332159{col 37}{space 1}    3.66{col 46}{space 3}0.001{col 54}{space 4} .2121937{col 67}{space 3}  .762082
+{txt}{space 9}36  {c |}{col 14}{res}{space 2} .7649181{col 26}{space 2} .1431828{col 37}{space 1}    5.34{col 46}{space 3}0.000{col 54}{space 4} .4694033{col 67}{space 3} 1.060433
+{txt}{space 9}37  {c |}{col 14}{res}{space 2} .5898895{col 26}{space 2} .1644897{col 37}{space 1}    3.59{col 46}{space 3}0.001{col 54}{space 4} .2503994{col 67}{space 3} .9293797
+{txt}{space 9}38  {c |}{col 14}{res}{space 2} .4446396{col 26}{space 2} .1414918{col 37}{space 1}    3.14{col 46}{space 3}0.004{col 54}{space 4} .1526149{col 67}{space 3} .7366642
+{txt}{space 9}39  {c |}{col 14}{res}{space 2} .3132889{col 26}{space 2} .2152405{col 37}{space 1}    1.46{col 46}{space 3}0.158{col 54}{space 4}-.1309457{col 67}{space 3} .7575234
+{txt}{space 9}40  {c |}{col 14}{res}{space 2} .6295174{col 26}{space 2} .1203586{col 37}{space 1}    5.23{col 46}{space 3}0.000{col 54}{space 4} .3811094{col 67}{space 3} .8779254
+{txt}{space 9}41  {c |}{col 14}{res}{space 2} .7413657{col 26}{space 2} .1649781{col 37}{space 1}    4.49{col 46}{space 3}0.000{col 54}{space 4} .4008676{col 67}{space 3} 1.081864
+{txt}{space 9}42  {c |}{col 14}{res}{space 2} .6440224{col 26}{space 2} .1854795{col 37}{space 1}    3.47{col 46}{space 3}0.002{col 54}{space 4} .2612115{col 67}{space 3} 1.026833
+{txt}{space 9}43  {c |}{col 14}{res}{space 2} .1100458{col 26}{space 2}  .261421{col 37}{space 1}    0.42{col 46}{space 3}0.678{col 54}{space 4}-.4295006{col 67}{space 3} .6495921
+{txt}{space 9}44  {c |}{col 14}{res}{space 2} .3310236{col 26}{space 2} .1953046{col 37}{space 1}    1.69{col 46}{space 3}0.103{col 54}{space 4}-.0720652{col 67}{space 3} .7341124
+{txt}{space 9}45  {c |}{col 14}{res}{space 2} .2092177{col 26}{space 2} .2516651{col 37}{space 1}    0.83{col 46}{space 3}0.414{col 54}{space 4}-.3101935{col 67}{space 3} .7286288
+{txt}{space 9}46  {c |}{col 14}{res}{space 2} .5989884{col 26}{space 2} .1833996{col 37}{space 1}    3.27{col 46}{space 3}0.003{col 54}{space 4} .2204702{col 67}{space 3} .9775067
+{txt}{space 9}47  {c |}{col 14}{res}{space 2} .2833783{col 26}{space 2} .1619895{col 37}{space 1}    1.75{col 46}{space 3}0.093{col 54}{space 4}-.0509517{col 67}{space 3} .6177083
+{txt}{space 9}48  {c |}{col 14}{res}{space 2} .2354062{col 26}{space 2} .1468512{col 37}{space 1}    1.60{col 46}{space 3}0.122{col 54}{space 4}-.0676798{col 67}{space 3} .5384923
+{txt}{space 9}49  {c |}{col 14}{res}{space 2} .4378188{col 26}{space 2}  .164764{col 37}{space 1}    2.66{col 46}{space 3}0.014{col 54}{space 4} .0977627{col 67}{space 3} .7778749
+{txt}{space 9}50  {c |}{col 14}{res}{space 2} .0167503{col 26}{space 2} .1750601{col 37}{space 1}    0.10{col 46}{space 3}0.925{col 54}{space 4} -.344556{col 67}{space 3} .3780566
+{txt}{space 9}51  {c |}{col 14}{res}{space 2}-.1610867{col 26}{space 2} .1851799{col 37}{space 1}   -0.87{col 46}{space 3}0.393{col 54}{space 4}-.5432792{col 67}{space 3} .2211059
+{txt}{space 9}52  {c |}{col 14}{res}{space 2}-.1302052{col 26}{space 2}  .286344{col 37}{space 1}   -0.45{col 46}{space 3}0.653{col 54}{space 4}-.7211901{col 67}{space 3} .4607797
+{txt}{space 9}53  {c |}{col 14}{res}{space 2}-.0033811{col 26}{space 2} .2062946{col 37}{space 1}   -0.02{col 46}{space 3}0.987{col 54}{space 4}-.4291521{col 67}{space 3}   .42239
+{txt}{space 9}54  {c |}{col 14}{res}{space 2} .2233507{col 26}{space 2} .1566927{col 37}{space 1}    1.43{col 46}{space 3}0.167{col 54}{space 4}-.1000471{col 67}{space 3} .5467486
+{txt}{space 9}55  {c |}{col 14}{res}{space 2}  .216386{col 26}{space 2} .2374876{col 37}{space 1}    0.91{col 46}{space 3}0.371{col 54}{space 4}-.2737643{col 67}{space 3} .7065363
+{txt}{space 12} {c |}
+{space 3}hukou#age {c |}
+城镇户口#26  {c |}{col 14}{res}{space 2}-.0602352{col 26}{space 2} .2412837{col 37}{space 1}   -0.25{col 46}{space 3}0.805{col 54}{space 4}-.5582202{col 67}{space 3} .4377497
+{txt}城镇户口#27  {c |}{col 14}{res}{space 2} .4551441{col 26}{space 2} .2638459{col 37}{space 1}    1.73{col 46}{space 3}0.097{col 54}{space 4}-.0894072{col 67}{space 3} .9996953
+{txt}城镇户口#28  {c |}{col 14}{res}{space 2} .3544994{col 26}{space 2} .2567836{col 37}{space 1}    1.38{col 46}{space 3}0.180{col 54}{space 4}-.1754758{col 67}{space 3} .8844747
+{txt}城镇户口#29  {c |}{col 14}{res}{space 2} .3823274{col 26}{space 2}  .297972{col 37}{space 1}    1.28{col 46}{space 3}0.212{col 54}{space 4}-.2326564{col 67}{space 3} .9973113
+{txt}城镇户口#30  {c |}{col 14}{res}{space 2}-.0193147{col 26}{space 2} .2555672{col 37}{space 1}   -0.08{col 46}{space 3}0.940{col 54}{space 4}-.5467794{col 67}{space 3}   .50815
+{txt}城镇户口#31  {c |}{col 14}{res}{space 2}-.0932038{col 26}{space 2} .2561528{col 37}{space 1}   -0.36{col 46}{space 3}0.719{col 54}{space 4}-.6218772{col 67}{space 3} .4354696
+{txt}城镇户口#32  {c |}{col 14}{res}{space 2} .6327651{col 26}{space 2} .2259055{col 37}{space 1}    2.80{col 46}{space 3}0.010{col 54}{space 4}  .166519{col 67}{space 3} 1.099011
+{txt}城镇户口#33  {c |}{col 14}{res}{space 2} .1374474{col 26}{space 2} .2483846{col 37}{space 1}    0.55{col 46}{space 3}0.585{col 54}{space 4}-.3751932{col 67}{space 3}  .650088
+{txt}城镇户口#34  {c |}{col 14}{res}{space 2} .4132721{col 26}{space 2} .2550715{col 37}{space 1}    1.62{col 46}{space 3}0.118{col 54}{space 4}-.1131696{col 67}{space 3} .9397139
+{txt}城镇户口#35  {c |}{col 14}{res}{space 2} .2141665{col 26}{space 2} .1854107{col 37}{space 1}    1.16{col 46}{space 3}0.259{col 54}{space 4}-.1685025{col 67}{space 3} .5968354
+{txt}城镇户口#36  {c |}{col 14}{res}{space 2} .0205633{col 26}{space 2} .2148722{col 37}{space 1}    0.10{col 46}{space 3}0.925{col 54}{space 4}-.4229113{col 67}{space 3} .4640378
+{txt}城镇户口#37  {c |}{col 14}{res}{space 2}-.0448259{col 26}{space 2} .2031256{col 37}{space 1}   -0.22{col 46}{space 3}0.827{col 54}{space 4}-.4640566{col 67}{space 3} .3744048
+{txt}城镇户口#38  {c |}{col 14}{res}{space 2} .3187681{col 26}{space 2} .1745486{col 37}{space 1}    1.83{col 46}{space 3}0.080{col 54}{space 4}-.0414825{col 67}{space 3} .6790186
+{txt}城镇户口#39  {c |}{col 14}{res}{space 2} .4006106{col 26}{space 2}  .234722{col 37}{space 1}    1.71{col 46}{space 3}0.101{col 54}{space 4}-.0838317{col 67}{space 3} .8850529
+{txt}城镇户口#40  {c |}{col 14}{res}{space 2} .0135196{col 26}{space 2} .2054592{col 37}{space 1}    0.07{col 46}{space 3}0.948{col 54}{space 4}-.4105273{col 67}{space 3} .4375666
+{txt}城镇户口#41  {c |}{col 14}{res}{space 2}-.0207122{col 26}{space 2} .2451003{col 37}{space 1}   -0.08{col 46}{space 3}0.933{col 54}{space 4}-.5265743{col 67}{space 3} .4851499
+{txt}城镇户口#42  {c |}{col 14}{res}{space 2} .0024452{col 26}{space 2} .2642466{col 37}{space 1}    0.01{col 46}{space 3}0.993{col 54}{space 4}-.5429331{col 67}{space 3} .5478234
+{txt}城镇户口#43  {c |}{col 14}{res}{space 2} .8893687{col 26}{space 2} .3581507{col 37}{space 1}    2.48{col 46}{space 3}0.020{col 54}{space 4} .1501819{col 67}{space 3} 1.628555
+{txt}城镇户口#44  {c |}{col 14}{res}{space 2} .3810794{col 26}{space 2} .2435123{col 37}{space 1}    1.56{col 46}{space 3}0.131{col 54}{space 4}-.1215052{col 67}{space 3}  .883664
+{txt}城镇户口#45  {c |}{col 14}{res}{space 2} .5548028{col 26}{space 2} .3701405{col 37}{space 1}    1.50{col 46}{space 3}0.147{col 54}{space 4}-.2091297{col 67}{space 3} 1.318735
+{txt}城镇户口#46  {c |}{col 14}{res}{space 2}-.0202823{col 26}{space 2} .2068561{col 37}{space 1}   -0.10{col 46}{space 3}0.923{col 54}{space 4}-.4472122{col 67}{space 3} .4066477
+{txt}城镇户口#47  {c |}{col 14}{res}{space 2} .1388032{col 26}{space 2} .3315924{col 37}{space 1}    0.42{col 46}{space 3}0.679{col 54}{space 4}-.5455699{col 67}{space 3} .8231762
+{txt}城镇户口#48  {c |}{col 14}{res}{space 2} .4089894{col 26}{space 2} .2048096{col 37}{space 1}    2.00{col 46}{space 3}0.057{col 54}{space 4}-.0137169{col 67}{space 3} .8316956
+{txt}城镇户口#49  {c |}{col 14}{res}{space 2} .3254708{col 26}{space 2} .2237488{col 37}{space 1}    1.45{col 46}{space 3}0.159{col 54}{space 4}-.1363241{col 67}{space 3} .7872657
+{txt}城镇户口#50  {c |}{col 14}{res}{space 2}   .65057{col 26}{space 2} .2474684{col 37}{space 1}    2.63{col 46}{space 3}0.015{col 54}{space 4} .1398203{col 67}{space 3}  1.16132
+{txt}城镇户口#51  {c |}{col 14}{res}{space 2} .7067489{col 26}{space 2} .3553651{col 37}{space 1}    1.99{col 46}{space 3}0.058{col 54}{space 4}-.0266886{col 67}{space 3} 1.440186
+{txt}城镇户口#52  {c |}{col 14}{res}{space 2} .7470444{col 26}{space 2} .3445403{col 37}{space 1}    2.17{col 46}{space 3}0.040{col 54}{space 4} .0359482{col 67}{space 3} 1.458141
+{txt}城镇户口#53  {c |}{col 14}{res}{space 2}  .694888{col 26}{space 2} .2878366{col 37}{space 1}    2.41{col 46}{space 3}0.024{col 54}{space 4} .1008224{col 67}{space 3} 1.288954
+{txt}城镇户口#54  {c |}{col 14}{res}{space 2} .4754364{col 26}{space 2} .2742435{col 37}{space 1}    1.73{col 46}{space 3}0.096{col 54}{space 4}-.0905744{col 67}{space 3} 1.041447
+{txt}城镇户口#55  {c |}{col 14}{res}{space 2} .2745935{col 26}{space 2} .3227371{col 37}{space 1}    0.85{col 46}{space 3}0.403{col 54}{space 4}-.3915031{col 67}{space 3} .9406901
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 8.937311{col 26}{space 2} .1616701{col 37}{space 1}   55.28{col 46}{space 3}0.000{col 54}{space 4}  8.60364{col 67}{space 3} 9.270982
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}     4,137{col 28}-6686.381{col 39}-6349.885{col 50}    24{col 58} 12747.77{col 69} 12899.63
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] IC note}}.{p_end}
+
+{com}. 
+. reg lninc college hukou##(c.age c.age2 c.age3), vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(8, 24)          =  {res}    88.50
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1331
+                                                {txt}Root MSE          =    {res} 1.1354
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .7547539{col 26}{space 2} .0501103{col 37}{space 1}   15.06{col 46}{space 3}0.000{col 54}{space 4} .6513314{col 67}{space 3} .8581763
+{txt}{space 12} {c |}
+{space 7}hukou {c |}
+{space 3}城镇户口  {c |}{col 14}{res}{space 2}-.5628695{col 26}{space 2} 3.164092{col 37}{space 1}   -0.18{col 46}{space 3}0.860{col 54}{space 4}-7.093234{col 67}{space 3} 5.967495
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .6604027{col 26}{space 2} .2081753{col 37}{space 1}    3.17{col 46}{space 3}0.004{col 54}{space 4}   .23075{col 67}{space 3} 1.090055
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0152886{col 26}{space 2}  .005478{col 37}{space 1}   -2.79{col 46}{space 3}0.010{col 54}{space 4}-.0265947{col 67}{space 3}-.0039824
+{txt}{space 8}age3 {c |}{col 14}{res}{space 2} .0001114{col 26}{space 2} .0000469{col 37}{space 1}    2.38{col 46}{space 3}0.026{col 54}{space 4} .0000147{col 67}{space 3} .0002082
+{txt}{space 12} {c |}
+{space 1}hukou#c.age {c |}
+{space 3}城镇户口  {c |}{col 14}{res}{space 2} .0697643{col 26}{space 2} .2557794{col 37}{space 1}    0.27{col 46}{space 3}0.787{col 54}{space 4}-.4581385{col 67}{space 3} .5976671
+{txt}{space 12} {c |}
+hukou#c.age2 {c |}
+{space 3}城镇户口  {c |}{col 14}{res}{space 2}-.0023666{col 26}{space 2} .0067435{col 37}{space 1}   -0.35{col 46}{space 3}0.729{col 54}{space 4}-.0162844{col 67}{space 3} .0115512
+{txt}{space 12} {c |}
+hukou#c.age3 {c |}
+{space 3}城镇户口  {c |}{col 14}{res}{space 2} .0000268{col 26}{space 2} .0000577{col 37}{space 1}    0.46{col 46}{space 3}0.646{col 54}{space 4}-.0000923{col 67}{space 3} .0001459
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  .358661{col 26}{space 2} 2.584047{col 37}{space 1}    0.14{col 46}{space 3}0.891{col 54}{space 4}-4.974549{col 67}{space 3} 5.691871
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}     4,137{col 28}-6686.381{col 39}-6390.917{col 50}     9{col 58} 12799.83{col 69} 12856.78
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] IC note}}.{p_end}
+
+{com}. 
+. reg lninc college hukou age age2 age3, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(5, 24)          =  {res}   130.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1304
+                                                {txt}Root MSE          =    {res} 1.1367
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .7483616{col 26}{space 2} .0474037{col 37}{space 1}   15.79{col 46}{space 3}0.000{col 54}{space 4} .6505252{col 67}{space 3} .8461981
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .2233219{col 26}{space 2} .0657661{col 37}{space 1}    3.40{col 46}{space 3}0.002{col 54}{space 4} .0875874{col 67}{space 3} .3590565
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .6884785{col 26}{space 2}  .143905{col 37}{space 1}    4.78{col 46}{space 3}0.000{col 54}{space 4} .3914732{col 67}{space 3} .9854837
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0162254{col 26}{space 2} .0037903{col 37}{space 1}   -4.28{col 46}{space 3}0.000{col 54}{space 4}-.0240482{col 67}{space 3}-.0084026
+{txt}{space 8}age3 {c |}{col 14}{res}{space 2}  .000122{col 26}{space 2} .0000326{col 37}{space 1}    3.74{col 46}{space 3}0.001{col 54}{space 4} .0000546{col 67}{space 3} .0001893
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0389147{col 26}{space 2} 1.813509{col 37}{space 1}    0.02{col 46}{space 3}0.983{col 54}{space 4}-3.703984{col 67}{space 3} 3.781814
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat ic
+
+{txt}Akaike's information criterion and Bayesian information criterion
+
+{hline 13}{c TT}{hline 63}
+       Model {c |}          N   ll(null)  ll(model)      df        AIC        BIC
+{hline 13}{c +}{hline 63}
+{ralign 12:.}{col 14}{c |}{res}{col 16}     4,137{col 28}-6686.381{col 39}-6397.289{col 50}     6{col 58} 12806.58{col 69} 12844.54
+{txt}{hline 13}{c BT}{hline 63}
+{p 0 6 0 77}Note: BIC uses N = number of observations. See {helpb bic_note:{bind:[R] IC note}}.{p_end}
+
+{com}. 
+. reg lninc college hukou age age2 age3 gender race sibling i.fmedu, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(10, 24)         =  {res}   241.99
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1601
+                                                {txt}Root MSE          =    {res} 1.1178
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .7418545{col 26}{space 2} .0426899{col 37}{space 1}   17.38{col 46}{space 3}0.000{col 54}{space 4} .6537468{col 67}{space 3} .8299622
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .2232857{col 26}{space 2} .0579839{col 37}{space 1}    3.85{col 46}{space 3}0.001{col 54}{space 4} .1036129{col 67}{space 3} .3429585
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .6743558{col 26}{space 2}  .164432{col 37}{space 1}    4.10{col 46}{space 3}0.000{col 54}{space 4} .3349849{col 67}{space 3} 1.013727
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0156173{col 26}{space 2} .0042856{col 37}{space 1}   -3.64{col 46}{space 3}0.001{col 54}{space 4}-.0244623{col 67}{space 3}-.0067723
+{txt}{space 8}age3 {c |}{col 14}{res}{space 2} .0001151{col 26}{space 2} .0000365{col 37}{space 1}    3.16{col 46}{space 3}0.004{col 54}{space 4} .0000398{col 67}{space 3} .0001904
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .3943385{col 26}{space 2} .0417227{col 37}{space 1}    9.45{col 46}{space 3}0.000{col 54}{space 4} .3082271{col 67}{space 3} .4804498
+{txt}{space 8}race {c |}{col 14}{res}{space 2} .1793763{col 26}{space 2} .1014295{col 37}{space 1}    1.77{col 46}{space 3}0.090{col 54}{space 4} -.029964{col 67}{space 3} .3887166
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .1837219{col 26}{space 2} .0792935{col 37}{space 1}    2.32{col 46}{space 3}0.029{col 54}{space 4} .0200681{col 67}{space 3} .3473757
+{txt}{space 12} {c |}
+{space 7}fmedu {c |}
+{space 9}是  {c |}{col 14}{res}{space 2}  .025374{col 26}{space 2} .0357401{col 37}{space 1}    0.71{col 46}{space 3}0.485{col 54}{space 4}-.0483899{col 67}{space 3} .0991379
+{txt}{space 7}缺失  {c |}{col 14}{res}{space 2} .0073327{col 26}{space 2} .0397113{col 37}{space 1}    0.18{col 46}{space 3}0.855{col 54}{space 4}-.0746275{col 67}{space 3} .0892929
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.3450864{col 26}{space 2} 2.094658{col 37}{space 1}   -0.16{col 46}{space 3}0.871{col 54}{space 4}-4.668247{col 67}{space 3} 3.978074
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *分解回归系数
+. reg lninc college if hukou==0, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     2,451
+                                                {txt}F(1, 24)          =  {res}   477.21
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1018
+                                                {txt}Root MSE          =    {res}  1.238
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .873513{col 26}{space 2} .0399865{col 37}{space 1}   21.85{col 46}{space 3}0.000{col 54}{space 4} .7909849{col 67}{space 3} .9560412
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.249105{col 26}{space 2} .1050262{col 37}{space 1}   88.06{col 46}{space 3}0.000{col 54}{space 4} 9.032342{col 67}{space 3} 9.465869
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college if hukou==1, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     1,686
+                                                {txt}F(1, 24)          =  {res}    63.29
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1097
+                                                {txt}Root MSE          =    {res} .99279
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6983452{col 26}{space 2} .0877811{col 37}{space 1}    7.96{col 46}{space 3}0.000{col 54}{space 4} .5171739{col 67}{space 3} .8795166
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.537533{col 26}{space 2} .1003993{col 37}{space 1}   95.00{col 46}{space 3}0.000{col 54}{space 4} 9.330319{col 67}{space 3} 9.744747
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. tab hukou
+
+    {txt}3岁时户 {c |}
+     口性质 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+   农村户口 {c |}{res}      2,451       59.25       59.25
+{txt}   城镇户口 {c |}{res}      1,686       40.75      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+{txt}
+{com}. tab college if hukou==0
+
+     {txt}是否上 {c |}
+       大学 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         否 {c |}{res}      1,594       65.03       65.03
+{txt}         是 {c |}{res}        857       34.97      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,451      100.00
+{txt}
+{com}. tab college if hukou==1
+
+     {txt}是否上 {c |}
+       大学 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         否 {c |}{res}        900       53.38       53.38
+{txt}         是 {c |}{res}        786       46.62      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      1,686      100.00
+{txt}
+{com}. 
+. 
+. dis 34.97*65.03*59.25
+{res}134740.37
+{txt}
+{com}. dis 53.38*46.62*40.75
+{res}101409.46
+{txt}
+{com}. 
+. dis 134740.37/(134740.37+101409.46)
+{res}.57057153
+{txt}
+{com}. dis 101409.46/(134740.37+101409.46)
+{res}.42942847
+{txt}
+{com}. dis .57057153*.873513+.6983452*.42942847
+{res}.79829096
+{txt}
+{com}. 
+. *回归调整估计量
+. teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college), vce(robust)
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 2.620e-24}  
+Iteration 1:{space 2}EE criterion = {res: 9.251e-30}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: regression adjustment}
+{txt:Outcome model}{col 16}:{res: linear}
+{txt:Treatment model}{col 16}:{res: none}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7887353{col 26}{space 2} .0373127{col 37}{space 1}   21.14{col 46}{space 3}0.000{col 54}{space 4} .7156038{col 67}{space 3} .8618667
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.413724{col 26}{space 2} .0271812{col 37}{space 1}  346.33{col 46}{space 3}0.000{col 54}{space 4}  9.36045{col 67}{space 3} 9.466998
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college), vce(robust) atet
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 2.620e-24}  
+Iteration 1:{space 2}EE criterion = {res: 7.826e-30}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: regression adjustment}
+{txt:Outcome model}{col 16}:{res: linear}
+{txt:Treatment model}{col 16}:{res: none}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATET         {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .6711883{col 26}{space 2} .0416622{col 37}{space 1}   16.11{col 46}{space 3}0.000{col 54}{space 4}  .589532{col 67}{space 3} .7528446
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.505613{col 26}{space 2} .0359548{col 37}{space 1}  264.38{col 46}{space 3}0.000{col 54}{space 4} 9.435143{col 67}{space 3} 9.576083
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college), vce(robust) control(1) tlevel(0) atet
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 2.620e-24}  
+Iteration 1:{space 2}EE criterion = {res: 1.079e-29}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: regression adjustment}
+{txt:Outcome model}{col 16}:{res: linear}
+{txt:Treatment model}{col 16}:{res: none}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATET         {txt}{c |}
+{space 5}college {c |}
+{space 1}(否 vs 是)  {c |}{col 14}{res}{space 2} -.866173{col 26}{space 2} .0405392{col 37}{space 1}  -21.37{col 46}{space 3}0.000{col 54}{space 4}-.9456283{col 67}{space 3}-.7867176
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}是  {c |}{col 14}{res}{space 2} 10.21936{col 26}{space 2} .0317611{col 37}{space 1}  321.76{col 46}{space 3}0.000{col 54}{space 4} 10.15711{col 67}{space 3} 10.28161
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *手动实现
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==0
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     2,494
+{txt}{hline 13}{c +}{hline 34}   F(9, 2484)      = {res}    21.72
+{txt}       Model {c |} {res} 299.291704         9  33.2546338   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 3803.21617     2,484  1.53108541   {txt}R-squared       ={res}    0.0730
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0696
+{txt}       Total {c |} {res} 4102.50787     2,493  1.64561086   {txt}Root MSE        =   {res} 1.2374
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}hukou {c |}{col 14}{res}{space 2} .3400725{col 26}{space 2} .0536769{col 37}{space 1}    6.34{col 46}{space 3}0.000{col 54}{space 4} .2348163{col 67}{space 3} .4453286
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .5876334{col 26}{space 2} .2255975{col 37}{space 1}    2.60{col 46}{space 3}0.009{col 54}{space 4} .1452547{col 67}{space 3} 1.030012
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0140172{col 26}{space 2} .0056768{col 37}{space 1}   -2.47{col 46}{space 3}0.014{col 54}{space 4}-.0251491{col 67}{space 3}-.0028854
+{txt}{space 8}age3 {c |}{col 14}{res}{space 2}  .000105{col 26}{space 2} .0000465{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0000138{col 67}{space 3} .0001963
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .5032089{col 26}{space 2} .0511487{col 37}{space 1}    9.84{col 46}{space 3}0.000{col 54}{space 4} .4029104{col 67}{space 3} .6035073
+{txt}{space 8}race {c |}{col 14}{res}{space 2} .1929442{col 26}{space 2} .1168315{col 37}{space 1}    1.65{col 46}{space 3}0.099{col 54}{space 4}-.0361529{col 67}{space 3} .4220413
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .2414546{col 26}{space 2} .0893476{col 37}{space 1}    2.70{col 46}{space 3}0.007{col 54}{space 4} .0662513{col 67}{space 3}  .416658
+{txt}{space 12} {c |}
+{space 7}fmedu {c |}
+{space 9}是  {c |}{col 14}{res}{space 2} .0178976{col 26}{space 2} .0790321{col 37}{space 1}    0.23{col 46}{space 3}0.821{col 54}{space 4} -.137078{col 67}{space 3} .1728732
+{txt}{space 7}缺失  {c |}{col 14}{res}{space 2} .0028774{col 26}{space 2} .0613876{col 37}{space 1}    0.05{col 46}{space 3}0.963{col 54}{space 4}-.1174987{col 67}{space 3} .1232535
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 1.072145{col 26}{space 2} 2.916684{col 37}{space 1}    0.37{col 46}{space 3}0.713{col 54}{space 4}-4.647238{col 67}{space 3} 6.791527
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict y0hat if college==1
+{txt}(option {bf:xb} assumed; fitted values)
+(2,494 missing values generated)
+
+{com}. 
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==1
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,643
+{txt}{hline 13}{c +}{hline 34}   F(9, 1633)      = {res}    12.17
+{txt}       Model {c |} {res} 85.7486412         9   9.5276268   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 1278.30719     1,633  .782796812   {txt}R-squared       ={res}    0.0629
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0577
+{txt}       Total {c |} {res} 1364.05584     1,642   .83072828   {txt}Root MSE        =   {res} .88476
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}hukou {c |}{col 14}{res}{space 2} .0484465{col 26}{space 2} .0485173{col 37}{space 1}    1.00{col 46}{space 3}0.318{col 54}{space 4}-.0467162{col 67}{space 3} .1436091
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .6205456{col 26}{space 2} .1870398{col 37}{space 1}    3.32{col 46}{space 3}0.001{col 54}{space 4} .2536824{col 67}{space 3} .9874087
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0143115{col 26}{space 2} .0049184{col 37}{space 1}   -2.91{col 46}{space 3}0.004{col 54}{space 4}-.0239586{col 67}{space 3}-.0046644
+{txt}{space 8}age3 {c |}{col 14}{res}{space 2} .0001088{col 26}{space 2}  .000042{col 37}{space 1}    2.59{col 46}{space 3}0.010{col 54}{space 4} .0000264{col 67}{space 3} .0001912
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .2153348{col 26}{space 2}  .044547{col 37}{space 1}    4.83{col 46}{space 3}0.000{col 54}{space 4} .1279596{col 67}{space 3}   .30271
+{txt}{space 8}race {c |}{col 14}{res}{space 2} .1548971{col 26}{space 2} .0931465{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4}-.0278021{col 67}{space 3} .3375962
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .2273577{col 26}{space 2} .0611421{col 37}{space 1}    3.72{col 46}{space 3}0.000{col 54}{space 4} .1074325{col 67}{space 3}  .347283
+{txt}{space 12} {c |}
+{space 7}fmedu {c |}
+{space 9}是  {c |}{col 14}{res}{space 2}  .091336{col 26}{space 2} .0511668{col 37}{space 1}    1.79{col 46}{space 3}0.074{col 54}{space 4}-.0090234{col 67}{space 3} .1916954
+{txt}{space 7}缺失  {c |}{col 14}{res}{space 2} .0564651{col 26}{space 2} .0651018{col 37}{space 1}    0.87{col 46}{space 3}0.386{col 54}{space 4}-.0712268{col 67}{space 3}  .184157
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  1.06923{col 26}{space 2} 2.310655{col 37}{space 1}    0.46{col 46}{space 3}0.644{col 54}{space 4}-3.462931{col 67}{space 3}  5.60139
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict y1hat if college==0
+{txt}(option {bf:xb} assumed; fitted values)
+(1,643 missing values generated)
+
+{com}. 
+. gen y0=lninc if college==0
+{txt}(1,643 missing values generated)
+
+{com}. replace y0=y0hat if college==1
+{txt}(1,643 real changes made)
+
+{com}. 
+. gen y1=lninc if college==1
+{txt}(2,494 missing values generated)
+
+{com}. replace y1=y1hat if college==0
+{txt}(2,494 real changes made)
+
+{com}. 
+. gen effect=y1-y0
+{txt}
+{com}. tab college, sum(effect)
+
+     {txt}是否上 {c |}          Summary of effect
+       大学 {c |}        Mean   Std. dev.       Freq.
+{hline 12}{c +}{hline 36}
+         否 {c |}  {res} .86617296   1.2711443       2,494
+  {txt}       是 {c |}  {res}  .6711883   .92538643       1,643
+{txt}{hline 12}{c +}{hline 36}
+      Total {c |}  {res} .78873525   1.1502225       4,137
+{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第四章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Jul 2024, 10:08:33
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -1,0 +1,681 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第八章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Jul 2024, 10:15:32
+
+{com}. do "C:\Users\XuQi\Desktop\第8章.do", nostop
+{txt}
+{com}. use "C:\Users\XuQi\Desktop\simulation.dta", clear
+{txt}
+{com}. 
+. *多元线性回归
+. reg lninc college
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    10,000
+{txt}{hline 13}{c +}{hline 34}   F(1, 9998)      = {res}  1249.62
+{txt}       Model {c |} {res} 1768.49262         1  1768.49262   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 14149.4062     9,998  1.41522366   {txt}R-squared       ={res}    0.1111
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1110
+{txt}       Total {c |} {res} 15917.8988     9,999  1.59194908   {txt}Root MSE        =   {res} 1.1896
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} 1.223779{col 26}{space 2} .0346189{col 37}{space 1}   35.35{col 46}{space 3}0.000{col 54}{space 4} 1.155919{col 67}{space 3} 1.291639
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 8.338612{col 26}{space 2} .0128043{col 37}{space 1}  651.23{col 46}{space 3}0.000{col 54}{space 4} 8.313513{col 67}{space 3} 8.363711
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college gender age age2 hukou feduy meduy sibling, robust
+
+{txt}Linear regression                               Number of obs     = {res}    10,000
+                                                {txt}F(8, 9991)        =  {res}   607.66
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.3171
+                                                {txt}Root MSE          =    {res} 1.0431
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .9058374{col 26}{space 2} .0314346{col 37}{space 1}   28.82{col 46}{space 3}0.000{col 54}{space 4} .8442193{col 67}{space 3} .9674555
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7710099{col 26}{space 2} .0211603{col 37}{space 1}   36.44{col 46}{space 3}0.000{col 54}{space 4} .7295315{col 67}{space 3} .8124883
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2730867{col 26}{space 2}  .011892{col 37}{space 1}   22.96{col 46}{space 3}0.000{col 54}{space 4} .2497761{col 67}{space 3} .2963974
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0041989{col 26}{space 2} .0001894{col 37}{space 1}  -22.17{col 46}{space 3}0.000{col 54}{space 4}-.0045701{col 67}{space 3}-.0038276
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .3756471{col 26}{space 2} .0354001{col 37}{space 1}   10.61{col 46}{space 3}0.000{col 54}{space 4} .3062559{col 67}{space 3} .4450384
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0378026{col 26}{space 2} .0027645{col 37}{space 1}   13.67{col 46}{space 3}0.000{col 54}{space 4} .0323837{col 67}{space 3} .0432215
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2}  .022306{col 26}{space 2} .0030646{col 37}{space 1}    7.28{col 46}{space 3}0.000{col 54}{space 4} .0162988{col 67}{space 3} .0283132
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1026486{col 26}{space 2} .0088941{col 37}{space 1}  -11.54{col 46}{space 3}0.000{col 54}{space 4}-.1200828{col 67}{space 3}-.0852143
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.688726{col 26}{space 2} .1810034{col 37}{space 1}   20.38{col 46}{space 3}0.000{col 54}{space 4} 3.333923{col 67}{space 3} 4.043529
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *假设高考时的运气可观测，可使用其作为工具变量来识别大学对收入的影响
+. corr luck1 luck2 luck3 college
+{txt}(obs=10,000)
+
+             {c |}    luck1    luck2    luck3  college
+{hline 13}{c +}{hline 36}
+       luck1 {c |}{res}   1.0000
+       {txt}luck2 {c |}{res}  -0.0036   1.0000
+       {txt}luck3 {c |}{res}   0.0031  -0.0087   1.0000
+     {txt}college {c |}{res}   0.1841   0.1667   0.0232   1.0000
+
+{txt}
+{com}. 
+. *两阶段最小二乘法
+. ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck1), vce(robust) first 
+{res}
+{txt}First-stage regressions
+{hline 23}
+{res}
+{txt}{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:10,000}
+{txt}{col 57}{lalign 13:F({res:8}, {res:9991})}{col 70} = {res}{ralign 6:169.85}
+{txt}{col 57}{lalign 13:Prob > F}{col 70} = {res}{ralign 6:0.0000}
+{txt}{col 57}{lalign 13:R-squared}{col 70} = {res}{ralign 6:0.1564}
+{txt}{col 57}{lalign 13:Adj R-squared}{col 70} = {res}{ralign 6:0.1557}
+{txt}{col 57}{lalign 13:Root MSE}{col 70} = {res}{ralign 6:0.3158}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}     college{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.0498054{col 26}{space 2} .0064536{col 37}{space 1}   -7.72{col 46}{space 3}0.000{col 54}{space 4}-.0624558{col 67}{space 3} -.037155
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0384085{col 26}{space 2} .0030797{col 37}{space 1}   12.47{col 46}{space 3}0.000{col 54}{space 4} .0323716{col 67}{space 3} .0444454
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0005812{col 26}{space 2} .0000491{col 37}{space 1}  -11.84{col 46}{space 3}0.000{col 54}{space 4}-.0006774{col 67}{space 3} -.000485
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .1806179{col 26}{space 2} .0143323{col 37}{space 1}   12.60{col 46}{space 3}0.000{col 54}{space 4} .1525238{col 67}{space 3}  .208712
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0086345{col 26}{space 2} .0008356{col 37}{space 1}   10.33{col 46}{space 3}0.000{col 54}{space 4} .0069966{col 67}{space 3} .0102725
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0099724{col 26}{space 2} .0010186{col 37}{space 1}    9.79{col 46}{space 3}0.000{col 54}{space 4} .0079758{col 67}{space 3} .0119689
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.0199209{col 26}{space 2} .0023318{col 37}{space 1}   -8.54{col 46}{space 3}0.000{col 54}{space 4}-.0244917{col 67}{space 3}-.0153501
+{txt}{space 7}luck1 {c |}{col 14}{res}{space 2} .0612274{col 26}{space 2}  .003246{col 37}{space 1}   18.86{col 46}{space 3}0.000{col 54}{space 4} .0548645{col 67}{space 3} .0675902
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.4910525{col 26}{space 2} .0465114{col 37}{space 1}  -10.56{col 46}{space 3}0.000{col 54}{space 4}-.5822242{col 67}{space 3}-.3998807
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   3992.49
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.3134
+{txt}{col 51}Root MSE{col 67}=    {res} 1.0455
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6662753{col 26}{space 2} .1719651{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .3292298{col 67}{space 3} 1.003321
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7587879{col 26}{space 2} .0229832{col 37}{space 1}   33.01{col 46}{space 3}0.000{col 54}{space 4} .7137416{col 67}{space 3} .8038342
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2823288{col 26}{space 2} .0135849{col 37}{space 1}   20.78{col 46}{space 3}0.000{col 54}{space 4}  .255703{col 67}{space 3} .3089547
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043386{col 26}{space 2} .0002139{col 37}{space 1}  -20.28{col 46}{space 3}0.000{col 54}{space 4}-.0047579{col 67}{space 3}-.0039194
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4193268{col 26}{space 2} .0465068{col 37}{space 1}    9.02{col 46}{space 3}0.000{col 54}{space 4} .3281751{col 67}{space 3} .5104785
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0398998{col 26}{space 2} .0031489{col 37}{space 1}   12.67{col 46}{space 3}0.000{col 54}{space 4}  .033728{col 67}{space 3} .0460716
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0247089{col 26}{space 2} .0034991{col 37}{space 1}    7.06{col 46}{space 3}0.000{col 54}{space 4} .0178507{col 67}{space 3} .0315671
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1074756{col 26}{space 2} .0096097{col 37}{space 1}  -11.18{col 46}{space 3}0.000{col 54}{space 4}-.1263102{col 67}{space 3}-.0886409
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.570269{col 26}{space 2} .1993796{col 37}{space 1}   17.91{col 46}{space 3}0.000{col 54}{space 4} 3.179492{col 67}{space 3} 3.961046
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck1}{p_end}
+
+{com}. ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck2), vce(robust) first
+{res}
+{txt}First-stage regressions
+{hline 23}
+{res}
+{txt}{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:10,000}
+{txt}{col 57}{lalign 13:F({res:8}, {res:9991})}{col 70} = {res}{ralign 6:167.65}
+{txt}{col 57}{lalign 13:Prob > F}{col 70} = {res}{ralign 6:0.0000}
+{txt}{col 57}{lalign 13:R-squared}{col 70} = {res}{ralign 6:0.1531}
+{txt}{col 57}{lalign 13:Adj R-squared}{col 70} = {res}{ralign 6:0.1524}
+{txt}{col 57}{lalign 13:Root MSE}{col 70} = {res}{ralign 6:0.3164}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}     college{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.0517735{col 26}{space 2}  .006465{col 37}{space 1}   -8.01{col 46}{space 3}0.000{col 54}{space 4}-.0644462{col 67}{space 3}-.0391008
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0392778{col 26}{space 2} .0030852{col 37}{space 1}   12.73{col 46}{space 3}0.000{col 54}{space 4} .0332301{col 67}{space 3} .0453255
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0005956{col 26}{space 2} .0000492{col 37}{space 1}  -12.12{col 46}{space 3}0.000{col 54}{space 4} -.000692{col 67}{space 3}-.0004993
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .1853484{col 26}{space 2} .0143511{col 37}{space 1}   12.92{col 46}{space 3}0.000{col 54}{space 4} .1572173{col 67}{space 3} .2134794
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0086325{col 26}{space 2} .0008394{col 37}{space 1}   10.28{col 46}{space 3}0.000{col 54}{space 4} .0069871{col 67}{space 3} .0102778
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0100091{col 26}{space 2} .0010235{col 37}{space 1}    9.78{col 46}{space 3}0.000{col 54}{space 4} .0080029{col 67}{space 3} .0120153
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.0193321{col 26}{space 2} .0023129{col 37}{space 1}   -8.36{col 46}{space 3}0.000{col 54}{space 4}-.0238658{col 67}{space 3}-.0147984
+{txt}{space 7}luck2 {c |}{col 14}{res}{space 2} .0575641{col 26}{space 2} .0032359{col 37}{space 1}   17.79{col 46}{space 3}0.000{col 54}{space 4} .0512211{col 67}{space 3}  .063907
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.5049241{col 26}{space 2} .0466455{col 37}{space 1}  -10.82{col 46}{space 3}0.000{col 54}{space 4}-.5963586{col 67}{space 3}-.4134895
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   3990.24
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.3140
+{txt}{col 51}Root MSE{col 67}=    {res}  1.045
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .688817{col 26}{space 2} .1785721{col 37}{space 1}    3.86{col 46}{space 3}0.000{col 54}{space 4} .3388222{col 67}{space 3} 1.038812
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7599379{col 26}{space 2} .0229423{col 37}{space 1}   33.12{col 46}{space 3}0.000{col 54}{space 4} .7149718{col 67}{space 3} .8049041
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2814592{col 26}{space 2} .0134274{col 37}{space 1}   20.96{col 46}{space 3}0.000{col 54}{space 4}  .255142{col 67}{space 3} .3077764
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043255{col 26}{space 2} .0002117{col 37}{space 1}  -20.43{col 46}{space 3}0.000{col 54}{space 4}-.0047405{col 67}{space 3}-.0039105
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4152167{col 26}{space 2} .0476301{col 37}{space 1}    8.72{col 46}{space 3}0.000{col 54}{space 4} .3218635{col 67}{space 3} .5085699
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0397025{col 26}{space 2} .0031449{col 37}{space 1}   12.62{col 46}{space 3}0.000{col 54}{space 4} .0335386{col 67}{space 3} .0458663
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0244828{col 26}{space 2} .0035723{col 37}{space 1}    6.85{col 46}{space 3}0.000{col 54}{space 4} .0174811{col 67}{space 3} .0314844
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1070214{col 26}{space 2} .0095726{col 37}{space 1}  -11.18{col 46}{space 3}0.000{col 54}{space 4}-.1257834{col 67}{space 3}-.0882594
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.581415{col 26}{space 2} .1972292{col 37}{space 1}   18.16{col 46}{space 3}0.000{col 54}{space 4} 3.194853{col 67}{space 3} 3.967977
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck2}{p_end}
+
+{com}. ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck3), vce(robust) first 
+{res}
+{txt}First-stage regressions
+{hline 23}
+{res}
+{txt}{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:10,000}
+{txt}{col 57}{lalign 13:F({res:8}, {res:9991})}{col 70} = {res}{ralign 6:128.67}
+{txt}{col 57}{lalign 13:Prob > F}{col 70} = {res}{ralign 6:0.0000}
+{txt}{col 57}{lalign 13:R-squared}{col 70} = {res}{ralign 6:0.1254}
+{txt}{col 57}{lalign 13:Adj R-squared}{col 70} = {res}{ralign 6:0.1247}
+{txt}{col 57}{lalign 13:Root MSE}{col 70} = {res}{ralign 6:0.3215}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}     college{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}gender {c |}{col 14}{res}{space 2}-.0508021{col 26}{space 2} .0065697{col 37}{space 1}   -7.73{col 46}{space 3}0.000{col 54}{space 4}-.0636801{col 67}{space 3}-.0379241
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0386755{col 26}{space 2} .0031176{col 37}{space 1}   12.41{col 46}{space 3}0.000{col 54}{space 4} .0325643{col 67}{space 3} .0447867
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2} -.000585{col 26}{space 2} .0000497{col 37}{space 1}  -11.78{col 46}{space 3}0.000{col 54}{space 4}-.0006823{col 67}{space 3}-.0004876
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .1820838{col 26}{space 2} .0146968{col 37}{space 1}   12.39{col 46}{space 3}0.000{col 54}{space 4}  .153275{col 67}{space 3} .2108926
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0087529{col 26}{space 2} .0008561{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .0070748{col 67}{space 3} .0104309
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2}  .010016{col 26}{space 2} .0010423{col 37}{space 1}    9.61{col 46}{space 3}0.000{col 54}{space 4} .0079729{col 67}{space 3}  .012059
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.0201732{col 26}{space 2} .0023403{col 37}{space 1}   -8.62{col 46}{space 3}0.000{col 54}{space 4}-.0247607{col 67}{space 3}-.0155857
+{txt}{space 7}luck3 {c |}{col 14}{res}{space 2} .0064889{col 26}{space 2}    .0032{col 37}{space 1}    2.03{col 46}{space 3}0.043{col 54}{space 4} .0002162{col 67}{space 3} .0127616
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.4959444{col 26}{space 2} .0471004{col 37}{space 1}  -10.53{col 46}{space 3}0.000{col 54}{space 4}-.5882707{col 67}{space 3} -.403618
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   3421.03
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.2088
+{txt}{col 51}Root MSE{col 67}=    {res} 1.1223
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}-.3859112{col 26}{space 2} 1.723558{col 37}{space 1}   -0.22{col 46}{space 3}0.823{col 54}{space 4}-3.764023{col 67}{space 3}   2.9922
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7051075{col 26}{space 2} .0909592{col 37}{space 1}    7.75{col 46}{space 3}0.000{col 54}{space 4} .5268307{col 67}{space 3} .8833842
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .3229214{col 26}{space 2}  .067601{col 37}{space 1}    4.78{col 46}{space 3}0.000{col 54}{space 4} .1904259{col 67}{space 3} .4554169
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0049526{col 26}{space 2} .0010237{col 37}{space 1}   -4.84{col 46}{space 3}0.000{col 54}{space 4}-.0069591{col 67}{space 3}-.0029461
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .6111732{col 26}{space 2} .3162383{col 37}{space 1}    1.93{col 46}{space 3}0.053{col 54}{space 4}-.0086425{col 67}{space 3} 1.230989
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0491108{col 26}{space 2} .0153072{col 37}{space 1}    3.21{col 46}{space 3}0.001{col 54}{space 4} .0191093{col 67}{space 3} .0791123
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0352626{col 26}{space 2} .0176762{col 37}{space 1}    1.99{col 46}{space 3}0.046{col 54}{space 4} .0006179{col 67}{space 3} .0699073
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1286765{col 26}{space 2} .0363541{col 37}{space 1}   -3.54{col 46}{space 3}0.000{col 54}{space 4}-.1999293{col 67}{space 3}-.0574237
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.049993{col 26}{space 2} .8717742{col 37}{space 1}    3.50{col 46}{space 3}0.000{col 54}{space 4} 1.341346{col 67}{space 3} 4.758639
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck3}{p_end}
+
+{com}. 
+. *同时使用三个工具变量
+. ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), vce(robust)
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   4001.37
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.3135
+{txt}{col 51}Root MSE{col 67}=    {res} 1.0454
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6703614{col 26}{space 2}  .120531{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4341249{col 67}{space 3} .9065979
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7589964{col 26}{space 2} .0220328{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158128{col 67}{space 3} .8021799
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2821712{col 26}{space 2} .0125903{col 37}{space 1}   22.41{col 46}{space 3}0.000{col 54}{space 4} .2574946{col 67}{space 3} .3068478
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043363{col 26}{space 2} .0001995{col 37}{space 1}  -21.73{col 46}{space 3}0.000{col 54}{space 4}-.0047273{col 67}{space 3}-.0039452
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4185817{col 26}{space 2} .0409591{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .3383033{col 67}{space 3} .4988601
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2}  .039864{col 26}{space 2} .0029423{col 37}{space 1}   13.55{col 46}{space 3}0.000{col 54}{space 4} .0340972{col 67}{space 3} .0456309
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246679{col 26}{space 2} .0032976{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0182047{col 67}{space 3} .0311311
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1073933{col 26}{space 2}  .009253{col 37}{space 1}  -11.61{col 46}{space 3}0.000{col 54}{space 4}-.1255289{col 67}{space 3}-.0892577
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3.57229{col 26}{space 2} .1881435{col 37}{space 1}   18.99{col 46}{space 3}0.000{col 54}{space 4} 3.203535{col 67}{space 3} 3.941044
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck1 luck2 luck3}{p_end}
+
+{com}. 
+. *使用广义矩估计法
+. ivregress gmm lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), vce(robust)
+{res}
+{txt}{col 1}Instrumental variables GMM regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   4001.06
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.3135
+{txt}{col 1}GMM weight matrix: Robust{col 51}Root MSE{col 67}=    {res} 1.0454
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6697812{col 26}{space 2} .1205048{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4335963{col 67}{space 3} .9059662
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7590011{col 26}{space 2} .0220292{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158246{col 67}{space 3} .8021777
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2821799{col 26}{space 2}  .012581{col 37}{space 1}   22.43{col 46}{space 3}0.000{col 54}{space 4} .2575215{col 67}{space 3} .3068383
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043368{col 26}{space 2} .0001994{col 37}{space 1}  -21.75{col 46}{space 3}0.000{col 54}{space 4}-.0047276{col 67}{space 3} -.003946
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4185789{col 26}{space 2} .0409599{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .3382988{col 67}{space 3} .4988589
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2}   .03991{col 26}{space 2} .0029406{col 37}{space 1}   13.57{col 46}{space 3}0.000{col 54}{space 4} .0341465{col 67}{space 3} .0456735
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246561{col 26}{space 2} .0032974{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0181933{col 67}{space 3} .0311189
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1071712{col 26}{space 2} .0092456{col 37}{space 1}  -11.59{col 46}{space 3}0.000{col 54}{space 4}-.1252923{col 67}{space 3}  -.08905
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.571827{col 26}{space 2} .1880171{col 37}{space 1}   19.00{col 46}{space 3}0.000{col 54}{space 4}  3.20332{col 67}{space 3} 3.940334
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck1 luck2 luck3}{p_end}
+
+{com}. 
+. *使用有限信息最大似然法
+. ivregress liml lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), vce(robust)
+{res}
+{txt}{col 1}Instrumental variables LIML regression{col 51}Number of obs{col 67}= {res}    10,000
+{txt}{col 1}{col 51}Wald chi2({res}8{txt}){col 67}= {res}   4001.31
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}    0.3135
+{txt}{col 51}Root MSE{col 67}=    {res} 1.0454
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6702121{col 26}{space 2} .1206029{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4338348{col 67}{space 3} .9065893
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7589887{col 26}{space 2} .0220339{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158031{col 67}{space 3} .8021744
+{txt}{space 9}age {c |}{col 14}{res}{space 2}  .282177{col 26}{space 2} .0125913{col 37}{space 1}   22.41{col 46}{space 3}0.000{col 54}{space 4} .2574985{col 67}{space 3} .3068555
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043363{col 26}{space 2} .0001995{col 37}{space 1}  -21.73{col 46}{space 3}0.000{col 54}{space 4}-.0047274{col 67}{space 3}-.0039452
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2}  .418609{col 26}{space 2} .0409661{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4}  .338317{col 67}{space 3}  .498901
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0398653{col 26}{space 2} .0029426{col 37}{space 1}   13.55{col 46}{space 3}0.000{col 54}{space 4}  .034098{col 67}{space 3} .0456326
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246694{col 26}{space 2} .0032979{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0182057{col 67}{space 3} .0311331
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1073963{col 26}{space 2} .0092534{col 37}{space 1}  -11.61{col 46}{space 3}0.000{col 54}{space 4}-.1255327{col 67}{space 3}-.0892598
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 3.572216{col 26}{space 2}  .188154{col 37}{space 1}   18.99{col 46}{space 3}0.000{col 54}{space 4} 3.203441{col 67}{space 3} 3.940991
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:college}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:gender age age2 hukou feduy meduy sibling luck1 luck2 luck3}{p_end}
+
+{com}. 
+. *弱工具变量检验
+. qui ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck1), vce(robust)
+{txt}
+{com}. estat firststage, all forcenonrobust  
+{res}
+{txt}{col 3}First-stage regression summary statistics
+{res}{col 3}{text}{hline 13}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 16}{c |}{col 29}Adjusted{col 43}Partial{col 57}Robust
+{col 3}{text}    Variable{col 16}{c |}   R-sq.{col 29}   R-sq.{col 41}    R-sq.{col 53}  F(1,9991){col 65}  Prob > F
+{res}{col 3}{text}{hline 13}{c +}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 3}{text}     college{col 16}{c |}{result}{space 2}0.1564{col 29}{space 2}0.1557{col 41}{space 3}0.0359{col 53}{space 3} 355.785{col 65}{space 3}0.0000
+{col 3}{text}{hline 13}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+
+
+{col 3}Shea's partial R-squared
+{res}{col 3}{text}{hline 13}{c TT}{hline 18}{hline 18}
+{col 16}{c |}{col 22}Shea's{col 41}Shea's
+{col 3}{text}    Variable{col 16}{c |}  partial R-sq.{col 35}adj. partial R-sq.
+{res}{col 3}{text}{hline 13}{c +}{hline 18}{hline 18}
+{col 3}{text}     college{col 16}{c |}{result}{space 5}0.0359{col 35}{space 6}0.0352
+{col 3}{text}{hline 13}{c BT}{hline 18}{hline 18}
+
+
+{col 3}Minimum eigenvalue statistic = {res}371.903     
+
+{txt}{col 3}Critical Values{col 40}# of endogenous regressors:{res}    1
+{txt}{col 3}H0: Instruments are weak{col 40}# of excluded instruments: {res}    1
+{txt}{col 3}{hline 35}{c TT}{hline 33}
+{col 38}{c |}{col 43}5%     10%     20%     30%
+{col 3}2SLS relative bias{col 38}{c |}{col 48}(not available)
+{col 3}{hline 35}{c +}{hline 33}
+{col 38}{c |}{col 42}10%     15%     20%     25%
+{col 3}2SLS size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}LIML size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}{hline 35}{c BT}{hline 33}
+
+{res}{txt}
+{com}. 
+. qui ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck2), vce(robust)
+{txt}
+{com}. estat firststage, all forcenonrobust  
+{res}
+{txt}{col 3}First-stage regression summary statistics
+{res}{col 3}{text}{hline 13}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 16}{c |}{col 29}Adjusted{col 43}Partial{col 57}Robust
+{col 3}{text}    Variable{col 16}{c |}   R-sq.{col 29}   R-sq.{col 41}    R-sq.{col 53}  F(1,9991){col 65}  Prob > F
+{res}{col 3}{text}{hline 13}{c +}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 3}{text}     college{col 16}{c |}{result}{space 2}0.1531{col 29}{space 2}0.1524{col 41}{space 3}0.0321{col 53}{space 3}  316.46{col 65}{space 3}0.0000
+{col 3}{text}{hline 13}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+
+
+{col 3}Shea's partial R-squared
+{res}{col 3}{text}{hline 13}{c TT}{hline 18}{hline 18}
+{col 16}{c |}{col 22}Shea's{col 41}Shea's
+{col 3}{text}    Variable{col 16}{c |}  partial R-sq.{col 35}adj. partial R-sq.
+{res}{col 3}{text}{hline 13}{c +}{hline 18}{hline 18}
+{col 3}{text}     college{col 16}{c |}{result}{space 5}0.0321{col 35}{space 6}0.0314
+{col 3}{text}{hline 13}{c BT}{hline 18}{hline 18}
+
+
+{col 3}Minimum eigenvalue statistic = {res}331.004     
+
+{txt}{col 3}Critical Values{col 40}# of endogenous regressors:{res}    1
+{txt}{col 3}H0: Instruments are weak{col 40}# of excluded instruments: {res}    1
+{txt}{col 3}{hline 35}{c TT}{hline 33}
+{col 38}{c |}{col 43}5%     10%     20%     30%
+{col 3}2SLS relative bias{col 38}{c |}{col 48}(not available)
+{col 3}{hline 35}{c +}{hline 33}
+{col 38}{c |}{col 42}10%     15%     20%     25%
+{col 3}2SLS size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}LIML size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}{hline 35}{c BT}{hline 33}
+
+{res}{txt}
+{com}. 
+. qui ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck3), vce(robust)
+{txt}
+{com}. estat firststage, all forcenonrobust 
+{res}
+{txt}{col 3}First-stage regression summary statistics
+{res}{col 3}{text}{hline 13}{c TT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 16}{c |}{col 29}Adjusted{col 43}Partial{col 57}Robust
+{col 3}{text}    Variable{col 16}{c |}   R-sq.{col 29}   R-sq.{col 41}    R-sq.{col 53}  F(1,9991){col 65}  Prob > F
+{res}{col 3}{text}{hline 13}{c +}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 3}{text}     college{col 16}{c |}{result}{space 2}0.1254{col 29}{space 2}0.1247{col 41}{space 3}0.0004{col 53}{space 3} 4.11179{col 65}{space 3}0.0426
+{col 3}{text}{hline 13}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}{hline 12}
+
+
+{col 3}Shea's partial R-squared
+{res}{col 3}{text}{hline 13}{c TT}{hline 18}{hline 18}
+{col 16}{c |}{col 22}Shea's{col 41}Shea's
+{col 3}{text}    Variable{col 16}{c |}  partial R-sq.{col 35}adj. partial R-sq.
+{res}{col 3}{text}{hline 13}{c +}{hline 18}{hline 18}
+{col 3}{text}     college{col 16}{c |}{result}{space 5}0.0004{col 35}{space 6}-0.0003
+{col 3}{text}{hline 13}{c BT}{hline 18}{hline 18}
+
+
+{col 3}Minimum eigenvalue statistic = {res}4.03006     
+
+{txt}{col 3}Critical Values{col 40}# of endogenous regressors:{res}    1
+{txt}{col 3}H0: Instruments are weak{col 40}# of excluded instruments: {res}    1
+{txt}{col 3}{hline 35}{c TT}{hline 33}
+{col 38}{c |}{col 43}5%     10%     20%     30%
+{col 3}2SLS relative bias{col 38}{c |}{col 48}(not available)
+{col 3}{hline 35}{c +}{hline 33}
+{col 38}{c |}{col 42}10%     15%     20%     25%
+{col 3}2SLS size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}LIML size of nominal 5% Wald test{col 38}{c |}{res}{col 41}16.38{col 49} 8.96{col 57} 6.66{col 65} 5.53
+{txt}{col 3}{hline 35}{c BT}{hline 33}
+
+{res}{txt}
+{com}. 
+. *过度识别检验
+. qui ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), vce(robust)
+{txt}
+{com}. estat overid  
+
+{txt}{col 3}Test of overidentifying restrictions:
+
+{col 3}Score chi2({res}2{txt}){col 26}={res}{col 28} .439215{txt}{col 38}(p = {res}0.8028{txt})
+
+{com}. 
+. qui ivregress 2sls lninc gender hukou feduy meduy sibling (college=luck1 luck2 luck3 age age2), robust first 
+{txt}
+{com}. estat overid  
+
+{txt}{col 3}Test of overidentifying restrictions:
+
+{col 3}Score chi2({res}4{txt}){col 26}={res}{col 28} 419.319{txt}{col 38}(p = {res}0.0000{txt})
+
+{com}. 
+. *豪斯曼检验
+. qui ivregress 2sls lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), vce(robust)
+{txt}
+{com}. estat endogenous  
+
+{txt}{col 3}Tests of endogeneity
+{col 3}H0: Variables are exogenous
+
+{col 3}Robust score chi2({res}1{txt}){col 35}={res}{col 37}  4.1346{txt}  (p = {res}0.0420{txt})
+{col 3}Robust regression F({res}1{txt},{res}9990{txt}){col 35}={res}{col 37} 4.13972{txt}  (p = {res}0.0419{txt})
+
+{com}. 
+. *使用ivreg2
+. ivreg2 lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), robust
+{res}
+{txt}IV (2SLS) estimation
+{hline 20}
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity
+
+{col 55}Number of obs = {res}   10000
+{txt}{col 55}F(  8,  9991) = {res}  499.72
+{txt}{col 55}Prob > F      = {res}  0.0000
+{txt}Total (centered) SS     = {res} 15917.89881{txt}{col 55}Centered R2   = {res}  0.3135
+{txt}Total (uncentered) SS   = {res}   739442.52{txt}{col 55}Uncentered R2 = {res}  0.9852
+{txt}Residual SS             = {res} 10927.87721{txt}{col 55}Root MSE      = {res}   1.045
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6703614{col 26}{space 2}  .120531{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4341249{col 67}{space 3} .9065979
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7589964{col 26}{space 2} .0220328{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158128{col 67}{space 3} .8021799
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2821712{col 26}{space 2} .0125903{col 37}{space 1}   22.41{col 46}{space 3}0.000{col 54}{space 4} .2574946{col 67}{space 3} .3068478
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043363{col 26}{space 2} .0001995{col 37}{space 1}  -21.73{col 46}{space 3}0.000{col 54}{space 4}-.0047273{col 67}{space 3}-.0039452
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4185817{col 26}{space 2} .0409591{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .3383033{col 67}{space 3} .4988601
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2}  .039864{col 26}{space 2} .0029423{col 37}{space 1}   13.55{col 46}{space 3}0.000{col 54}{space 4} .0340972{col 67}{space 3} .0456309
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246679{col 26}{space 2} .0032976{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0182047{col 67}{space 3} .0311311
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1073933{col 26}{space 2}  .009253{col 37}{space 1}  -11.61{col 46}{space 3}0.000{col 54}{space 4}-.1255289{col 67}{space 3}-.0892577
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3.57229{col 26}{space 2} .1881435{col 37}{space 1}   18.99{col 46}{space 3}0.000{col 54}{space 4} 3.203535{col 67}{space 3} 3.941044
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{help ivreg2##idtest:Underidentification test} (Kleibergen-Paap rk LM statistic):{res}{col 71} 565.798
+{txt}{col 52}Chi-sq({res}3{txt}) P-val =  {res}{col 73}0.0000
+{txt}{hline 78}
+{help ivreg2##widtest:Weak identification test} (Cragg-Donald Wald F statistic):{res}{col 71} 245.411
+{txt}                         (Kleibergen-Paap rk Wald F statistic):{res}{col 71} 224.013
+{txt}Stock-Yogo weak ID test critical values:{res}{txt}{col 42} 5% maximal IV relative bias{res}{col 73} 13.91
+{txt}{col 42}10% maximal IV relative bias{res}{col 73}  9.08
+{txt}{col 42}20% maximal IV relative bias{res}{col 73}  6.46
+{txt}{col 42}30% maximal IV relative bias{res}{col 73}  5.39
+{txt}{col 42}10% maximal IV size{res}{col 73} 22.30
+{txt}{col 42}15% maximal IV size{res}{col 73} 12.83
+{txt}{col 42}20% maximal IV size{res}{col 73}  9.54
+{txt}{col 42}25% maximal IV size{res}{col 73}  7.80
+{txt}Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+{hline 78}
+{help ivreg2##overidtests:Hansen J statistic} (overidentification test of all instruments):{res}{col 71}   0.439
+{txt}{col 52}Chi-sq({res}2{txt}) P-val =  {res}{col 73}0.8028
+{txt}{hline 78}
+Instrumented:{col 23}college
+Included instruments:{col 23}gender age age2 hukou feduy meduy sibling
+Excluded instruments:{col 23}luck1 luck2 luck3
+{hline 78}
+
+{com}. ivreg2 lninc gender hukou feduy meduy sibling (college=luck1 luck2 luck3 age age2), robust orthog(age age2)
+{res}
+{txt}IV (2SLS) estimation
+{hline 20}
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity
+
+{col 55}Number of obs = {res}   10000
+{txt}{col 55}F(  6,  9993) = {res}  513.72
+{txt}{col 55}Prob > F      = {res}  0.0000
+{txt}Total (centered) SS     = {res} 15917.89881{txt}{col 55}Centered R2   = {res}  0.2389
+{txt}Total (uncentered) SS   = {res}   739442.52{txt}{col 55}Uncentered R2 = {res}  0.9836
+{txt}Residual SS             = {res} 12115.73885{txt}{col 55}Root MSE      = {res}   1.101
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} 1.770388{col 26}{space 2} .1193018{col 37}{space 1}   14.84{col 46}{space 3}0.000{col 54}{space 4} 1.536561{col 67}{space 3} 2.004215
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .8226807{col 26}{space 2} .0229812{col 37}{space 1}   35.80{col 46}{space 3}0.000{col 54}{space 4} .7776384{col 67}{space 3} .8677229
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .2611968{col 26}{space 2} .0432643{col 37}{space 1}    6.04{col 46}{space 3}0.000{col 54}{space 4} .1764003{col 67}{space 3} .3459932
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2} .0301675{col 26}{space 2} .0030575{col 37}{space 1}    9.87{col 46}{space 3}0.000{col 54}{space 4}  .024175{col 67}{space 3}   .03616
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0122471{col 26}{space 2} .0034466{col 37}{space 1}    3.55{col 46}{space 3}0.000{col 54}{space 4} .0054918{col 67}{space 3} .0190024
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.0879799{col 26}{space 2} .0087492{col 37}{space 1}  -10.06{col 46}{space 3}0.000{col 54}{space 4}-.1051279{col 67}{space 3}-.0708318
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 7.782271{col 26}{space 2} .0347036{col 37}{space 1}  224.25{col 46}{space 3}0.000{col 54}{space 4} 7.714253{col 67}{space 3} 7.850288
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{help ivreg2##idtest:Underidentification test} (Kleibergen-Paap rk LM statistic):{res}{col 71} 669.151
+{txt}{col 52}Chi-sq({res}5{txt}) P-val =  {res}{col 73}0.0000
+{txt}{hline 78}
+{help ivreg2##widtest:Weak identification test} (Cragg-Donald Wald F statistic):{res}{col 71} 174.450
+{txt}                         (Kleibergen-Paap rk Wald F statistic):{res}{col 71} 161.738
+{txt}Stock-Yogo weak ID test critical values:{res}{txt}{col 42} 5% maximal IV relative bias{res}{col 73} 18.37
+{txt}{col 42}10% maximal IV relative bias{res}{col 73} 10.83
+{txt}{col 42}20% maximal IV relative bias{res}{col 73}  6.77
+{txt}{col 42}30% maximal IV relative bias{res}{col 73}  5.25
+{txt}{col 42}10% maximal IV size{res}{col 73} 26.87
+{txt}{col 42}15% maximal IV size{res}{col 73} 15.09
+{txt}{col 42}20% maximal IV size{res}{col 73} 10.98
+{txt}{col 42}25% maximal IV size{res}{col 73}  8.84
+{txt}Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+{hline 78}
+{help ivreg2##overidtests:Hansen J statistic} (overidentification test of all instruments):{res}{col 71} 419.319
+{txt}{col 52}Chi-sq({res}4{txt}) P-val =  {res}{col 73}0.0000
+{txt}-orthog- option:
+Hansen J statistic (eqn. excluding suspect orthog. conditions): {res}{col 71}   0.868
+{txt}{col 52}Chi-sq({res}2{txt}) P-val =  {res}{col 73}0.6478
+{help ivreg2##ctest:C statistic}{txt} (exogeneity/orthogonality of suspect instruments): {res}{col 71} 418.451
+{txt}{col 52}Chi-sq({res}2{txt}) P-val =  {res}{col 73}0.0000
+{txt}Instruments tested:  {col 23}age age2
+{hline 78}
+Instrumented:{col 23}college
+Included instruments:{col 23}gender hukou feduy meduy sibling
+Excluded instruments:{col 23}luck1 luck2 luck3 age age2
+{hline 78}
+
+{com}. ivreg2 lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), robust redundant(luck3)
+{res}
+{txt}IV (2SLS) estimation
+{hline 20}
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity
+
+{col 55}Number of obs = {res}   10000
+{txt}{col 55}F(  8,  9991) = {res}  499.72
+{txt}{col 55}Prob > F      = {res}  0.0000
+{txt}Total (centered) SS     = {res} 15917.89881{txt}{col 55}Centered R2   = {res}  0.3135
+{txt}Total (uncentered) SS   = {res}   739442.52{txt}{col 55}Uncentered R2 = {res}  0.9852
+{txt}Residual SS             = {res} 10927.87721{txt}{col 55}Root MSE      = {res}   1.045
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6703614{col 26}{space 2}  .120531{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4341249{col 67}{space 3} .9065979
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7589964{col 26}{space 2} .0220328{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158128{col 67}{space 3} .8021799
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2821712{col 26}{space 2} .0125903{col 37}{space 1}   22.41{col 46}{space 3}0.000{col 54}{space 4} .2574946{col 67}{space 3} .3068478
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043363{col 26}{space 2} .0001995{col 37}{space 1}  -21.73{col 46}{space 3}0.000{col 54}{space 4}-.0047273{col 67}{space 3}-.0039452
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4185817{col 26}{space 2} .0409591{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .3383033{col 67}{space 3} .4988601
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2}  .039864{col 26}{space 2} .0029423{col 37}{space 1}   13.55{col 46}{space 3}0.000{col 54}{space 4} .0340972{col 67}{space 3} .0456309
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246679{col 26}{space 2} .0032976{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0182047{col 67}{space 3} .0311311
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1073933{col 26}{space 2}  .009253{col 37}{space 1}  -11.61{col 46}{space 3}0.000{col 54}{space 4}-.1255289{col 67}{space 3}-.0892577
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3.57229{col 26}{space 2} .1881435{col 37}{space 1}   18.99{col 46}{space 3}0.000{col 54}{space 4} 3.203535{col 67}{space 3} 3.941044
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{help ivreg2##idtest:Underidentification test} (Kleibergen-Paap rk LM statistic):{res}{col 71} 565.798
+{txt}{col 52}Chi-sq({res}3{txt}) P-val =  {res}{col 73}0.0000
+{txt}-redundant- option:
+{help ivreg2##redtest:IV redundancy test} (LM test of redundancy of specified instruments):{res}{col 71}   4.936
+{txt}{col 52}Chi-sq({res}1{txt}) P-val =  {res}{col 73}0.0263
+{txt}Instruments tested: {col 23}luck3
+{hline 78}
+{help ivreg2##widtest:Weak identification test} (Cragg-Donald Wald F statistic):{res}{col 71} 245.411
+{txt}                         (Kleibergen-Paap rk Wald F statistic):{res}{col 71} 224.013
+{txt}Stock-Yogo weak ID test critical values:{res}{txt}{col 42} 5% maximal IV relative bias{res}{col 73} 13.91
+{txt}{col 42}10% maximal IV relative bias{res}{col 73}  9.08
+{txt}{col 42}20% maximal IV relative bias{res}{col 73}  6.46
+{txt}{col 42}30% maximal IV relative bias{res}{col 73}  5.39
+{txt}{col 42}10% maximal IV size{res}{col 73} 22.30
+{txt}{col 42}15% maximal IV size{res}{col 73} 12.83
+{txt}{col 42}20% maximal IV size{res}{col 73}  9.54
+{txt}{col 42}25% maximal IV size{res}{col 73}  7.80
+{txt}Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+{hline 78}
+{help ivreg2##overidtests:Hansen J statistic} (overidentification test of all instruments):{res}{col 71}   0.439
+{txt}{col 52}Chi-sq({res}2{txt}) P-val =  {res}{col 73}0.8028
+{txt}{hline 78}
+Instrumented:{col 23}college
+Included instruments:{col 23}gender age age2 hukou feduy meduy sibling
+Excluded instruments:{col 23}luck1 luck2 luck3
+{hline 78}
+
+{com}. ivreg2 lninc gender age age2 hukou feduy meduy sibling (college=luck1 luck2 luck3), robust endog(college)
+{res}
+{txt}IV (2SLS) estimation
+{hline 20}
+
+Estimates efficient for homoskedasticity only
+Statistics robust to heteroskedasticity
+
+{col 55}Number of obs = {res}   10000
+{txt}{col 55}F(  8,  9991) = {res}  499.72
+{txt}{col 55}Prob > F      = {res}  0.0000
+{txt}Total (centered) SS     = {res} 15917.89881{txt}{col 55}Centered R2   = {res}  0.3135
+{txt}Total (uncentered) SS   = {res}   739442.52{txt}{col 55}Uncentered R2 = {res}  0.9852
+{txt}Residual SS             = {res} 10927.87721{txt}{col 55}Root MSE      = {res}   1.045
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6703614{col 26}{space 2}  .120531{col 37}{space 1}    5.56{col 46}{space 3}0.000{col 54}{space 4} .4341249{col 67}{space 3} .9065979
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7589964{col 26}{space 2} .0220328{col 37}{space 1}   34.45{col 46}{space 3}0.000{col 54}{space 4} .7158128{col 67}{space 3} .8021799
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .2821712{col 26}{space 2} .0125903{col 37}{space 1}   22.41{col 46}{space 3}0.000{col 54}{space 4} .2574946{col 67}{space 3} .3068478
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0043363{col 26}{space 2} .0001995{col 37}{space 1}  -21.73{col 46}{space 3}0.000{col 54}{space 4}-.0047273{col 67}{space 3}-.0039452
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .4185817{col 26}{space 2} .0409591{col 37}{space 1}   10.22{col 46}{space 3}0.000{col 54}{space 4} .3383033{col 67}{space 3} .4988601
+{txt}{space 7}feduy {c |}{col 14}{res}{space 2}  .039864{col 26}{space 2} .0029423{col 37}{space 1}   13.55{col 46}{space 3}0.000{col 54}{space 4} .0340972{col 67}{space 3} .0456309
+{txt}{space 7}meduy {c |}{col 14}{res}{space 2} .0246679{col 26}{space 2} .0032976{col 37}{space 1}    7.48{col 46}{space 3}0.000{col 54}{space 4} .0182047{col 67}{space 3} .0311311
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2}-.1073933{col 26}{space 2}  .009253{col 37}{space 1}  -11.61{col 46}{space 3}0.000{col 54}{space 4}-.1255289{col 67}{space 3}-.0892577
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  3.57229{col 26}{space 2} .1881435{col 37}{space 1}   18.99{col 46}{space 3}0.000{col 54}{space 4} 3.203535{col 67}{space 3} 3.941044
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{help ivreg2##idtest:Underidentification test} (Kleibergen-Paap rk LM statistic):{res}{col 71} 565.798
+{txt}{col 52}Chi-sq({res}3{txt}) P-val =  {res}{col 73}0.0000
+{txt}{hline 78}
+{help ivreg2##widtest:Weak identification test} (Cragg-Donald Wald F statistic):{res}{col 71} 245.411
+{txt}                         (Kleibergen-Paap rk Wald F statistic):{res}{col 71} 224.013
+{txt}Stock-Yogo weak ID test critical values:{res}{txt}{col 42} 5% maximal IV relative bias{res}{col 73} 13.91
+{txt}{col 42}10% maximal IV relative bias{res}{col 73}  9.08
+{txt}{col 42}20% maximal IV relative bias{res}{col 73}  6.46
+{txt}{col 42}30% maximal IV relative bias{res}{col 73}  5.39
+{txt}{col 42}10% maximal IV size{res}{col 73} 22.30
+{txt}{col 42}15% maximal IV size{res}{col 73} 12.83
+{txt}{col 42}20% maximal IV size{res}{col 73}  9.54
+{txt}{col 42}25% maximal IV size{res}{col 73}  7.80
+{txt}Source: Stock-Yogo (2005).  Reproduced by permission.
+NB: Critical values are for Cragg-Donald F statistic and i.i.d. errors.
+{hline 78}
+{help ivreg2##overidtests:Hansen J statistic} (overidentification test of all instruments):{res}{col 71}   0.439
+{txt}{col 52}Chi-sq({res}2{txt}) P-val =  {res}{col 73}0.8028
+{txt}-endog- option:
+{help ivreg2##endogtest:Endogeneity test} of endogenous regressors: {res}{col 71}   4.154
+{txt}{col 52}Chi-sq({res}1{txt}) P-val =  {res}{col 73}0.0415
+{txt}Regressors tested:  {col 23}college
+{hline 78}
+Instrumented:{col 23}college
+Included instruments:{col 23}gender age age2 hukou feduy meduy sibling
+Excluded instruments:{col 23}luck1 luck2 luck3
+{hline 78}
+
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第八章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Jul 2024, 10:15:46
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

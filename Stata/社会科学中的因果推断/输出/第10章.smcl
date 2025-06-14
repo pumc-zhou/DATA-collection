@@ -1,0 +1,1044 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第十章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Jul 2024, 10:18:35
+
+{com}. do "C:\Users\XuQi\Desktop\第10章.do", nostop
+{txt}
+{com}. ***************************************************************************
+. *                             短面板模型                                  *
+. ***************************************************************************
+. 
+. use "C:\Users\XuQi\Desktop\wagepan.dta", clear
+{txt}
+{com}. 
+. *设置数据为追踪数据
+. xtset nr year
+{res}
+{col 1}{txt:Panel variable: }{res:nr}{txt: (strongly balanced)}
+{p 1 16 2}{txt:Time variable: }{res:year}{txt:, }{res:{bind:1980}}{txt: to }{res:{bind:1987}}{p_end}
+{txt}{col 10}Delta: {res}1 unit
+{txt}
+{com}. 
+. *描述数据缺失情况
+. xtdescribe
+
+      {txt}nr:  {res}13{txt}, {res}17{txt}, ..., {res}12548                                {txt}n ={res}        545
+    {txt}year:  {res}1980, 1981, ..., 1987                             {txt}T ={res}          8
+           {txt}Delta(year) = {res}1 unit
+           {txt}Span(year)  = {res}8 periods
+           {txt}(nr*year uniquely identifies each observation)
+
+Distribution of T_i:   min      5%     25%       50%       75%     95%     max
+                    {res}     8       8       8         8         8       8       8
+
+{txt}{col 6}Freq.  Percent    Cum. {c |}  Pattern
+ {hline 27}{c +}{c -}{c -}{hline 8}
+{res}      545    100.00  100.00{txt} {c |}  {res}11111111
+{txt} {hline 27}{c +}{c -}{c -}{hline 8}
+{res}      545    100.00        {txt} {c |}  {res}XXXXXXXX
+{txt}
+{com}. 
+. *描述变量的组内和组间方差
+. xtsum lwage black hisp educ year married exper exper2 union
+
+{txt}Variable         {c |}      Mean   Std. dev.       Min        Max {c |}    Observations
+{hline 17}{c +}{hline 44}{c +}{hline 16}
+lwage{col 10}overall {c |} {res} 1.649147   .5326094  -3.579079    4.05186{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} .3907468   .3333435   3.174173{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res} .3622636  -2.467201   3.204687{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+black{col 10}overall {c |} {res} .1155963   .3197769          0          1{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res}  .320034          0          1{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res}        0   .1155963   .1155963{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+hisp{col 10}overall {c |} {res} .1559633   .3628622          0          1{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} .3631539          0          1{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res}        0   .1559633   .1559633{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+educ{col 10}overall {c |} {res} 11.76697   1.746181          3         16{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} 1.747585          3         16{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res}        0   11.76697   11.76697{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+year{col 10}overall {c |} {res}   1983.5   2.291551       1980       1987{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res}        0     1983.5     1983.5{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res} 2.291551       1980       1987{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+married{col 10}overall {c |} {res} .4389908   .4963208          0          1{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} .3766116          0          1{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res} .3236137  -.4360092   1.313991{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+exper{col 10}overall {c |} {res} 6.514679   2.825873          0         18{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} 1.654918        3.5       14.5{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res} 2.291551   3.014679   10.01468{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+exper2{col 10}overall {c |} {res} 50.42477   40.78199          0        324{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} 26.35134       17.5      215.5{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res}  31.1431  -44.07523   158.9248{txt} {c |}     T =       8
+{col 18}{c |}{col 63}{c |}
+union{col 10}overall {c |} {res} .2440367   .4295639          0          1{txt} {c |}{col 69}N =    4360
+{col 10}between {c |}{col 31}{res} .3294467          0          1{txt} {c |}{col 69}n =     545
+{col 10}within  {c |}{col 31}{res} .2759787  -.6309633   1.119037{txt} {c |}     T =       8
+
+{com}. 
+. *描述个体时间序列
+. xtline lwage if nr<100
+{res}{txt}
+{com}. 
+. *混合线性回归
+. xtreg lwage black hisp union married exper exper2 year educ, pa corr(independent) vce(robust)
+
+{txt}Iteration 1:  Tolerance = {res}1.346e-10
+
+{txt}GEE population-averaged model{col 52}{txt}{lalign 16:Number of obs} = {res}{ralign 8:4,360}
+{txt}Group variable: {res}nr{txt}{col 52}{txt}{lalign 16:Number of groups} = {res}{ralign 8:545}
+{txt}Family: {lalign 8:Gaussian}{col 52}{lalign 16:Obs per group:}
+Link:   {lalign 8:Identity}{col 52}{ralign 16:min} = {res}{ralign 8:8}
+{txt}Correlation: {res}independent{txt}{col 52}{ralign 16:avg} = {res}{ralign 8:8.0}
+{txt}{col 52}{ralign 16:max} = {res}{ralign 8:8}
+{txt}{col 52}{txt}{lalign 16:Wald chi2({res:8})} = {res}{ralign 8:621.34}
+{txt}Scale parameter = {res}.2300891{txt}{col 52}{txt}{lalign 16:Prob > chi2} = {res}{ralign 8:0.0000}
+
+{txt}Pearson chi2({res:4360}){col 21} = {res}{ralign 8:1003.19}{txt}{col 52}{lalign 16:Deviance} = {res}{ralign 8:1003.19}
+{txt}Dispersion (Pearson){col 21} = {res}{ralign 8:.2300891}{col 52}{txt}{lalign 16:Dispersion} = {res}{ralign 8:.2300891}
+
+{txt}{ralign 78:(Std. err. adjusted for clustering on {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}black {c |}{col 14}{res}{space 2}-.1392244{col 26}{space 2}  .050428{col 37}{space 1}   -2.76{col 46}{space 3}0.006{col 54}{space 4}-.2380614{col 67}{space 3}-.0403874
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} .0158267{col 26}{space 2}   .03894{col 37}{space 1}    0.41{col 46}{space 3}0.684{col 54}{space 4}-.0604943{col 67}{space 3} .0921478
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1830538{col 26}{space 2}  .027393{col 37}{space 1}    6.68{col 46}{space 3}0.000{col 54}{space 4} .1293645{col 67}{space 3} .2367431
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .1080949{col 26}{space 2} .0259289{col 37}{space 1}    4.17{col 46}{space 3}0.000{col 54}{space 4} .0572751{col 67}{space 3} .1589147
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0645952{col 26}{space 2} .0173346{col 37}{space 1}    3.73{col 46}{space 3}0.000{col 54}{space 4}   .03062{col 67}{space 3} .0985703
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0022382{col 26}{space 2} .0008428{col 37}{space 1}   -2.66{col 46}{space 3}0.008{col 54}{space 4}-.0038901{col 67}{space 3}-.0005863
+{txt}{space 8}year {c |}{col 14}{res}{space 2} .0218522{col 26}{space 2} .0118747{col 37}{space 1}    1.84{col 46}{space 3}0.066{col 54}{space 4}-.0014218{col 67}{space 3} .0451263
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .0914692{col 26}{space 2} .0110806{col 37}{space 1}    8.25{col 46}{space 3}0.000{col 54}{space 4} .0697516{col 67}{space 3} .1131868
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-43.15754{col 26}{space 2} 23.40199{col 37}{space 1}   -1.84{col 46}{space 3}0.065{col 54}{space 4} -89.0246{col 67}{space 3} 2.709523
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. regress lwage black hisp union married exper exper2 year educ, vce(cluster nr)
+
+{txt}Linear regression                               Number of obs     = {res}     4,360
+                                                {txt}F(8, 544)         =  {res}    77.52
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1887
+                                                {txt}Root MSE          =    {res} .48017
+
+{txt}{ralign 78:(Std. err. adjusted for {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}black {c |}{col 14}{res}{space 2}-.1392244{col 26}{space 2} .0504743{col 37}{space 1}   -2.76{col 46}{space 3}0.006{col 54}{space 4}-.2383728{col 67}{space 3} -.040076
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} .0158267{col 26}{space 2} .0389758{col 37}{space 1}    0.41{col 46}{space 3}0.685{col 54}{space 4}-.0607348{col 67}{space 3} .0923882
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1830538{col 26}{space 2} .0274182{col 37}{space 1}    6.68{col 46}{space 3}0.000{col 54}{space 4} .1291954{col 67}{space 3} .2369122
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .1080949{col 26}{space 2} .0259528{col 37}{space 1}    4.17{col 46}{space 3}0.000{col 54}{space 4}  .057115{col 67}{space 3} .1590748
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0645952{col 26}{space 2} .0173505{col 37}{space 1}    3.72{col 46}{space 3}0.000{col 54}{space 4}  .030513{col 67}{space 3} .0986774
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0022382{col 26}{space 2} .0008436{col 37}{space 1}   -2.65{col 46}{space 3}0.008{col 54}{space 4}-.0038953{col 67}{space 3}-.0005811
+{txt}{space 8}year {c |}{col 14}{res}{space 2} .0218522{col 26}{space 2} .0118857{col 37}{space 1}    1.84{col 46}{space 3}0.067{col 54}{space 4}-.0014952{col 67}{space 3} .0451996
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .0914692{col 26}{space 2} .0110908{col 37}{space 1}    8.25{col 46}{space 3}0.000{col 54}{space 4} .0696832{col 67}{space 3} .1132552
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-43.15754{col 26}{space 2}  23.4235{col 37}{space 1}   -1.84{col 46}{space 3}0.066{col 54}{space 4}-89.16912{col 67}{space 3} 2.854039
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *固定效应模型
+. *LSDV法
+. qui regress lwage union married exper exper2 i.nr, vce(cluster nr)
+{txt}
+{com}. estimates table, keep(union married exper exper2) b se
+{res}
+{txt}{hline 12}{c -}{c TT}{c -}{hline 10}{c -}{c -}
+{ralign 12:Variable} {c |} {center 10:Active} {space 1}
+{hline 12}{c -}{c +}{c -}{hline 10}{c -}{c -}
+{res}{txt}{space 7}union {c |}{res} {ralign 10:.08208713}{txt} {space 1}
+{res}{txt}{space 12} {c |}{res} {ralign 10:.02440148}{txt} {space 1}
+{res}{txt}{space 5}married {c |}{res} {ralign 10:.04530332}{txt} {space 1}
+{res}{txt}{space 12} {c |}{res} {ralign 10:.02245327}{txt} {space 1}
+{res}{txt}{space 7}exper {c |}{res} {ralign 10:.11684669}{txt} {space 1}
+{res}{txt}{space 12} {c |}{res} {ralign 10:.0114521}{txt} {space 1}
+{res}{txt}{space 6}exper2 {c |}{res} {ralign 10:-.00430089}{txt} {space 1}
+{res}{txt}{space 12} {c |}{res} {ralign 10:.00073343}{txt} {space 1}
+{res}{txt}{hline 12}{c -}{c BT}{c -}{hline 10}{c -}{c -}
+{ralign 27:Legend: b/se}
+{res}{txt}
+{com}. 
+. *均值差分法
+. xtreg lwage union married exper exper2, fe vce(robust)
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     4,360
+{txt}Group variable: {res}nr{txt}{col 49}Number of groups{col 67}={col 69}{res}       545
+
+{txt}R-squared:{col 49}Obs per group:
+     Within  = {res}0.1780{col 63}{txt}min{col 67}={col 69}{res}         8
+{txt}     Between = {res}0.0005{col 63}{txt}avg{col 67}={col 69}{res}       8.0
+{txt}     Overall = {res}0.0638{col 63}{txt}max{col 67}={col 69}{res}         8
+
+{txt}{col 49}F({res}4{txt}, {res}544{txt}){col 67}={col 70}{res}   107.94
+{txt}corr(u_i, Xb) = {res}-0.1139{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{ralign 78:(Std. err. adjusted for {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}union {c |}{col 14}{res}{space 2} .0820871{col 26}{space 2} .0228266{col 37}{space 1}    3.60{col 46}{space 3}0.000{col 54}{space 4}  .037248{col 67}{space 3} .1269262
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .0453033{col 26}{space 2} .0210041{col 37}{space 1}    2.16{col 46}{space 3}0.031{col 54}{space 4} .0040442{col 67}{space 3} .0865625
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .1168467{col 26}{space 2}  .010713{col 37}{space 1}   10.91{col 46}{space 3}0.000{col 54}{space 4} .0958028{col 67}{space 3} .1378906
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0043009{col 26}{space 2} .0006861{col 37}{space 1}   -6.27{col 46}{space 3}0.000{col 54}{space 4}-.0056486{col 67}{space 3}-.0029532
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  1.06488{col 26}{space 2} .0366294{col 37}{space 1}   29.07{col 46}{space 3}0.000{col 54}{space 4} .9929274{col 67}{space 3} 1.136832
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     sigma_u {c |} {res}  .4000539
+     {txt}sigma_e {c |} {res} .35125535
+         {txt}rho {c |} {res}  .5646785{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+
+{com}. 
+. *一阶差分法
+. regress D.(lwage union married exper exper2), vce(cluster nr) noconstant
+
+{txt}Linear regression                               Number of obs     = {res}     3,815
+                                                {txt}F(4, 544)         =  {res}    93.68
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0268
+                                                {txt}Root MSE          =    {res} .44304
+
+{txt}{ralign 78:(Std. err. adjusted for {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}     D.lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}union {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0427878{col 26}{space 2} .0220062{col 37}{space 1}    1.94{col 46}{space 3}0.052{col 54}{space 4}-.0004397{col 67}{space 3} .0860153
+{txt}{space 12} {c |}
+{space 5}married {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2} .0381377{col 26}{space 2} .0242391{col 37}{space 1}    1.57{col 46}{space 3}0.116{col 54}{space 4}-.0094761{col 67}{space 3} .0857515
+{txt}{space 12} {c |}
+{space 7}exper {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2}   .11575{col 26}{space 2} .0143991{col 37}{space 1}    8.04{col 46}{space 3}0.000{col 54}{space 4} .0874654{col 67}{space 3} .1440347
+{txt}{space 12} {c |}
+{space 6}exper2 {c |}
+{space 9}D1. {c |}{col 14}{res}{space 2}-.0038824{col 26}{space 2} .0009428{col 37}{space 1}   -4.12{col 46}{space 3}0.000{col 54}{space 4}-.0057343{col 67}{space 3}-.0020304
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *随机效应模型
+. *广义最小二乘估计
+. xtreg lwage black hisp union married exper exper2 year educ, re theta vce(robust)
+{res}
+{txt}Random-effects GLS regression                   Number of obs     = {res}     4,360
+{txt}Group variable: {res}nr                              {txt}Number of groups  = {res}       545
+
+{txt}R-squared:                                      Obs per group:
+     Within  = {res}0.1774                                         {txt}min = {res}         8
+{txt}     Between = {res}0.1881                                         {txt}avg = {res}       8.0
+{txt}     Overall = {res}0.1829                                         {txt}max = {res}         8
+
+                                                {txt}Wald chi2({res}8{txt})      =  {res}   573.35
+{txt}corr(u_i, X) = {res}0{txt} (assumed)                      Prob > chi2       =     {res}0.0000
+{txt}theta        = {res}.64264094
+
+{txt}{ralign 78:(Std. err. adjusted for {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}black {c |}{col 14}{res}{space 2}-.1393043{col 26}{space 2} .0508314{col 37}{space 1}   -2.74{col 46}{space 3}0.006{col 54}{space 4} -.238932{col 67}{space 3}-.0396766
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} .0209246{col 26}{space 2} .0397401{col 37}{space 1}    0.53{col 46}{space 3}0.599{col 54}{space 4}-.0569646{col 67}{space 3} .0988137
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1080178{col 26}{space 2} .0208882{col 37}{space 1}    5.17{col 46}{space 3}0.000{col 54}{space 4} .0670777{col 67}{space 3}  .148958
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .0629524{col 26}{space 2} .0189525{col 37}{space 1}    3.32{col 46}{space 3}0.001{col 54}{space 4} .0258062{col 67}{space 3} .1000987
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0942591{col 26}{space 2} .0150814{col 37}{space 1}    6.25{col 46}{space 3}0.000{col 54}{space 4}    .0647{col 67}{space 3} .1238181
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0039663{col 26}{space 2} .0006701{col 37}{space 1}   -5.92{col 46}{space 3}0.000{col 54}{space 4}-.0052797{col 67}{space 3}-.0026529
+{txt}{space 8}year {c |}{col 14}{res}{space 2} .0172317{col 26}{space 2} .0118578{col 37}{space 1}    1.45{col 46}{space 3}0.146{col 54}{space 4}-.0060091{col 67}{space 3} .0404725
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .0924148{col 26}{space 2} .0111504{col 37}{space 1}    8.29{col 46}{space 3}0.000{col 54}{space 4} .0705604{col 67}{space 3} .1142691
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-34.07261{col 26}{space 2} 23.37069{col 37}{space 1}   -1.46{col 46}{space 3}0.145{col 54}{space 4}-79.87831{col 67}{space 3}  11.7331
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     sigma_u {c |} {res} .32456727
+     {txt}sigma_e {c |} {res} .35125535
+         {txt}rho {c |} {res} .46057172{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+
+{com}. 
+. *最大似然估计
+. xtreg lwage black hisp union married exper exper2 year educ, mle vce(bootstrap)
+{res}{txt}(running {bf:xtreg} on estimation sample)
+{res}
+{text}Bootstrap replications ({result:50}){text}: {res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}10{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}20{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}30{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}40{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}50{text} done
+{res}
+{txt}{col 1}Random-effects ML regression{col 54}{lalign 16:Number of obs}{col 70} = {res}{ralign 6:4,360}
+{txt}{col 54}{lalign 16:Replications}{col 70} = {res}{ralign 6:50}
+{txt}{col 1}{txt}Group variable: {res}nr{txt}{col 54}{lalign 16:Number of groups}{col 70} = {res}{ralign 6:545}
+
+{txt}{col 1}Random effects u_i ~ {txt:Gaussian}{col 54}Obs per group:
+{col 54}{ralign 16:min}{col 70} = {res}{ralign 6:8}
+{txt}{col 54}{ralign 16:avg}{col 70} = {res}{ralign 6:8.0}
+{txt}{col 54}{ralign 16:max}{col 70} = {res}{ralign 6:8}
+
+{txt}{col 54}{lalign 16:Wald chi2({res:8})}{col 70} = {res}{ralign 6:899.88}
+{txt}{col 1}{lalign 14:Log likelihood}{col 15} = {res}{ralign 10:-2192.1739}{txt}{col 54}{lalign 16:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+
+{txt}{ralign 78:(Replications based on {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 1}       lwage{col 14}{c |} coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}black {c |}{col 14}{res}{space 2}-.1393088{col 26}{space 2} .0537444{col 37}{space 1}   -2.59{col 46}{space 3}0.010{col 54}{space 4}-.2446459{col 67}{space 3}-.0339716
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}  .020958{col 26}{space 2} .0377767{col 37}{space 1}    0.55{col 46}{space 3}0.579{col 54}{space 4} -.053083{col 67}{space 3} .0949991
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1074526{col 26}{space 2} .0178995{col 37}{space 1}    6.00{col 46}{space 3}0.000{col 54}{space 4} .0723702{col 67}{space 3}  .142535
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .0625782{col 26}{space 2} .0187651{col 37}{space 1}    3.33{col 46}{space 3}0.001{col 54}{space 4} .0257993{col 67}{space 3} .0993571
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0944108{col 26}{space 2} .0168733{col 37}{space 1}    5.60{col 46}{space 3}0.000{col 54}{space 4} .0613397{col 67}{space 3} .1274819
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0039745{col 26}{space 2} .0006874{col 37}{space 1}   -5.78{col 46}{space 3}0.000{col 54}{space 4}-.0053217{col 67}{space 3}-.0026273
+{txt}{space 8}year {c |}{col 14}{res}{space 2} .0172076{col 26}{space 2} .0132192{col 37}{space 1}    1.30{col 46}{space 3}0.193{col 54}{space 4}-.0087014{col 67}{space 3} .0431167
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .0924264{col 26}{space 2} .0131452{col 37}{space 1}    7.03{col 46}{space 3}0.000{col 54}{space 4} .0666622{col 67}{space 3} .1181905
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-34.02529{col 26}{space 2} 26.03304{col 37}{space 1}   -1.31{col 46}{space 3}0.191{col 54}{space 4}-85.04911{col 67}{space 3} 16.99854
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+    /sigma_u {c |}{col 14}{res}{space 2} .3293644{col 26}{space 2} .0118546{col 54}{space 4} .3069304{col 67}{space 3} .3534382
+{txt}    /sigma_e {c |}{col 14}{res}{space 2} .3512025{col 26}{space 2} .0107314{col 54}{space 4} .3307867{col 67}{space 3} .3728783
+{txt}         rho {c |}{col 14}{res}{space 2}  .467945{col 26}{space 2}  .022141{col 54}{space 4} .4248247{col 67}{space 3} .5114451
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}LR test of sigma_u=0: {help j_chibar##|_new:chibar2(01) = }{res}1582.70{col 56}{txt}Prob >= chibar2 = {res}0.000
+{txt}
+{com}. 
+. *组间估计量
+. xtreg lwage black hisp union married exper exper2 year educ, be vce(bootstrap)
+{res}{txt}(running {bf:xtreg} on estimation sample)
+{res}
+{text}Bootstrap replications ({result:50}){text}: {res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}10{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}20{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}30{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}40{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}.{res}{text}50{text} done
+{res}
+{txt}Between regression (regression on group means)  Number of obs     = {res}     4,360
+{txt}Group variable: {res}nr                              {txt}Number of groups  = {res}       545
+
+{txt}R-squared:                                      Obs per group:
+     Within  = {res}0.0488                                         {txt}min = {res}         8
+{txt}     Between = {res}0.2192                                         {txt}avg = {res}       8.0
+{txt}     Overall = {res}0.1380                                         {txt}max = {res}         8
+
+                                                {txt}Wald chi({res}7{txt})       =  {res}   164.26
+{txt}sd(u_i + avg(e_i.)) = {res}.3475147                  {txt}Prob > chi2       =     {res}0.0000
+
+{txt}{ralign 78:(Replications based on {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}   Observed{col 26}   Bootstrap{col 54}         Norm{col 67}al-based
+{col 1}       lwage{col 14}{c |} coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}black {c |}{col 14}{res}{space 2}-.1388124{col 26}{space 2} .0580155{col 37}{space 1}   -2.39{col 46}{space 3}0.017{col 54}{space 4}-.2525207{col 67}{space 3} -.025104
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2} .0047758{col 26}{space 2} .0383482{col 37}{space 1}    0.12{col 46}{space 3}0.901{col 54}{space 4}-.0703853{col 67}{space 3} .0799369
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .2706765{col 26}{space 2} .0453357{col 37}{space 1}    5.97{col 46}{space 3}0.000{col 54}{space 4} .1818203{col 67}{space 3} .3595328
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .1436637{col 26}{space 2} .0382036{col 37}{space 1}    3.76{col 46}{space 3}0.000{col 54}{space 4} .0687861{col 67}{space 3} .2185413
+{txt}{space 7}exper {c |}{col 14}{res}{space 2}-.0504371{col 26}{space 2} .0491228{col 37}{space 1}   -1.03{col 46}{space 3}0.305{col 54}{space 4}-.1467161{col 67}{space 3} .0458419
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2} .0051245{col 26}{space 2} .0029744{col 37}{space 1}    1.72{col 46}{space 3}0.085{col 54}{space 4}-.0007052{col 67}{space 3} .0109542
+{txt}{space 8}year {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 8}educ {c |}{col 14}{res}{space 2} .0946036{col 26}{space 2} .0109293{col 37}{space 1}    8.66{col 46}{space 3}0.000{col 54}{space 4} .0731825{col 67}{space 3} .1160246
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  .492309{col 26}{space 2} .2321234{col 37}{space 1}    2.12{col 46}{space 3}0.034{col 54}{space 4} .0373555{col 67}{space 3} .9472626
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *Hausman检验
+. qui xtreg lwage union married exper exper2, fe
+{txt}
+{com}. est store fe
+{txt}
+{com}. 
+. qui xtreg lwage black hisp union married exper exper2 year educ, re
+{txt}
+{com}. est store re
+{txt}
+{com}. 
+. hausman fe re, sigmamore
+
+{txt}{col 18}{hline 4} Coefficients {hline 4}
+{col 14}{c |}{col 21}(b){col 34}(B){col 49}(b-B){col 59}sqrt(diag(V_b-V_B))
+{col 14}{c |}{col 17}     fe     {col 30}     re     {col 46}Difference{col 63}Std. err.
+{hline 13}{c +}{hline 64}
+{space 7}union {c |}{res}{col 18} .0820871{col 31} .1080178{col 47}-.0259307{col 63} .0074844
+{txt}{space 5}married {c |}{res}{col 18} .0453033{col 31} .0629524{col 47}-.0176491{col 63}  .007462
+{txt}{space 7}exper {c |}{res}{col 18} .1168467{col 31} .0942591{col 47} .0225876{col 63}        .
+{txt}{space 6}exper2 {c |}{res}{col 18}-.0043009{col 31}-.0039663{col 47}-.0003346{col 63} .0001159
+{txt}{hline 13}{c BT}{hline 64}
+{ralign 78:b = Consistent under H0 and Ha; obtained from {bf:xtreg}.}
+{ralign 78:B = Inconsistent under Ha, efficient under H0; obtained from {bf:xtreg}.}
+
+Test of H0: Difference in coefficients not systematic
+
+{ralign 11:chi2({res:4})} = (b-B)'[(V_b-V_B)^(-1)](b-B)
+{ralign 11:} = {res:{ralign 6:15.87}}
+{ralign 11:Prob > chi2} = {res:{ralign 6:0.0032}}
+(V_b-V_B is not positive definite)
+
+{com}. 
+. *稳健的Hausman检验
+. qui xtreg lwage black hisp union married exper exper2 year educ, re vce(robust)
+{txt}
+{com}. xtoverid 
+
+{txt}Test of overidentifying restrictions: fixed vs random effects
+Cross-section time-series model: xtreg re  robust cluster(nr)
+Sargan-Hansen statistic{res}{col 25} 28.711{txt}  Chi-sq({res}4{txt}){col 47}P-value = {res}0.0000
+{txt}
+{com}. 
+. 
+. ***************************************************************************
+. *                             长面板模型                                  *
+. ***************************************************************************
+. 
+. use "C:\Users\XuQi\Desktop\mus08cigar.dta", clear
+{txt}
+{com}. 
+. *设置为面板数据
+. xtset state year
+{res}
+{col 1}{txt:Panel variable: }{res:state}{txt: (strongly balanced)}
+{p 1 16 2}{txt:Time variable: }{res:year}{txt:, }{res:{bind:63}}{txt: to }{res:{bind:92}}{p_end}
+{txt}{col 10}Delta: {res}1 unit
+{txt}
+{com}. 
+. *LSDV法拟合个体效应模型，将时间T作为连续变量纳入模型
+. reg lnc lnp lny lnpmin i.state year, vce(cluster state)
+
+{txt}Linear regression                               Number of obs     = {res}       300
+                                                {txt}{help j_robustsingular:F(3, 9) }          =  {res}        .
+                                                {txt}Prob > F          = {res}         .
+                                                {txt}R-squared         = {res}    0.7203
+                                                {txt}Root MSE          =    {res} .11203
+
+{txt}{ralign 78:(Std. err. adjusted for {res:10} clusters in {res:state})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-1.027181{col 26}{space 2} .4412156{col 37}{space 1}   -2.33{col 46}{space 3}0.045{col 54}{space 4} -2.02528{col 67}{space 3}-.0290819
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .4975365{col 26}{space 2} .4139086{col 37}{space 1}    1.20{col 46}{space 3}0.260{col 54}{space 4}-.4387899{col 67}{space 3} 1.433863
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .5100582{col 26}{space 2} .2627025{col 37}{space 1}    1.94{col 46}{space 3}0.084{col 54}{space 4}-.0842161{col 67}{space 3} 1.104332
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0773908{col 26}{space 2} .0594636{col 37}{space 1}   -1.30{col 46}{space 3}0.225{col 54}{space 4}-.2119069{col 67}{space 3} .0571252
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}  .088557{col 26}{space 2} .0090317{col 37}{space 1}    9.81{col 46}{space 3}0.000{col 54}{space 4} .0681259{col 67}{space 3} .1089881
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.1809375{col 26}{space 2} .1695839{col 37}{space 1}   -1.07{col 46}{space 3}0.314{col 54}{space 4}-.5645629{col 67}{space 3}  .202688
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.1066138{col 26}{space 2} .2409767{col 37}{space 1}   -0.44{col 46}{space 3}0.669{col 54}{space 4} -.651741{col 67}{space 3} .4385135
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .2177434{col 26}{space 2} .1063333{col 37}{space 1}    2.05{col 46}{space 3}0.071{col 54}{space 4}-.0227993{col 67}{space 3}  .458286
+{txt}{space 10}7  {c |}{col 14}{res}{space 2}  .115543{col 26}{space 2} .1959351{col 37}{space 1}    0.59{col 46}{space 3}0.570{col 54}{space 4} -.327693{col 67}{space 3} .5587791
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .1068277{col 26}{space 2}  .124702{col 37}{space 1}    0.86{col 46}{space 3}0.414{col 54}{space 4}-.1752679{col 67}{space 3} .3889233
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0433207{col 26}{space 2}   .04618{col 37}{space 1}    0.94{col 46}{space 3}0.373{col 54}{space 4}-.0611458{col 67}{space 3} .1477872
+{txt}{space 9}10  {c |}{col 14}{res}{space 2} -.133583{col 26}{space 2} .0333562{col 37}{space 1}   -4.00{col 46}{space 3}0.003{col 54}{space 4}-.2090399{col 67}{space 3}-.0581261
+{txt}{space 12} {c |}
+{space 8}year {c |}{col 14}{res}{space 2}-.0429824{col 26}{space 2} .0305275{col 37}{space 1}   -1.41{col 46}{space 3}0.193{col 54}{space 4}-.1120405{col 67}{space 3} .0260757
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.153657{col 26}{space 2} 2.152852{col 37}{space 1}    2.86{col 46}{space 3}0.019{col 54}{space 4} 1.283567{col 67}{space 3} 11.02375
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *检验组间异方差
+. qui xtreg lnc lnp lny lnpmin year, fe vce(robust)
+{txt}
+{com}. xttest3
+
+{txt}Modified Wald test for groupwise heteroskedasticity
+in fixed effect regression model
+
+{res}H0: sigma(i)^2 = sigma^2 for all i
+
+{txt}chi2 (10)  =   {res}  378.90
+{txt}Prob>chi2 =    {res}  0.0000
+
+{txt}
+{com}. 
+. *检验组内自相关
+. xi:xtserial lnc lnp lny lnpmin year i.state
+{txt}i.state{col 19}_Istate_1-10{col 39}(naturally coded; _Istate_1 omitted)
+
+Wooldridge test for autocorrelation in panel data
+H0: no first-order autocorrelation
+{col 5}F(  1,       9) = {res}    89.304
+{txt}{col 12}Prob > F = {res}     0.0000
+{txt}
+{com}. 
+. *检验组间同期相关
+. qui xtreg lnc lnp lny lnpmin year, fe vce(robust)
+{txt}
+{com}. xttest2
+{res} 
+{txt}Correlation matrix of residuals:
+
+{space 0}{space 0}{ralign 12:}{space 1}{c |}{space 1}{ralign 9:__e1}{space 1}{space 1}{ralign 9:__e2}{space 1}{space 1}{ralign 9:__e3}{space 1}{space 1}{ralign 9:__e4}{space 1}{space 1}{ralign 9:__e5}{space 1}{space 1}{ralign 9:__e6}{space 1}{space 1}{ralign 9:__e7}{space 1}{space 1}{ralign 9:__e8}{space 1}{space 1}{ralign 9:__e9}{space 1}{space 1}{ralign 9:__e10}{space 1}
+{space 0}{hline 13}{c   +}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}{hline 11}
+{space 0}{space 0}{ralign 12:__e1}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .2921489}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e2}{space 1}{c |}{space 1}{ralign 9:{res:{sf:-.0213432}}}{space 1}{space 1}{ralign 9:{res:{sf: .1777056}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e3}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .3780161}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0190987}}}{space 1}{space 1}{ralign 9:{res:{sf: .5315973}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e4}{space 1}{c |}{space 1}{ralign 9:{res:{sf:-.1132695}}}{space 1}{space 1}{ralign 9:{res:{sf: .0807039}}}{space 1}{space 1}{ralign 9:{res:{sf:-.1682104}}}{space 1}{space 1}{ralign 9:{res:{sf: .2440957}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e5}{space 1}{c |}{space 1}{ralign 9:{res:{sf: -.094377}}}{space 1}{space 1}{ralign 9:{res:{sf: .0466794}}}{space 1}{space 1}{ralign 9:{res:{sf:-.1377809}}}{space 1}{space 1}{ralign 9:{res:{sf: .0877548}}}{space 1}{space 1}{ralign 9:{res:{sf: .1035723}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e6}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .0053953}}}{space 1}{space 1}{ralign 9:{res:{sf: .0979055}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0120405}}}{space 1}{space 1}{ralign 9:{res:{sf: .1042869}}}{space 1}{space 1}{ralign 9:{res:{sf: .0761779}}}{space 1}{space 1}{ralign 9:{res:{sf: .1662647}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e7}{space 1}{c |}{space 1}{ralign 9:{res:{sf:-.5039313}}}{space 1}{space 1}{ralign 9:{res:{sf: .2195519}}}{space 1}{space 1}{ralign 9:{res:{sf: -.686677}}}{space 1}{space 1}{ralign 9:{res:{sf: .3532443}}}{space 1}{space 1}{ralign 9:{res:{sf: .3409154}}}{space 1}{space 1}{ralign 9:{res:{sf: .2502154}}}{space 1}{space 1}{ralign 9:{res:{sf: 1.573015}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e8}{space 1}{c |}{space 1}{ralign 9:{res:{sf:  .105558}}}{space 1}{space 1}{ralign 9:{res:{sf: .0783913}}}{space 1}{space 1}{ralign 9:{res:{sf: .1330914}}}{space 1}{space 1}{ralign 9:{res:{sf: .0172018}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0239187}}}{space 1}{space 1}{ralign 9:{res:{sf: .0690433}}}{space 1}{space 1}{ralign 9:{res:{sf:-.1414606}}}{space 1}{space 1}{ralign 9:{res:{sf: .1194612}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e9}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .2069446}}}{space 1}{space 1}{ralign 9:{res:{sf: .0553588}}}{space 1}{space 1}{ralign 9:{res:{sf: .2848406}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0674447}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0578446}}}{space 1}{space 1}{ralign 9:{res:{sf: .0289819}}}{space 1}{space 1}{ralign 9:{res:{sf: -.334058}}}{space 1}{space 1}{ralign 9:{res:{sf: .1131528}}}{space 1}{space 1}{ralign 9:{res:{sf: .2109084}}}{space 1}{space 1}{ralign 9:{res:{sf:{space 9}}}}{space 1}
+{space 0}{space 0}{ralign 12:__e10}{space 1}{c |}{space 1}{ralign 9:{res:{sf: .1678554}}}{space 1}{space 1}{ralign 9:{res:{sf: .0577682}}}{space 1}{space 1}{ralign 9:{res:{sf: .2299779}}}{space 1}{space 1}{ralign 9:{res:{sf: .0000346}}}{space 1}{space 1}{ralign 9:{res:{sf:-.0209553}}}{space 1}{space 1}{ralign 9:{res:{sf: .0422944}}}{space 1}{space 1}{ralign 9:{res:{sf:-.2226333}}}{space 1}{space 1}{ralign 9:{res:{sf: .0902976}}}{space 1}{space 1}{ralign 9:{res:{sf: .1584811}}}{space 1}{space 1}{ralign 9:{res:{sf: .1710032}}}{space 1}
+
+          __e1     __e2     __e3     __e4     __e5     __e6     __e7     __e8     __e9    __e10
+ __e1  {res} 1.0000
+{txt} __e2  {res}-0.0937   1.0000
+{txt} __e3  {res} 0.9592  -0.0621   1.0000
+{txt} __e4  {res}-0.4242   0.3875  -0.4670   1.0000
+{txt} __e5  {res}-0.5426   0.3441  -0.5872   0.5519   1.0000
+{txt} __e6  {res} 0.0245   0.5696  -0.0405   0.5177   0.5805   1.0000
+{txt} __e7  {res}-0.7434   0.4153  -0.7509   0.5701   0.8446   0.4893   1.0000
+{txt} __e8  {res} 0.5650   0.5380   0.5281   0.1007  -0.2150   0.4899  -0.3263   1.0000
+{txt} __e9  {res} 0.8337   0.2859   0.8507  -0.2972  -0.3914   0.1548  -0.5800   0.7129   1.0000
+{txt}__e10  {res} 0.7510   0.3314   0.7628   0.0002  -0.1575   0.2508  -0.4293   0.6318   0.8345   1.0000
+
+{txt}Breusch-Pagan LM test of independence: chi2(45) = {res}  376.963{txt}, Pr = {res}0.0000
+{txt}Based on 30 complete observations over panel units
+
+{com}. 
+. *面板校正标准误
+. xtpcse lnc lnp lny lnpmin year i.state
+{res}
+{txt}Linear regression, correlated panels corrected standard errors (PCSEs)
+
+Group variable:{col 19}{res}state{col 49}{txt}Number of obs{col 67}= {res}       300
+{txt}Time variable:{col 19}{res}year{col 49}{txt}Number of groups{col 67}= {res}        10
+{txt}Panels:{col 19}{res}correlated (balanced){col 49}{txt}Obs per group:
+Autocorrelation:{col 19}{res}no autocorrelation{col 63}{txt}min{col 67}= {res}        30
+{txt}{col 63}avg{col 67}= {res}        30
+{txt}{col 63}max{col 67}= {res}        30
+{txt}Estimated covariances{col 28}= {res}       55{col 49}{txt}R-squared{col 67}= {res}    0.7203
+{txt}Estimated autocorrelations{col 28}= {res}        0{col 49}{txt}Wald chi2({res}13{txt}){col 67}= {res}   2147.36
+{txt}Estimated coefficients{col 28}= {res}       14{col 49}{txt}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}Panel-corrected
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-1.027181{col 26}{space 2} .1332425{col 37}{space 1}   -7.71{col 46}{space 3}0.000{col 54}{space 4}-1.288332{col 67}{space 3}-.7660305
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .4975365{col 26}{space 2} .1804528{col 37}{space 1}    2.76{col 46}{space 3}0.006{col 54}{space 4} .1438554{col 67}{space 3} .8512176
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .5100582{col 26}{space 2} .1393134{col 37}{space 1}    3.66{col 46}{space 3}0.000{col 54}{space 4}  .237009{col 67}{space 3} .7831074
+{txt}{space 8}year {c |}{col 14}{res}{space 2}-.0429824{col 26}{space 2}  .014234{col 37}{space 1}   -3.02{col 46}{space 3}0.003{col 54}{space 4}-.0708806{col 67}{space 3}-.0150843
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0773908{col 26}{space 2} .0389125{col 37}{space 1}   -1.99{col 46}{space 3}0.047{col 54}{space 4} -.153658{col 67}{space 3}-.0011237
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}  .088557{col 26}{space 2}  .011143{col 37}{space 1}    7.95{col 46}{space 3}0.000{col 54}{space 4} .0667171{col 67}{space 3} .1103968
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.1809375{col 26}{space 2} .0829463{col 37}{space 1}   -2.18{col 46}{space 3}0.029{col 54}{space 4}-.3435093{col 67}{space 3}-.0183657
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.1066138{col 26}{space 2} .1018461{col 37}{space 1}   -1.05{col 46}{space 3}0.295{col 54}{space 4}-.3062284{col 67}{space 3} .0930008
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .2177434{col 26}{space 2}  .049543{col 37}{space 1}    4.40{col 46}{space 3}0.000{col 54}{space 4} .1206408{col 67}{space 3} .3148459
+{txt}{space 10}7  {c |}{col 14}{res}{space 2}  .115543{col 26}{space 2} .0980092{col 37}{space 1}    1.18{col 46}{space 3}0.238{col 54}{space 4}-.0765516{col 67}{space 3} .3076376
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .1068277{col 26}{space 2} .0483694{col 37}{space 1}    2.21{col 46}{space 3}0.027{col 54}{space 4} .0120255{col 67}{space 3}   .20163
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0433207{col 26}{space 2} .0202198{col 37}{space 1}    2.14{col 46}{space 3}0.032{col 54}{space 4} .0036907{col 67}{space 3} .0829508
+{txt}{space 9}10  {c |}{col 14}{res}{space 2} -.133583{col 26}{space 2} .0221487{col 37}{space 1}   -6.03{col 46}{space 3}0.000{col 54}{space 4}-.1769937{col 67}{space 3}-.0901722
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.153657{col 26}{space 2} .7886145{col 37}{space 1}    7.80{col 46}{space 3}0.000{col 54}{space 4} 4.608002{col 67}{space 3} 7.699313
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *面板校正标准误+FGLS
+. xtpcse lnc lnp lny lnpmin year i.state, corr(ar1)
+{txt}note: estimates of rho outside [-1,1] bounded to be in the range [-1,1].
+{res}
+{txt}Prais–Winsten regression, correlated panels corrected standard errors (PCSEs)
+
+Group variable:{col 19}{res}state{col 49}{txt}Number of obs{col 67}= {res}       300
+{txt}Time variable:{col 19}{res}year{col 49}{txt}Number of groups{col 67}= {res}        10
+{txt}Panels:{col 19}{res}correlated (balanced){col 49}{txt}Obs per group:
+Autocorrelation:{col 19}{res}common AR(1){col 63}{txt}min{col 67}= {res}        30
+{txt}{col 63}avg{col 67}= {res}        30
+{txt}{col 63}max{col 67}= {res}        30
+{txt}Estimated covariances{col 28}= {res}       55{col 49}{txt}R-squared{col 67}= {res}    0.9824
+{txt}Estimated autocorrelations{col 28}= {res}        1{col 49}{txt}Wald chi2({res}13{txt}){col 67}= {res}    504.30
+{txt}Estimated coefficients{col 28}= {res}       14{col 49}{txt}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}Panel-corrected
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-.3440621{col 26}{space 2} .0571589{col 37}{space 1}   -6.02{col 46}{space 3}0.000{col 54}{space 4}-.4560914{col 67}{space 3}-.2320328
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .5661073{col 26}{space 2} .1566725{col 37}{space 1}    3.61{col 46}{space 3}0.000{col 54}{space 4} .2590348{col 67}{space 3} .8731798
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .1000875{col 26}{space 2} .0736082{col 37}{space 1}    1.36{col 46}{space 3}0.174{col 54}{space 4} -.044182{col 67}{space 3} .2443569
+{txt}{space 8}year {c |}{col 14}{res}{space 2}-.0498643{col 26}{space 2} .0121104{col 37}{space 1}   -4.12{col 46}{space 3}0.000{col 54}{space 4}-.0736003{col 67}{space 3}-.0261283
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0784486{col 26}{space 2} .0519567{col 37}{space 1}   -1.51{col 46}{space 3}0.131{col 54}{space 4}-.1802818{col 67}{space 3} .0233846
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0954506{col 26}{space 2} .0261747{col 37}{space 1}    3.65{col 46}{space 3}0.000{col 54}{space 4} .0441491{col 67}{space 3}  .146752
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} -.207494{col 26}{space 2} .0810219{col 37}{space 1}   -2.56{col 46}{space 3}0.010{col 54}{space 4} -.366294{col 67}{space 3} -.048694
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.1811666{col 26}{space 2} .0977461{col 37}{space 1}   -1.85{col 46}{space 3}0.064{col 54}{space 4}-.3727454{col 67}{space 3} .0104123
+{txt}{space 10}6  {c |}{col 14}{res}{space 2}  .185644{col 26}{space 2} .0554283{col 37}{space 1}    3.35{col 46}{space 3}0.001{col 54}{space 4} .0770065{col 67}{space 3} .2942816
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} .0701358{col 26}{space 2}  .120881{col 37}{space 1}    0.58{col 46}{space 3}0.562{col 54}{space 4}-.1667866{col 67}{space 3} .3070582
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .0397148{col 26}{space 2} .0507738{col 37}{space 1}    0.78{col 46}{space 3}0.434{col 54}{space 4}-.0598001{col 67}{space 3} .1392297
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0231754{col 26}{space 2}  .025083{col 37}{space 1}    0.92{col 46}{space 3}0.356{col 54}{space 4}-.0259863{col 67}{space 3} .0723371
+{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.1289763{col 26}{space 2} .0387423{col 37}{space 1}   -3.33{col 46}{space 3}0.001{col 54}{space 4}-.2049099{col 67}{space 3}-.0530428
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.837936{col 26}{space 2} .6044356{col 37}{space 1}    8.00{col 46}{space 3}0.000{col 54}{space 4} 3.653264{col 67}{space 3} 6.022608
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+         rho {c |}  {res} .7936188
+{txt}{hline 13}{c BT}{hline 64}
+
+{com}. xtpcse lnc lnp lny lnpmin year i.state, corr(psar1)
+{txt}note: estimates of rho outside [-1,1] bounded to be in the range [-1,1].
+{res}
+{txt}Prais–Winsten regression, correlated panels corrected standard errors (PCSEs)
+
+Group variable:{col 19}{res}state{col 49}{txt}Number of obs{col 67}= {res}       300
+{txt}Time variable:{col 19}{res}year{col 49}{txt}Number of groups{col 67}= {res}        10
+{txt}Panels:{col 19}{res}correlated (balanced){col 49}{txt}Obs per group:
+Autocorrelation:{col 19}{res}panel-specific AR(1){col 63}{txt}min{col 67}= {res}        30
+{txt}{col 63}avg{col 67}= {res}        30
+{txt}{col 63}max{col 67}= {res}        30
+{txt}Estimated covariances{col 28}= {res}       55{col 49}{txt}R-squared{col 67}= {res}    0.9954
+{txt}Estimated autocorrelations{col 28}= {res}       10{col 49}{txt}Wald chi2({res}12{txt}){col 67}= {res}    855.24
+{txt}Estimated coefficients{col 28}= {res}       13{col 49}{txt}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}Panel-corrected
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-.2960784{col 26}{space 2} .0539584{col 37}{space 1}   -5.49{col 46}{space 3}0.000{col 54}{space 4} -.401835{col 67}{space 3}-.1903218
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .5326598{col 26}{space 2} .1350574{col 37}{space 1}    3.94{col 46}{space 3}0.000{col 54}{space 4} .2679522{col 67}{space 3} .7973674
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .0507118{col 26}{space 2} .0673426{col 37}{space 1}    0.75{col 46}{space 3}0.451{col 54}{space 4}-.0812772{col 67}{space 3} .1827009
+{txt}{space 8}year {c |}{col 14}{res}{space 2}-.0488194{col 26}{space 2} .0103959{col 37}{space 1}   -4.70{col 46}{space 3}0.000{col 54}{space 4}-.0691949{col 67}{space 3}-.0284439
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0639957{col 26}{space 2} .0802776{col 37}{space 1}   -0.80{col 46}{space 3}0.425{col 54}{space 4}-.2213369{col 67}{space 3} .0933456
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}        0{col 26}{txt}  (omitted)
+{space 10}4  {c |}{col 14}{res}{space 2} -.187228{col 26}{space 2} .0981734{col 37}{space 1}   -1.91{col 46}{space 3}0.057{col 54}{space 4}-.3796444{col 67}{space 3} .0051885
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} -.163645{col 26}{space 2} .1128024{col 37}{space 1}   -1.45{col 46}{space 3}0.147{col 54}{space 4}-.3847336{col 67}{space 3} .0574436
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .1980726{col 26}{space 2} .0809248{col 37}{space 1}    2.45{col 46}{space 3}0.014{col 54}{space 4} .0394629{col 67}{space 3} .3566822
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} .0796166{col 26}{space 2} .1709107{col 37}{space 1}    0.47{col 46}{space 3}0.641{col 54}{space 4}-.2553622{col 67}{space 3} .4145954
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .0492827{col 26}{space 2} .0817016{col 37}{space 1}    0.60{col 46}{space 3}0.546{col 54}{space 4}-.1108495{col 67}{space 3} .2094149
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0263335{col 26}{space 2} .0630703{col 37}{space 1}    0.42{col 46}{space 3}0.676{col 54}{space 4} -.097282{col 67}{space 3}  .149949
+{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.1229701{col 26}{space 2}  .065134{col 37}{space 1}   -1.89{col 46}{space 3}0.059{col 54}{space 4}-.2506303{col 67}{space 3} .0046901
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}   5.0428{col 26}{space 2} .5477758{col 37}{space 1}    9.21{col 46}{space 3}0.000{col 54}{space 4} 3.969179{col 67}{space 3} 6.116421
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+        rhos = {res} .9414582{txt} {res}   .66151{txt} {res}        1{txt} {res} .7045066{txt} {res} .7351521{txt} ... {res} .6905643
+{txt}{hline 78}
+
+{com}. 
+. *全面FGLS
+. xtgls lnc lnp lny lnpmin year i.state, panels(cor) corr(ar1)
+
+{txt}Cross-sectional time-series FGLS regression
+
+Coefficients:  {res}generalized least squares
+{txt}Panels:        {res}heteroskedastic with cross-sectional correlation
+{txt}Correlation:   {res}common AR(1) coefficient for all panels{txt}  ({res}0.7967{txt})
+
+Estimated covariances{col 28}= {res}       55{txt}{col 49}Number of obs{col 67}= {res}       300
+{txt}Estimated autocorrelations{col 28}= {res}        1{txt}{col 49}Number of groups{col 67}= {res}        10
+{txt}Estimated coefficients{col 28}= {res}       14{txt}{col 49}Time periods{col 67}=  {res}       30
+{txt}{col 49}Wald chi2({res}13{txt}){col 67}=  {res}   797.11
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-.3629823{col 26}{space 2} .0239353{col 37}{space 1}  -15.17{col 46}{space 3}0.000{col 54}{space 4}-.4098947{col 67}{space 3}-.3160699
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .5116673{col 26}{space 2} .0733079{col 37}{space 1}    6.98{col 46}{space 3}0.000{col 54}{space 4} .3679865{col 67}{space 3}  .655348
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .0258594{col 26}{space 2} .0302743{col 37}{space 1}    0.85{col 46}{space 3}0.393{col 54}{space 4} -.033477{col 67}{space 3} .0851959
+{txt}{space 8}year {c |}{col 14}{res}{space 2}-.0448556{col 26}{space 2} .0057821{col 37}{space 1}   -7.76{col 46}{space 3}0.000{col 54}{space 4}-.0561884{col 67}{space 3}-.0335228
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.0719573{col 26}{space 2} .0471313{col 37}{space 1}   -1.53{col 46}{space 3}0.127{col 54}{space 4} -.164333{col 67}{space 3} .0204185
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .0913241{col 26}{space 2} .0260485{col 37}{space 1}    3.51{col 46}{space 3}0.000{col 54}{space 4}   .04027{col 67}{space 3} .1423782
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.1844595{col 26}{space 2}  .056133{col 37}{space 1}   -3.29{col 46}{space 3}0.001{col 54}{space 4}-.2944782{col 67}{space 3}-.0744407
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.1466676{col 26}{space 2} .0636223{col 37}{space 1}   -2.31{col 46}{space 3}0.021{col 54}{space 4} -.271365{col 67}{space 3}-.0219701
+{txt}{space 10}6  {c |}{col 14}{res}{space 2}  .198174{col 26}{space 2} .0424493{col 37}{space 1}    4.67{col 46}{space 3}0.000{col 54}{space 4}  .114975{col 67}{space 3} .2813731
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} .0861722{col 26}{space 2} .1025173{col 37}{space 1}    0.84{col 46}{space 3}0.401{col 54}{space 4}-.1147579{col 67}{space 3} .2871024
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} .0548621{col 26}{space 2} .0386937{col 37}{space 1}    1.42{col 46}{space 3}0.156{col 54}{space 4}-.0209761{col 67}{space 3} .1307003
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} .0227095{col 26}{space 2} .0204346{col 37}{space 1}    1.11{col 46}{space 3}0.266{col 54}{space 4}-.0173416{col 67}{space 3} .0627607
+{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.1279293{col 26}{space 2} .0359818{col 37}{space 1}   -3.56{col 46}{space 3}0.000{col 54}{space 4}-.1984523{col 67}{space 3}-.0574063
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 5.331351{col 26}{space 2} .2815822{col 37}{space 1}   18.93{col 46}{space 3}0.000{col 54}{space 4}  4.77946{col 67}{space 3} 5.883242
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. xtgls lnc lnp lny lnpmin year i.state, panels(cor) corr(psar1)
+
+{txt}Cross-sectional time-series FGLS regression
+
+Coefficients:  {res}generalized least squares
+{txt}Panels:        {res}heteroskedastic with cross-sectional correlation
+{txt}Correlation:   {res}panel-specific AR(1)
+
+{txt}Estimated covariances{col 28}= {res}       55{txt}{col 49}Number of obs{col 67}= {res}       300
+{txt}Estimated autocorrelations{col 28}= {res}       10{txt}{col 49}Number of groups{col 67}= {res}        10
+{txt}Estimated coefficients{col 28}= {res}       14{txt}{col 49}Time periods{col 67}=  {res}       30
+{txt}{col 49}Wald chi2({res}13{txt}){col 67}=  {res}  1246.78
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         lnc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lnp {c |}{col 14}{res}{space 2}-.3541126{col 26}{space 2}  .024395{col 37}{space 1}  -14.52{col 46}{space 3}0.000{col 54}{space 4}-.4019259{col 67}{space 3}-.3062994
+{txt}{space 9}lny {c |}{col 14}{res}{space 2} .5459469{col 26}{space 2} .0712941{col 37}{space 1}    7.66{col 46}{space 3}0.000{col 54}{space 4}  .406213{col 67}{space 3} .6856808
+{txt}{space 6}lnpmin {c |}{col 14}{res}{space 2} .0185409{col 26}{space 2}  .030352{col 37}{space 1}    0.61{col 46}{space 3}0.541{col 54}{space 4} -.040948{col 67}{space 3} .0780297
+{txt}{space 8}year {c |}{col 14}{res}{space 2}-.0487174{col 26}{space 2} .0055724{col 37}{space 1}   -8.74{col 46}{space 3}0.000{col 54}{space 4} -.059639{col 67}{space 3}-.0377957
+{txt}{space 12} {c |}
+{space 7}state {c |}
+{space 10}2  {c |}{col 14}{res}{space 2}-.1229944{col 26}{space 2} .0660784{col 37}{space 1}   -1.86{col 46}{space 3}0.063{col 54}{space 4}-.2525056{col 67}{space 3} .0065169
+{txt}{space 10}3  {c |}{col 14}{res}{space 2}-.3649205{col 26}{space 2} .2134793{col 37}{space 1}   -1.71{col 46}{space 3}0.087{col 54}{space 4}-.7833323{col 67}{space 3} .0534913
+{txt}{space 10}4  {c |}{col 14}{res}{space 2}-.2405925{col 26}{space 2} .0717201{col 37}{space 1}   -3.35{col 46}{space 3}0.001{col 54}{space 4}-.3811613{col 67}{space 3}-.1000236
+{txt}{space 10}5  {c |}{col 14}{res}{space 2}-.2086117{col 26}{space 2} .0793916{col 37}{space 1}   -2.63{col 46}{space 3}0.009{col 54}{space 4}-.3642163{col 67}{space 3}-.0530071
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} .1417767{col 26}{space 2} .0643671{col 37}{space 1}    2.20{col 46}{space 3}0.028{col 54}{space 4} .0156194{col 67}{space 3} .2679339
+{txt}{space 10}7  {c |}{col 14}{res}{space 2}-.0337763{col 26}{space 2} .1435772{col 37}{space 1}   -0.24{col 46}{space 3}0.814{col 54}{space 4}-.3151824{col 67}{space 3} .2476297
+{txt}{space 10}8  {c |}{col 14}{res}{space 2}-.0008845{col 26}{space 2} .0647305{col 37}{space 1}   -0.01{col 46}{space 3}0.989{col 54}{space 4}-.1277539{col 67}{space 3} .1259849
+{txt}{space 10}9  {c |}{col 14}{res}{space 2}-.0350394{col 26}{space 2} .0544958{col 37}{space 1}   -0.64{col 46}{space 3}0.520{col 54}{space 4}-.1418491{col 67}{space 3} .0717703
+{txt}{space 9}10  {c |}{col 14}{res}{space 2}-.1888756{col 26}{space 2} .0569821{col 37}{space 1}   -3.31{col 46}{space 3}0.001{col 54}{space 4}-.3005584{col 67}{space 3}-.0771928
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 5.377111{col 26}{space 2} .2890047{col 37}{space 1}   18.61{col 46}{space 3}0.000{col 54}{space 4} 4.810673{col 67}{space 3}  5.94355
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. 
+. ***************************************************************************
+. *                            动态面板模型                                 *
+. ***************************************************************************
+. 
+. use "C:\Users\XuQi\Desktop\wagepan.dta", clear
+{txt}
+{com}. 
+. *设置为面板数据
+. xtset nr year
+{res}
+{col 1}{txt:Panel variable: }{res:nr}{txt: (strongly balanced)}
+{p 1 16 2}{txt:Time variable: }{res:year}{txt:, }{res:{bind:1980}}{txt: to }{res:{bind:1987}}{p_end}
+{txt}{col 10}Delta: {res}1 unit
+{txt}
+{com}. 
+. *固定效应模型
+. xtreg lwage L.lwage union married exper exper2, fe vce(robust)
+{res}
+{txt}Fixed-effects (within) regression{col 49}Number of obs{col 67}={col 69}{res}     3,815
+{txt}Group variable: {res}nr{txt}{col 49}Number of groups{col 67}={col 69}{res}       545
+
+{txt}R-squared:{col 49}Obs per group:
+     Within  = {res}0.1440{col 63}{txt}min{col 67}={col 69}{res}         7
+{txt}     Between = {res}0.0549{col 63}{txt}avg{col 67}={col 69}{res}       7.0
+{txt}     Overall = {res}0.0899{col 63}{txt}max{col 67}={col 69}{res}         7
+
+{txt}{col 49}F({res}5{txt}, {res}544{txt}){col 67}={col 70}{res}    67.60
+{txt}corr(u_i, Xb) = {res}0.0078{txt}{col 49}Prob > F{col 67}={col 73}{res}0.0000
+
+{txt}{ralign 78:(Std. err. adjusted for {res:545} clusters in {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0541724{col 26}{space 2} .0228125{col 37}{space 1}    2.37{col 46}{space 3}0.018{col 54}{space 4} .0093609{col 67}{space 3} .0989838
+{txt}{space 12} {c |}
+{space 7}union {c |}{col 14}{res}{space 2} .0693037{col 26}{space 2} .0232182{col 37}{space 1}    2.98{col 46}{space 3}0.003{col 54}{space 4} .0236954{col 67}{space 3}  .114912
+{txt}{space 5}married {c |}{col 14}{res}{space 2}  .051994{col 26}{space 2} .0210299{col 37}{space 1}    2.47{col 46}{space 3}0.014{col 54}{space 4} .0106842{col 67}{space 3} .0933038
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0944637{col 26}{space 2} .0118633{col 37}{space 1}    7.96{col 46}{space 3}0.000{col 54}{space 4} .0711602{col 67}{space 3} .1177671
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0029993{col 26}{space 2} .0007305{col 37}{space 1}   -4.11{col 46}{space 3}0.000{col 54}{space 4}-.0044342{col 67}{space 3}-.0015644
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.061613{col 26}{space 2} .0529571{col 37}{space 1}   20.05{col 46}{space 3}0.000{col 54}{space 4} .9575876{col 67}{space 3} 1.165638
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     sigma_u {c |} {res} .39309736
+     {txt}sigma_e {c |} {res} .32555643
+         {txt}rho {c |} {res} .59315971{txt}   (fraction of variance due to u_i)
+{hline 13}{c BT}{hline 64}
+
+{com}. 
+. *Arellano-Bond估计量
+. xtabond lwage union married exper exper2, lags(1) twostep vce(robust)
+{res}
+{txt}Arellano–Bond dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,270
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         6
+{txt}{col 63}avg{col 67}=  {res}        6
+{txt}{col 63}max{col 67}= {res}         6
+
+{txt}Number of instruments =  {res}   26{txt}{col 49}Wald chi2({res}5{txt}){col 67}=  {res}   358.64
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{ralign 78:(Std. err. adjusted for clustering on {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   WC-robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1328737{col 26}{space 2} .0372796{col 37}{space 1}    3.56{col 46}{space 3}0.000{col 54}{space 4}  .059807{col 67}{space 3} .2059403
+{txt}{space 12} {c |}
+{space 7}union {c |}{col 14}{res}{space 2} .0156335{col 26}{space 2}  .025376{col 37}{space 1}    0.62{col 46}{space 3}0.538{col 54}{space 4}-.0341025{col 67}{space 3} .0653695
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .0439858{col 26}{space 2}    .0227{col 37}{space 1}    1.94{col 46}{space 3}0.053{col 54}{space 4}-.0005054{col 67}{space 3} .0884769
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0601414{col 26}{space 2} .0144121{col 37}{space 1}    4.17{col 46}{space 3}0.000{col 54}{space 4} .0318943{col 67}{space 3} .0883886
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0010929{col 26}{space 2} .0008963{col 37}{space 1}   -1.22{col 46}{space 3}0.223{col 54}{space 4}-.0028496{col 67}{space 3} .0006638
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.096868{col 26}{space 2} .0641509{col 37}{space 1}   17.10{col 46}{space 3}0.000{col 54}{space 4} .9711346{col 67}{space 3} 1.222602
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/.).lwage{p_end}
+{p 8 18 154}{txt}Standard: {res}D.union D.married D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+. *设置前定变量和同期内生解释变量
+. xtabond lwage exper exper2, lags(1) pre(married) endogenous(union) twostep vce(robust)
+{res}
+{txt}Arellano–Bond dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,270
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         6
+{txt}{col 63}avg{col 67}=  {res}        6
+{txt}{col 63}max{col 67}= {res}         6
+
+{txt}Number of instruments =  {res}   72{txt}{col 49}Wald chi2({res}5{txt}){col 67}=  {res}   326.26
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{ralign 78:(Std. err. adjusted for clustering on {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   WC-robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1103954{col 26}{space 2} .0356815{col 37}{space 1}    3.09{col 46}{space 3}0.002{col 54}{space 4}  .040461{col 67}{space 3} .1803298
+{txt}{space 12} {c |}
+{space 5}married {c |}{col 14}{res}{space 2}  .050656{col 26}{space 2} .0363232{col 37}{space 1}    1.39{col 46}{space 3}0.163{col 54}{space 4}-.0205361{col 67}{space 3} .1218482
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1346116{col 26}{space 2} .0865632{col 37}{space 1}    1.56{col 46}{space 3}0.120{col 54}{space 4}-.0350492{col 67}{space 3} .3042723
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0655848{col 26}{space 2} .0143476{col 37}{space 1}    4.57{col 46}{space 3}0.000{col 54}{space 4} .0374641{col 67}{space 3} .0937056
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0013896{col 26}{space 2} .0008665{col 37}{space 1}   -1.60{col 46}{space 3}0.109{col 54}{space 4}-.0030879{col 67}{space 3} .0003087
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.085348{col 26}{space 2} .0655635{col 37}{space 1}   16.55{col 46}{space 3}0.000{col 54}{space 4} .9568455{col 67}{space 3}  1.21385
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/.).lwage L(1/.).married L(2/.).union{p_end}
+{p 8 18 154}{txt}Standard: {res}D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+. *设置工具变量最多使用的滞后期数
+. xtabond lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust)
+{res}
+{txt}Arellano–Bond dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,270
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         6
+{txt}{col 63}avg{col 67}=  {res}        6
+{txt}{col 63}max{col 67}= {res}         6
+
+{txt}Number of instruments =  {res}   46{txt}{col 49}Wald chi2({res}5{txt}){col 67}=  {res}   341.01
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{ralign 78:(Std. err. adjusted for clustering on {res:nr})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   WC-robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .126051{col 26}{space 2} .0367537{col 37}{space 1}    3.43{col 46}{space 3}0.001{col 54}{space 4}  .054015{col 67}{space 3} .1980869
+{txt}{space 12} {c |}
+{space 5}married {c |}{col 14}{res}{space 2} .0817908{col 26}{space 2} .0380035{col 37}{space 1}    2.15{col 46}{space 3}0.031{col 54}{space 4} .0073054{col 67}{space 3} .1562762
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .2055507{col 26}{space 2} .0910115{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0271713{col 67}{space 3}   .38393
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0617464{col 26}{space 2} .0143044{col 37}{space 1}    4.32{col 46}{space 3}0.000{col 54}{space 4} .0337103{col 67}{space 3} .0897825
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0012091{col 26}{space 2} .0008825{col 37}{space 1}   -1.37{col 46}{space 3}0.171{col 54}{space 4}-.0029388{col 67}{space 3} .0005205
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.042697{col 26}{space 2} .0676055{col 37}{space 1}   15.42{col 46}{space 3}0.000{col 54}{space 4} .9101923{col 67}{space 3} 1.175201
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/4).lwage L(1/3).married L(2/3).union{p_end}
+{p 8 18 154}{txt}Standard: {res}D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+. *检验误差项是否存在自相关
+. qui xtabond lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust) artests(3)
+{txt}
+{com}. estat abond
+{res}
+{txt}{p}Arellano–Bond test for zero autocorrelation in first-differenced errors{p_end}
+{txt}H0: No autocorrelation 
+
+{res}{col 1}{text}Order{col 7}        z{col 17}  Prob > z
+{res}{col 1}{text}{hline 6}{hline 10}{hline 10}
+{col 1}{text}    1{col 7}{result}{space 2}-6.4595{col 17}{space 4}0.0000
+{col 1}{text}    2{col 7}{result}{space 2}1.9256 {col 17}{space 4}0.0541
+{col 1}{text}    3{col 7}{result}{space 2}-.6321 {col 17}{space 4}0.5273
+{col 1}{text}{hline 6}{hline 10}{hline 10}
+{res}{txt}
+{com}. 
+. *检验是否所有工具变量都有效
+. qui xtabond lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep
+{txt}
+{com}. estat sargan
+{txt}Sargan test of overidentifying restrictions
+{txt}H0: Overidentifying restrictions are valid
+{res}
+{txt}{col 9}chi2({res}40{txt}){col 22}={res}  49.41392
+{txt}{col 9}Prob > chi2  = {res}   0.1462
+{txt}
+{com}. 
+. *使用xtdpdsys命令
+. xtdpdsys lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust)
+{res}
+{txt}System dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,815
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         7
+{txt}{col 63}avg{col 67}=  {res}        7
+{txt}{col 63}max{col 67}= {res}         7
+
+{txt}Number of instruments =  {res}   65{txt}{col 49}Wald chi2({res}5{txt}){col 67}=  {res}   348.35
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   WC-robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .2324316{col 26}{space 2} .0351004{col 37}{space 1}    6.62{col 46}{space 3}0.000{col 54}{space 4}  .163636{col 67}{space 3} .3012271
+{txt}{space 12} {c |}
+{space 5}married {c |}{col 14}{res}{space 2} .1116266{col 26}{space 2} .0284073{col 37}{space 1}    3.93{col 46}{space 3}0.000{col 54}{space 4} .0559494{col 67}{space 3} .1673037
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1570422{col 26}{space 2}  .080435{col 37}{space 1}    1.95{col 46}{space 3}0.051{col 54}{space 4}-.0006074{col 67}{space 3} .3146918
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0492499{col 26}{space 2} .0141985{col 37}{space 1}    3.47{col 46}{space 3}0.001{col 54}{space 4} .0214215{col 67}{space 3} .0770784
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0008968{col 26}{space 2}  .000909{col 37}{space 1}   -0.99{col 46}{space 3}0.324{col 54}{space 4}-.0026783{col 67}{space 3} .0008848
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .9225495{col 26}{space 2} .0668613{col 37}{space 1}   13.80{col 46}{space 3}0.000{col 54}{space 4} .7915037{col 67}{space 3} 1.053595
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/4).lwage L(1/3).married L(2/3).union{p_end}
+{p 8 18 154}{txt}Standard: {res}D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}GMM-type: {res}LD.lwage D.married LD.union{p_end}
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+. *纳入非时变变量
+. xtdpdsys lwage exper exper2 black hisp educ, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust)
+{res}{txt}note: {bf:black} omitted from {bf:div()} because of collinearity.
+note: {bf:hisp} omitted from {bf:div()} because of collinearity.
+note: {bf:educ} omitted from {bf:div()} because of collinearity.
+{res}
+{txt}System dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,815
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         7
+{txt}{col 63}avg{col 67}=  {res}        7
+{txt}{col 63}max{col 67}= {res}         7
+
+{txt}Number of instruments =  {res}   65{txt}{col 49}Wald chi2({res}8{txt}){col 67}=  {res}   373.15
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   WC-robust
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .2083363{col 26}{space 2} .0340778{col 37}{space 1}    6.11{col 46}{space 3}0.000{col 54}{space 4}  .141545{col 67}{space 3} .2751276
+{txt}{space 12} {c |}
+{space 5}married {c |}{col 14}{res}{space 2} .0591983{col 26}{space 2} .0292133{col 37}{space 1}    2.03{col 46}{space 3}0.043{col 54}{space 4} .0019413{col 67}{space 3} .1164553
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1148674{col 26}{space 2} .0784187{col 37}{space 1}    1.46{col 46}{space 3}0.143{col 54}{space 4}-.0388306{col 67}{space 3} .2685653
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0606675{col 26}{space 2} .0142461{col 37}{space 1}    4.26{col 46}{space 3}0.000{col 54}{space 4} .0327456{col 67}{space 3} .0885894
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0014246{col 26}{space 2} .0008918{col 37}{space 1}   -1.60{col 46}{space 3}0.110{col 54}{space 4}-.0031725{col 67}{space 3} .0003234
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-.5825586{col 26}{space 2} .3609002{col 37}{space 1}   -1.61{col 46}{space 3}0.106{col 54}{space 4} -1.28991{col 67}{space 3} .1247929
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.1315547{col 26}{space 2} .2713542{col 37}{space 1}   -0.48{col 46}{space 3}0.628{col 54}{space 4}-.6633991{col 67}{space 3} .4002897
+{txt}{space 8}educ {c |}{col 14}{res}{space 2} .1357544{col 26}{space 2} .0898773{col 37}{space 1}    1.51{col 46}{space 3}0.131{col 54}{space 4}-.0404018{col 67}{space 3} .3119106
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-.5557442{col 26}{space 2} 1.073011{col 37}{space 1}   -0.52{col 46}{space 3}0.605{col 54}{space 4}-2.658807{col 67}{space 3} 1.547318
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/4).lwage L(1/3).married L(2/3).union{p_end}
+{p 8 18 154}{txt}Standard: {res}D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}GMM-type: {res}LD.lwage D.married LD.union{p_end}
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+. *检验误差项是否存在自相关
+. qui xtdpdsys lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust) artests(3)
+{txt}
+{com}. estat abond
+{res}
+{txt}{p}Arellano–Bond test for zero autocorrelation in first-differenced errors{p_end}
+{txt}H0: No autocorrelation 
+
+{res}{col 1}{text}Order{col 7}        z{col 17}  Prob > z
+{res}{col 1}{text}{hline 6}{hline 10}{hline 10}
+{col 1}{text}    1{col 7}{result}{space 2}-6.9591{col 17}{space 4}0.0000
+{col 1}{text}    2{col 7}{result}{space 2}2.693  {col 17}{space 4}0.0071
+{col 1}{text}    3{col 7}{result}{space 2}-.38028{col 17}{space 4}0.7037
+{col 1}{text}{hline 6}{hline 10}{hline 10}
+{res}{txt}
+{com}. 
+. *检验是否所有工具变量都有效
+. qui xtdpdsys lwage exper exper2, lags(1) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep
+{txt}
+{com}. estat sargan
+{txt}Sargan test of overidentifying restrictions
+{txt}H0: Overidentifying restrictions are valid
+{res}
+{txt}{col 9}chi2({res}59{txt}){col 22}={res}   89.6082
+{txt}{col 9}Prob > chi2  = {res}   0.0062
+{txt}
+{com}. 
+. *模型修正
+. qui xtdpdsys lwage exper exper2, lags(2) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep vce(robust) artests(3)
+{txt}
+{com}. estat abond
+{res}
+{txt}{p}Arellano–Bond test for zero autocorrelation in first-differenced errors{p_end}
+{txt}H0: No autocorrelation 
+
+{res}{col 1}{text}Order{col 7}        z{col 17}  Prob > z
+{res}{col 1}{text}{hline 6}{hline 10}{hline 10}
+{col 1}{text}    1{col 7}{result}{space 2}-5.8335{col 17}{space 4}0.0000
+{col 1}{text}    2{col 7}{result}{space 2}-.33194{col 17}{space 4}0.7399
+{col 1}{text}    3{col 7}{result}{space 2}.81621 {col 17}{space 4}0.4144
+{col 1}{text}{hline 6}{hline 10}{hline 10}
+{res}{txt}
+{com}. 
+. qui xtdpdsys lwage exper exper2, lags(2) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep
+{txt}
+{com}. estat sargan
+{txt}Sargan test of overidentifying restrictions
+{txt}H0: Overidentifying restrictions are valid
+{res}
+{txt}{col 9}chi2({res}53{txt}){col 22}={res}  64.75773
+{txt}{col 9}Prob > chi2  = {res}   0.1291
+{txt}
+{com}. 
+. xtdpdsys lwage exper exper2, lags(2) pre(married) endogenous(union) maxldep(3) maxlags(3) twostep
+{res}
+{txt}System dynamic panel-data estimation{col 49}Number of obs{col 67}= {res}     3,270
+{txt}Group variable: {res}nr{txt}{col 49}{txt}Number of groups{col 67}= {res}       545
+{txt}Time variable: {res}year
+{txt}{col 49}Obs per group:
+{col 63}min{col 67}= {res}         6
+{txt}{col 63}avg{col 67}=  {res}        6
+{txt}{col 63}max{col 67}= {res}         6
+
+{txt}Number of instruments =  {res}   60{txt}{col 49}Wald chi2({res}6{txt}){col 67}=  {res}   563.12
+{txt}{col 49}Prob > chi2{col 67}={col 73}{res}0.0000
+{txt}Two-step results
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lwage{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lwage {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .3269879{col 26}{space 2} .0250511{col 37}{space 1}   13.05{col 46}{space 3}0.000{col 54}{space 4} .2778887{col 67}{space 3} .3760872
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1285275{col 26}{space 2} .0180407{col 37}{space 1}    7.12{col 46}{space 3}0.000{col 54}{space 4} .0931684{col 67}{space 3} .1638866
+{txt}{space 12} {c |}
+{space 5}married {c |}{col 14}{res}{space 2} .1461174{col 26}{space 2} .0235017{col 37}{space 1}    6.22{col 46}{space 3}0.000{col 54}{space 4} .1000549{col 67}{space 3} .1921799
+{txt}{space 7}union {c |}{col 14}{res}{space 2} .1628679{col 26}{space 2}  .068009{col 37}{space 1}    2.39{col 46}{space 3}0.017{col 54}{space 4} .0295727{col 67}{space 3} .2961632
+{txt}{space 7}exper {c |}{col 14}{res}{space 2} .0392171{col 26}{space 2} .0153995{col 37}{space 1}    2.55{col 46}{space 3}0.011{col 54}{space 4} .0090347{col 67}{space 3} .0693996
+{txt}{space 6}exper2 {c |}{col 14}{res}{space 2}-.0008734{col 26}{space 2} .0009354{col 37}{space 1}   -0.93{col 46}{space 3}0.350{col 54}{space 4}-.0027067{col 67}{space 3} .0009599
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .6147707{col 26}{space 2} .0752732{col 37}{space 1}    8.17{col 46}{space 3}0.000{col 54}{space 4}  .467238{col 67}{space 3} .7623033
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{txt}Warning: gmm two-step standard errors are biased; robust standard 
+{col 10}errors are recommended.
+{txt}Instruments for differenced equation
+{p 8 18 154}{txt}GMM-type: {res}L(2/4).lwage L(1/3).married L(2/3).union{p_end}
+{p 8 18 154}{txt}Standard: {res}D.exper D.exper2{p_end}
+{txt}Instruments for level equation
+{p 8 18 154}{txt}GMM-type: {res}LD.lwage D.married LD.union{p_end}
+{p 8 18 154}{txt}Standard: {res}_cons{p_end}
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第十章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Jul 2024, 10:19:24
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

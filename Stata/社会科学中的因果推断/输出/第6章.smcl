@@ -1,0 +1,424 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第六章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Jul 2024, 10:11:44
+
+{com}. do "C:\Users\XuQi\Desktop\第6章.do", nostop
+{txt}
+{com}. use "C:\Users\XuQi\Desktop\cfps2010.dta", clear
+{txt}
+{com}. 
+. *一元线性回归
+. reg lninc college, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   271.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1095
+                                                {txt}Root MSE          =    {res} 1.1498
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0500155{col 37}{space 1}   16.47{col 46}{space 3}0.000{col 54}{space 4} .7203851{col 67}{space 3}  .926839
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .1084703{col 37}{space 1}   86.23{col 46}{space 3}0.000{col 54}{space 4} 9.129317{col 67}{space 3} 9.577061
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *有放回的1对1匹配
+. teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu)
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: propensity-score matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          1
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         1
+{txt:Treatment model}{col 16}:{res: logit}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7867998{col 26}{space 2} .0411656{col 37}{space 1}   19.11{col 46}{space 3}0.000{col 54}{space 4} .7061167{col 67}{space 3} .8674829
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *带卡尺的1对1匹配
+. teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu), caliper(0.02)
+{res}{error}{p}no propensity-score matches for observation 2607 within caliper 0.02; use option {helpb teffects psmatch##osample:osample}{bf:()} to identify all observations with deficient matches{p_end}
+{txt}{search r(459), local:r(459);}
+
+{com}. 
+. teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu), caliper(0.02) osample(flag)
+{res}{err}{p}1 observation has no propensity-score matches{err} within caliper .02{err}; it is identified in the {bf: osample()} variable{p_end}
+{txt}{search r(459), local:r(459);}
+
+{com}. tab flag
+
+    {txt}overlap {c |}
+  violation {c |}
+  indicator {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      4,136       99.98       99.98
+{txt}          1 {c |}{res}          1        0.02      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+{txt}
+{com}. 
+. teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02)
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,136
+{txt:Estimator}{col 16}:{res: propensity-score matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          1
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         1
+{txt:Treatment model}{col 16}:{res: logit}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7823973{col 26}{space 2} .0411119{col 37}{space 1}   19.03{col 46}{space 3}0.000{col 54}{space 4} .7018194{col 67}{space 3} .8629751
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *带卡尺的1对4匹配
+. teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02) nneighbor(4) vce(robust, nn(4))
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,136
+{txt:Estimator}{col 16}:{res: propensity-score matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          4
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         4
+{txt:Treatment model}{col 16}:{res: logit}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7981312{col 26}{space 2} .0398814{col 37}{space 1}   20.01{col 46}{space 3}0.000{col 54}{space 4} .7199651{col 67}{space 3} .8762974
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *平衡性检验
+. qui teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02)
+{txt}
+{com}. tebalance summarize
+{txt}(refitting the model using the {bf:generate()} option)
+{res}
+{txt}{p 0 0 2}Covariate balance summary{p_end}
+
+{res}{col 16}{text}          Raw{col 29}      Matched
+{res}{col 1}{text}{hline 15}{hline 13}{hline 13}
+{col 1}{text}Number of obs ={col 16}{result}{space 3}     4,136{col 29}{space 3}     8,272
+{col 1}{text}Treated obs   ={col 16}{result}{space 3}     1,642{col 29}{space 3}     4,136
+{col 1}{text}Control obs   ={col 16}{result}{space 3}     2,494{col 29}{space 3}     4,136
+{col 1}{text}{hline 15}{hline 13}{hline 13}
+
+{res}{col 1}{text}{hline 16}{c TT}{hline 24}{hline 24}
+{col 17}{text}{c |}Standardized differences{col 42}          Variance ratio
+{res}{col 17}{text}{c |}        Raw{col 30}    Matched{col 42}          Raw{col 54}    Matched
+{res}{col 1}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}          hukou{col 17}{c |}{result}{space 2} .2391517{col 30}{space 2}-.0014774{col 42}{space 4} 1.082073{col 54}{space 2} .9994289
+{col 1}{text}            age{col 17}{c |}{result}{space 2}-.7809001{col 30}{space 2}-.0058524{col 42}{space 4} .8161995{col 54}{space 2} .9835917
+{col 1}{text}         gender{col 17}{c |}{result}{space 2}-.0813989{col 30}{space 2} .0357897{col 42}{space 4} 1.025221{col 54}{space 2} .9881189
+{col 1}{text}           race{col 17}{c |}{result}{space 2}-.0453557{col 30}{space 2}-.0203342{col 42}{space 4} 1.199887{col 54}{space 2} 1.096473
+{col 1}{text}        sibling{col 17}{c |}{result}{space 2} .3632311{col 30}{space 2} .0106027{col 42}{space 4} 2.008184{col 54}{space 2} 1.022875
+{col 17}{text}{c |}
+{res}{col 1}{text}          fmedu{col 17}{c |}
+{res}{col 1}{text}            是{col 17}{c |}{result}{space 2} .5411217{col 30}{space 2}-.0152094{col 42}{space 4} 2.038229{col 54}{space 2} .9794947
+{col 1}{text}          缺失{col 17}{c |}{result}{space 2}-.2525403{col 30}{space 2}        0{col 42}{space 4} .6932101{col 54}{space 2}        1
+{col 1}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}{txt}
+{com}. 
+. qui teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02) nneighbor(4) vce(robust, nn(4))
+{txt}
+{com}. tebalance summarize
+{txt}(refitting the model using the {bf:generate()} option)
+{res}
+{txt}{p 0 0 2}Covariate balance summary{p_end}
+
+{res}{col 16}{text}          Raw{col 29}      Matched
+{res}{col 1}{text}{hline 15}{hline 13}{hline 13}
+{col 1}{text}Number of obs ={col 16}{result}{space 3}     4,136{col 29}{space 3}     8,272
+{col 1}{text}Treated obs   ={col 16}{result}{space 3}     1,642{col 29}{space 3}     4,136
+{col 1}{text}Control obs   ={col 16}{result}{space 3}     2,494{col 29}{space 3}     4,136
+{col 1}{text}{hline 15}{hline 13}{hline 13}
+
+{res}{col 1}{text}{hline 16}{c TT}{hline 24}{hline 24}
+{col 17}{text}{c |}Standardized differences{col 42}          Variance ratio
+{res}{col 17}{text}{c |}        Raw{col 30}    Matched{col 42}          Raw{col 54}    Matched
+{res}{col 1}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}          hukou{col 17}{c |}{result}{space 2} .2391517{col 30}{space 2}-.0031644{col 42}{space 4} 1.082073{col 54}{space 2} .9986757
+{col 1}{text}            age{col 17}{c |}{result}{space 2}-.7809001{col 30}{space 2} -.000016{col 42}{space 4} .8161995{col 54}{space 2} .9710056
+{col 1}{text}         gender{col 17}{c |}{result}{space 2}-.0813989{col 30}{space 2} .0745308{col 42}{space 4} 1.025221{col 54}{space 2}  .971546
+{col 1}{text}           race{col 17}{c |}{result}{space 2}-.0453557{col 30}{space 2} .0349928{col 42}{space 4} 1.199887{col 54}{space 2} .8487141
+{col 1}{text}        sibling{col 17}{c |}{result}{space 2} .3632311{col 30}{space 2}  .050172{col 42}{space 4} 2.008184{col 54}{space 2}   1.1103
+{col 17}{text}{c |}
+{res}{col 1}{text}          fmedu{col 17}{c |}
+{res}{col 1}{text}            是{col 17}{c |}{result}{space 2} .5411217{col 30}{space 2}-.0048144{col 42}{space 4} 2.038229{col 54}{space 2}  .993381
+{col 1}{text}          缺失{col 17}{c |}{result}{space 2}-.2525403{col 30}{space 2} .0173444{col 42}{space 4} .6932101{col 54}{space 2} 1.025388
+{col 1}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}{txt}
+{com}. 
+. qui teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02)
+{txt}
+{com}. tebalance density age
+{txt}(refitting the model using the {bf:generate()} option)
+{res}{txt}
+{com}. 
+. qui teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02)
+{txt}
+{com}. tebalance box age
+{txt}(refitting the model using the {bf:generate()} option)
+{res}{txt}
+{com}. 
+. *检查共同取值范围
+. qui teffects psmatch (lninc) (college hukou age gender race sibling i.fmedu) if flag==0, caliper(0.02)
+{txt}
+{com}. teffects overlap
+{txt}{p}(refitting the model using the {bf:generate()} option){p_end}
+{res}{txt}
+{com}. 
+. *psmatch2命令的使用
+. psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) caliper(0.02) common ate logit ties odds    //带卡尺的1对1匹配
+{res}
+{txt}{col 1}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:4,136}
+{txt}{col 57}{lalign 13:LR chi2({res:7})}{col 70} = {res}{ralign 6:690.80}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}{col 1}{lalign 14:Log likelihood}{col 15} = {res}{ralign 9:-2433.071}{txt}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.1243}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     college{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}hukou {c |}{col 14}{res}{space 2} .3691967{col 26}{space 2} .0750768{col 37}{space 1}    4.92{col 46}{space 3}0.000{col 54}{space 4} .2220487{col 67}{space 3} .5163446
+{txt}{space 9}age {c |}{col 14}{res}{space 2}-.0778884{col 26}{space 2}  .004612{col 37}{space 1}  -16.89{col 46}{space 3}0.000{col 54}{space 4}-.0869278{col 67}{space 3} -.068849
+{txt}{space 6}gender {c |}{col 14}{res}{space 2}-.0052387{col 26}{space 2} .0707322{col 37}{space 1}   -0.07{col 46}{space 3}0.941{col 54}{space 4}-.1438713{col 67}{space 3} .1333939
+{txt}{space 8}race {c |}{col 14}{res}{space 2} -.178265{col 26}{space 2}  .155782{col 37}{space 1}   -1.14{col 46}{space 3}0.252{col 54}{space 4}-.4835921{col 67}{space 3} .1270622
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .1541583{col 26}{space 2} .1050904{col 37}{space 1}    1.47{col 46}{space 3}0.142{col 54}{space 4}-.0518152{col 67}{space 3} .3601318
+{txt}{space 12} {c |}
+{space 7}fmedu {c |}
+{space 9}是  {c |}{col 14}{res}{space 2} .8091184{col 26}{space 2} .0889782{col 37}{space 1}    9.09{col 46}{space 3}0.000{col 54}{space 4} .6347243{col 67}{space 3} .9835126
+{txt}{space 7}缺失  {c |}{col 14}{res}{space 2} .1444773{col 26}{space 2}  .093519{col 37}{space 1}    1.54{col 46}{space 3}0.122{col 54}{space 4}-.0388166{col 67}{space 3} .3277713
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2.400111{col 26}{space 2} .2338113{col 37}{space 1}   10.27{col 46}{space 3}0.000{col 54}{space 4} 1.941849{col 67}{space 3} 2.858373
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}There are observations with identical propensity score values.
+The sort order of the data could affect your results.
+Make sure that the sort order is random before calling psmatch2.
+{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1775256   9.35318907   .824336518   .036540222    22.56
+{txt}{col 17}        ATT {c |}{res} 10.1784556   9.47407844   .704377162   .054015335    13.04
+{txt}{col 17}        ATU {c |}{res} 9.35371331     10.18839   .834676643            .        .
+{txt}{col 17}        ATE {c |}{col 56}{res} .783030667            .        .
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         4      2,490 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         7      1,635 {txt}{c |}{res}     1,642 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}        11      4,125 {txt}{c |}{res}     4,136 
+{txt}
+{com}. psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) caliper(0.02) neighbor(4) common ate logit ties odds quietly    //带卡尺的1对4匹配
+{res}There are observations with identical propensity score values.
+The sort order of the data could affect your results.
+Make sure that the sort order is random before calling psmatch2.
+{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1775256   9.35318907   .824336518   .036540222    22.56
+{txt}{col 17}        ATT {c |}{res} 10.1784556   9.47589894   .702556661   .050086699    14.03
+{txt}{col 17}        ATU {c |}{res} 9.35371331   10.2115772   .857863905            .        .
+{txt}{col 17}        ATE {c |}{col 56}{res} .796305761            .        .
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         4      2,490 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         7      1,635 {txt}{c |}{res}     1,642 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}        11      4,125 {txt}{c |}{res}     4,136 
+{txt}
+{com}. psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) caliper(0.02) radius common ate logit quietly   //半径匹配
+{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1775256   9.35318907   .824336518   .036540222    22.56
+{txt}{col 17}        ATT {c |}{res} 10.1778062   9.48062537   .697180782   .042803897    16.29
+{txt}{col 17}        ATU {c |}{res} 9.35318907   10.2249628     .8717737            .        .
+{txt}{col 17}        ATE {c |}{col 56}{res}  .80256189            .        .
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         0      2,494 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         4      1,638 {txt}{c |}{res}     1,642 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}         4      4,132 {txt}{c |}{res}     4,136 
+{txt}
+{com}. psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) kernel common ate logit quietly   //核匹配
+{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1775256   9.35318907   .824336518   .036540222    22.56
+{txt}{col 17}        ATT {c |}{res} 10.1778062   9.47873591   .699070244   .042010122    16.64
+{txt}{col 17}        ATU {c |}{res} 9.35318907   10.2248952   .871706092            .        .
+{txt}{col 17}        ATE {c |}{col 56}{res}   .8032701            .        .
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         0      2,494 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         4      1,638 {txt}{c |}{res}     1,642 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}         4      4,132 {txt}{c |}{res}     4,136 
+{txt}
+{com}. 
+. *平衡性检验
+. qui psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) kernel common ate logit quietly 
+{txt}
+{com}. pstest, both graph
+
+{txt}{hline 26}{c TT}{hline 34}{c TT}{hline 15}{c TT}{hline 10}
+                Unmatched {c |}       Mean               %reduct {c |}     t-test    {c |}  V(T)/
+Variable          Matched {c |} Treated Control    %bias  |bias| {c |}    t    p>|t| {c |}  V(C)
+{hline 26}{c +}{hline 34}{c +}{hline 15}{c +}{hline 10}
+hukou                 {col 24}U  {c |}{res} .47808   .36087     23.9        {txt} {c |}{res}   7.56  0.000 {c |}     .
+{txt}{col 24}M  {c |}{res}  .4768   .45253      5.0    79.3{txt} {c |}{res}   1.39  0.164 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+age                   {col 24}U  {c |}{res} 35.745   42.282    -78.1        {txt} {c |}{res} -24.32  0.000 {c |}  0.82*
+{txt}{col 24}M  {c |}{res} 35.769    35.67      1.2    98.5{txt} {c |}{res}   0.35  0.725 {c |}  0.94
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+gender                {col 24}U  {c |}{res} .55481   .59503     -8.1        {txt} {c |}{res}  -2.56  0.010 {c |}     .
+{txt}{col 24}M  {c |}{res} .55617   .56359     -1.5    81.5{txt} {c |}{res}  -0.43  0.669 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+race                  {col 24}U  {c |}{res} .94214   .95229     -4.5        {txt} {c |}{res}  -1.44  0.150 {c |}     .
+{txt}{col 24}M  {c |}{res} .94444   .93873      2.6    43.6{txt} {c |}{res}   0.70  0.486 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+sibling               {col 24}U  {c |}{res} .23021   .09783     36.3        {txt} {c |}{res}  11.85  0.000 {c |}     .
+{txt}{col 24}M  {c |}{res} .22955    .2036      7.1    80.4{txt} {c |}{res}   1.80  0.071 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+1.fmedu               {col 24}U  {c |}{res}  .3514   .12831     54.1        {txt} {c |}{res}  17.66  0.000 {c |}     .
+{txt}{col 24}M  {c |}{res} .34982   .33667      3.2    94.1{txt} {c |}{res}   0.79  0.428 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+2.fmedu               {col 24}U  {c |}{res} .15895   .26103    -25.3        {txt} {c |}{res}  -7.80  0.000 {c |}     .
+{txt}{col 24}M  {c |}{res} .15934   .15411      1.3    94.9{txt} {c |}{res}   0.41  0.681 {c |}     .
+{txt}{col 24}   {c |}                                  {c |}               {c |}
+{hline 26}{c BT}{hline 34}{c BT}{hline 15}{c BT}{hline 10}
+* if variance ratio outside [0.91; 1.10] for U and [0.91; 1.10] for M
+
+{hline 11}{c TT}{hline 71}
+ Sample    {c |} Ps R2   LR chi2   p>chi2   MeanBias   MedBias      B      R     %Var
+{hline 11}{c +}{hline 71}
+ Unmatched {c | }{res} 0.125    692.69    0.000     32.9      25.3      88.4*{col 70} 1.13{col 79}100
+{txt} Matched   {c | }{res} 0.001      6.07    0.531      3.1       2.6       8.6{col 70} 1.01{col 79}  0
+{txt}{hline 11}{c BT}{hline 71}
+* if B>25%, R outside [0.5; 2]
+{res}{txt}
+{com}. 
+. *检查共同取值范围
+. qui psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) kernel common ate logit quietly 
+{txt}
+{com}. psgraph, bin(5)
+{res}{txt}
+{com}. 
+. *敏感性分析
+. psmatch2 college hukou age gender race sibling i.fmedu if flag==0, outcome(lninc) caliper(0.02) common logit ties odds quietly    //带卡尺的1对1匹配
+{res}There are observations with identical propensity score values.
+The sort order of the data could affect your results.
+Make sure that the sort order is random before calling psmatch2.
+{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1775256   9.35318907   .824336518   .036540222    22.56
+{txt}{col 17}        ATT {c |}{res} 10.1784556   9.47407844   .704377162   .054015335    13.04
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         0      2,494 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         7      1,635 {txt}{c |}{res}     1,642 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}         7      4,129 {txt}{c |}{res}     4,136 
+{txt}
+{com}. 
+. gen diff=lninc-_lninc if _treated==1 & _support==1 & flag==0
+{txt}(2,502 missing values generated)
+
+{com}. rbounds diff, gamma(1 (1) 5)
+
+{txt}Rosenbaum bounds for {res}diff{txt} (N = {res}1635{txt} matched pairs)
+
+Gamma           sig+      sig-    t-hat+    t-hat-       CI+       CI-
+----------------------------------------------------------------------
+{res}    1              0         0   .679028   .679028   .630224   .728463  
+    2              0         0   .380941   .985865   .329637    1.0398  
+    3        8.1e-12         0   .210826   1.16725     .1551   1.22661  
+    4        .001779         0     .0917   1.29513   .031636   1.35918  
+    5        .501555         0  -3.4e-07   1.39373  -.065069    1.4644  
+
+{txt}* gamma  - log odds of differential assignment due to unobserved factors
+  sig+   - upper bound significance level
+  sig-   - lower bound significance level
+  t-hat+ - upper bound Hodges-Lehmann point estimate
+  t-hat- - lower bound Hodges-Lehmann point estimate
+  CI+    - upper bound confidence interval (a={res}  .95{txt})
+  CI-    - lower bound confidence interval (a={res}  .95{txt})
+
+{com}. rbounds diff, gamma(4 (0.1) 5)
+
+{txt}Rosenbaum bounds for {res}diff{txt} (N = {res}1635{txt} matched pairs)
+
+Gamma           sig+      sig-    t-hat+    t-hat-       CI+       CI-
+----------------------------------------------------------------------
+{res}    1              0         0   .679028   .679028   .630224   .728463  
+    4        .001779         0     .0917   1.29513   .031636   1.35918  
+  4.1        .004789         0   .081498   1.30569   .020604   1.37133  
+  4.2        .011459         0   .071757   1.31663   .010318   1.38245  
+  4.3        .024612         0   .061753   1.32688   3.4e-07   1.39327  
+  4.4        .047872         0    .05268   1.33685  -.009798   1.40459  
+  4.5        .085031         0    .04293   1.34712  -.019613    1.4148  
+  4.6        .139007         0   .033641   1.35616  -.029213   1.42535  
+  4.7        .210731         0   .025061   1.36639  -.038481   1.43508  
+  4.8        .298408         0   .016951   1.37553  -.047947   1.44519  
+  4.9        .397505         0   .008004   1.38522  -.056148   1.45504  
+    5        .501555         0  -3.4e-07   1.39373  -.065069    1.4644  
+
+{txt}* gamma  - log odds of differential assignment due to unobserved factors
+  sig+   - upper bound significance level
+  sig-   - lower bound significance level
+  t-hat+ - upper bound Hodges-Lehmann point estimate
+  t-hat- - lower bound Hodges-Lehmann point estimate
+  CI+    - upper bound confidence interval (a={res}  .95{txt})
+  CI-    - lower bound confidence interval (a={res}  .95{txt})
+
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第六章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Jul 2024, 10:12:59
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

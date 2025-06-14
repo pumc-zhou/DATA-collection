@@ -1,0 +1,281 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第5章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}16 Jul 2024, 09:14:57
+
+{com}. do 第5章.do, nostop
+{txt}
+{com}. use "C:\Users\XuQi\Desktop\cfps2010.dta", clear
+{txt}
+{com}. 
+. *不控制任何变量
+. reg lninc college, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   271.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1095
+                                                {txt}Root MSE          =    {res} 1.1498
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0500155{col 37}{space 1}   16.47{col 46}{space 3}0.000{col 54}{space 4} .7203851{col 67}{space 3}  .926839
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .1084703{col 37}{space 1}   86.23{col 46}{space 3}0.000{col 54}{space 4} 9.129317{col 67}{space 3} 9.577061
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *对hukou实施精确匹配
+. teffects nnmatch (lninc) (college), ematch(hukou)
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: nearest-neighbor matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          1
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}       786
+{txt:Distance metric: }{res:Mahalanobis}{col 63}{txt:max }{col 67}{txt:=}       1594
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .8021249{col 26}{space 2} .0337823{col 37}{space 1}   23.74{col 46}{space 3}0.000{col 54}{space 4} .7359127{col 67}{space 3}  .868337
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *同时对hukou、age、gender、race、sibling和fmedu实施精确匹配
+. teffects nnmatch (lninc) (college), ematch(hukou age gender race sibling fmedu)
+{res}{error}{p}no exact matches for observation 4; use option {helpb teffects nnmatch##osample:osample}{bf:()} to identify all observations with deficient matches{p_end}
+{txt}{search r(459), local:r(459);}
+
+{com}. teffects nnmatch (lninc) (college), ematch(hukou age gender race sibling fmedu) osample(overlap) 
+{res}{err}{p}593 observations have no exact matches{err}; they are identified in the {bf: osample()} variable{p_end}
+{txt}{search r(459), local:r(459);}
+
+{com}. tab overlap
+
+    {txt}overlap {c |}
+  violation {c |}
+  indicator {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      3,544       85.67       85.67
+{txt}          1 {c |}{res}        593       14.33      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+{txt}
+{com}. 
+. *马氏匹配
+. teffects nnmatch (lninc age race sibling) (college), ematch(hukou gender fmedu)
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: nearest-neighbor matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          1
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         1
+{txt:Distance metric: }{res:Mahalanobis}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7699847{col 26}{space 2}  .041446{col 37}{space 1}   18.58{col 46}{space 3}0.000{col 54}{space 4} .6887521{col 67}{space 3} .8512174
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects nnmatch (lninc age race sibling) (college), ematch(hukou gender fmedu) nneighbor(4) vce(robust, nn(4))
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: nearest-neighbor matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          4
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         4
+{txt:Distance metric: }{res:Mahalanobis}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7936157{col 26}{space 2} .0392848{col 37}{space 1}   20.20{col 46}{space 3}0.000{col 54}{space 4} .7166189{col 67}{space 3} .8706125
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects nnmatch (lninc age race sibling) (college), ematch(hukou gender fmedu) nneighbor(4) vce(robust, nn(4)) ///
+>          biasadj(age race sibling)
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: nearest-neighbor matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          4
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         4
+{txt:Distance metric: }{res:Mahalanobis}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7949957{col 26}{space 2} .0392914{col 37}{space 1}   20.23{col 46}{space 3}0.000{col 54}{space 4}  .717986{col 67}{space 3} .8720054
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects nnmatch (lninc age race sibling) (college), ematch(hukou gender fmedu) nneighbor(4) vce(robust, nn(4)) ///
+>          biasadj(age race sibling) atet
+{res}
+{txt}Treatment-effects estimation{col 48}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: nearest-neighbor matching}{col 48}{txt:Matches: requested }{col 67}{txt:=}          4
+{txt:Outcome model}{col 16}:{res: matching}{txt}{col 63}min {col 67}= {res}         4
+{txt:Distance metric: }{res:Mahalanobis}{col 63}{txt:max }{col 67}{txt:=}         50
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}   AI robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATET         {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .6993424{col 26}{space 2} .0475923{col 37}{space 1}   14.69{col 46}{space 3}0.000{col 54}{space 4} .6060633{col 67}{space 3} .7926215
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *粗化精确匹配
+. imb hukou age gender race sibling fmedu, treatment(college)
+{res}
+{txt}Multivariate L1 distance: {res}.42932057
+
+{txt}Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou  {res} .11753   .11753        0        0        0        0        0
+{txt}    age  {res} .32978  -6.5436        0       -6       -9       -9        0
+{txt} gender  {res} .04055  -.04055        0        0        0        0        0
+{txt}   race  {res} .01072  -.01072        0        0        0        0        0
+{txt}sibling  {res} .13284   .13284        0        0        0        0        0
+{txt}  fmedu  {res} .22349   .01915        0        0        1       -1        0
+{txt}
+{com}. 
+. cem hukou age (30 35 40 45 50) gender race sibling fmedu(#0), treatment(college)
+{txt}(using the scott break method for imbalance)
+{res}
+{txt}Matching Summary:
+-----------------
+Number of strata: {res}206
+{txt}Number of matched strata: {res}133
+
+           {txt}   0     1
+      All  {res}2494  1643
+{txt}  Matched  {res}2409  1583
+{txt}Unmatched  {res}  85    60
+
+
+{txt}Multivariate L1 distance: {res}.20630897
+
+{txt}Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou  {res} 8.3e-16   1.1e-16         0         0         0         0         0
+{txt}    age  {res}  .07527    -.1677         0         0         1         0         0
+{txt} gender  {res} 1.4e-15   6.7e-16         0         0         0         0         0
+{txt}   race  {res} 9.0e-16   1.8e-15         0         0         0         0         0
+{txt}sibling  {res} 2.4e-15  -1.9e-16         0         0         0         0         0
+{txt}  fmedu  {res} 3.7e-16   2.8e-15         0         0         0         0         0
+{txt}
+{com}. cem hukou age (#6) gender race sibling fmedu (#0), treatment(college)
+{txt}(using the scott break method for imbalance)
+{res}
+{txt}Matching Summary:
+-----------------
+Number of strata: {res}179
+{txt}Number of matched strata: {res}118
+
+           {txt}   0     1
+      All  {res}2494  1643
+{txt}  Matched  {res}2421  1579
+{txt}Unmatched  {res}  73    64
+
+
+{txt}Multivariate L1 distance: {res}.22223609
+
+{txt}Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou  {res}5.3e-15  4.6e-15        0        0        0        0        0
+{txt}    age  {res} .08636  -.24076        0        0        0        0        0
+{txt} gender  {res}6.0e-15  7.2e-15        0        0        0        0        0
+{txt}   race  {res}1.2e-15  2.1e-15        0        0        0        0        0
+{txt}sibling  {res}4.1e-15  1.7e-15        0        0        0        0        0
+{txt}  fmedu  {res}7.4e-15  5.3e-15        0        0        0        0        0
+{txt}
+{com}. cem hukou age gender race sibling fmedu (#0), treatment(college)
+{txt}(using the scott break method for imbalance)
+{res}
+{txt}Matching Summary:
+-----------------
+Number of strata: {res}369
+{txt}Number of matched strata: {res}214
+
+           {txt}   0     1
+      All  {res}2494  1643
+{txt}  Matched  {res}2330  1523
+{txt}Unmatched  {res} 164   120
+
+
+{txt}Multivariate L1 distance: {res}.09076546
+
+{txt}Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou  {res} 1.1e-15  -6.7e-16         0         0         0         0         0
+{txt}    age  {res}  .02518   -.02531         0         0         0         0         0
+{txt} gender  {res} 1.8e-15  -2.3e-15         0         0         0         0         0
+{txt}   race  {res} 8.7e-18         0         0         0         0         0         0
+{txt}sibling  {res} 1.3e-15  -3.1e-16         0         0         0         0         0
+{txt}  fmedu  {res} 1.6e-15   1.2e-15         0         0         0         0         0
+{txt}
+{com}. 
+. reg lninc college [iw=cem_weights]
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     3,852
+{txt}{hline 13}{c +}{hline 34}   F(1, 3850)      = {res}   333.41
+{txt}       Model {c |} {res} 450.866614         1  450.866614   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 5207.69062     3,850  1.35264691   {txt}R-squared       ={res}    0.0797
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0797
+{txt}       Total {c |} {res} 5658.55723     3,851  1.46937347   {txt}Root MSE        =   {res} 1.1629
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6996738{col 26}{space 2} .0383184{col 37}{space 1}   18.26{col 46}{space 3}0.000{col 54}{space 4} .6245475{col 67}{space 3} .7748001
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  9.47577{col 26}{space 2} .0240912{col 37}{space 1}  393.33{col 46}{space 3}0.000{col 54}{space 4} 9.428537{col 67}{space 3} 9.523003
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college hukou age gender race sibling i.fmedu [iw=cem_weights]
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     3,853
+{txt}{hline 13}{c +}{hline 34}   F(8, 3844)      = {res}    59.25
+{txt}       Model {c |} {res} 621.146148         8  77.6432685   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 5037.41109     3,844  1.31046074   {txt}R-squared       ={res}    0.1098
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.1079
+{txt}       Total {c |} {res} 5658.55723     3,852  1.46899201   {txt}Root MSE        =   {res} 1.1448
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .699765{col 26}{space 2} .0377211{col 37}{space 1}   18.55{col 46}{space 3}0.000{col 54}{space 4} .6258097{col 67}{space 3} .7737203
+{txt}{space 7}hukou {c |}{col 14}{res}{space 2} .1384669{col 26}{space 2} .0417004{col 37}{space 1}    3.32{col 46}{space 3}0.001{col 54}{space 4} .0567099{col 67}{space 3} .2202238
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0036032{col 26}{space 2}  .002706{col 37}{space 1}    1.33{col 46}{space 3}0.183{col 54}{space 4}-.0017021{col 67}{space 3} .0089086
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .3631285{col 26}{space 2} .0378722{col 37}{space 1}    9.59{col 46}{space 3}0.000{col 54}{space 4} .2888771{col 67}{space 3} .4373799
+{txt}{space 8}race {c |}{col 14}{res}{space 2} .1562387{col 26}{space 2} .1279194{col 37}{space 1}    1.22{col 46}{space 3}0.222{col 54}{space 4}-.0945576{col 67}{space 3} .4070351
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .1464629{col 26}{space 2} .0537444{col 37}{space 1}    2.73{col 46}{space 3}0.006{col 54}{space 4} .0410927{col 67}{space 3} .2518332
+{txt}{space 12} {c |}
+{space 7}fmedu {c |}
+{space 9}是  {c |}{col 14}{res}{space 2} .0025106{col 26}{space 2}  .043347{col 37}{space 1}    0.06{col 46}{space 3}0.954{col 54}{space 4}-.0824748{col 67}{space 3}  .087496
+{txt}{space 7}缺失  {c |}{col 14}{res}{space 2} .0241171{col 26}{space 2} .0565652{col 37}{space 1}    0.43{col 46}{space 3}0.670{col 54}{space 4}-.0867836{col 67}{space 3} .1350179
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 8.892506{col 26}{space 2}  .162912{col 37}{space 1}   54.58{col 46}{space 3}0.000{col 54}{space 4} 8.573104{col 67}{space 3} 9.211908
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第5章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}16 Jul 2024, 09:15:32
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

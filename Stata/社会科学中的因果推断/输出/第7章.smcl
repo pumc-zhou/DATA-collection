@@ -1,0 +1,659 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第7章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}16 Jul 2024, 09:38:43
+
+{com}. do 第7章.do, nostop
+{txt}
+{com}. use "C:\Users\XuQi\Desktop\cfps2010.dta", clear
+{txt}
+{com}. 
+. *一元线性回归
+. reg lninc college, vce(cluster provcd)
+
+{txt}Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   271.17
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1095
+                                                {txt}Root MSE          =    {res} 1.1498
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .823612{col 26}{space 2} .0500155{col 37}{space 1}   16.47{col 46}{space 3}0.000{col 54}{space 4} .7203851{col 67}{space 3}  .926839
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .1084703{col 37}{space 1}   86.23{col 46}{space 3}0.000{col 54}{space 4} 9.129317{col 67}{space 3} 9.577061
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *倾向值细分
+. tabulate fmedu, gen(fmedu)
+
+     {txt}父母是 {c |}
+     否上过 {c |}
+       高中 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         否 {c |}{res}      2,327       56.25       56.25
+{txt}         是 {c |}{res}        898       21.71       77.96
+{txt}       缺失 {c |}{res}        912       22.04      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+{txt}
+{com}. pscore college hukou age gender race sibling fmedu2 fmedu3, pscore(ps) blockid(strata) logit comsup
+
+
+
+{res}**************************************************** 
+Algorithm to estimate the propensity score 
+**************************************************** 
+
+
+The treatment is college
+
+     {txt}是否上 {c |}
+       大学 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         否 {c |}{res}      2,494       60.29       60.29
+{txt}         是 {c |}{res}      1,643       39.71      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+
+
+
+Estimation of the propensity score 
+
+{txt}Iteration 0:  Log likelihood = {res}-2779.3946
+{txt}Iteration 1:  Log likelihood = {res}-2437.5718
+{txt}Iteration 2:  Log likelihood = {res}-2433.2339
+{txt}Iteration 3:  Log likelihood = {res}-2433.2257
+{txt}Iteration 4:  Log likelihood = {res}-2433.2257
+
+{txt}Logistic regression                               Number of obs   = {res}      4137
+                                                  {txt}LR chi2({res}7{txt})      = {res}    692.34
+                                                  {txt}Prob > chi2     = {res}    0.0000
+{txt}Log likelihood = {res}-2433.2257                       {txt}Pseudo R2       = {res}    0.1245
+
+{txt}{hline 13}{c TT}{hline 64}
+     college {c |} Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+{hline 13}{c +}{hline 64}
+       hukou {c |}  {res} .3694308   .0750791     4.92   0.000     .2222784    .5165832
+         {txt}age {c |}  {res}-.0779021   .0046121   -16.89   0.000    -.0869417   -.0688625
+      {txt}gender {c |}  {res}-.0055885   .0707311    -0.08   0.937    -.1442189    .1330418
+        {txt}race {c |}  {res}-.1815893   .1555612    -1.17   0.243    -.4864837     .123305
+     {txt}sibling {c |}  {res} .1551052   .1050747     1.48   0.140    -.0508374    .3610478
+      {txt}fmedu2 {c |}  {res} .8096408   .0889766     9.10   0.000     .6352498    .9840318
+      {txt}fmedu3 {c |}  {res} .1445431   .0935233     1.55   0.122    -.0387591    .3278453
+       {txt}_cons {c |}  {res} 2.403783   .2336584    10.29   0.000     1.945821    2.861745
+{txt}{hline 13}{c BT}{hline 64}
+
+
+
+{res}Note: the common support option has been selected
+The region of common support is [.11224518, .85697725]
+
+
+
+Description of the estimated propensity score 
+in region of common support 
+
+                 {txt}Estimated propensity score
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} .1202454       .1122452
+{txt} 5%    {res} .1458332       .1122452
+{txt}10%    {res} .1663307       .1122452       {txt}Obs         {res}      4,137
+{txt}25%    {res} .2160295       .1122452       {txt}Sum of wgt. {res}      4,137
+
+{txt}50%    {res} .3705058                      {txt}Mean          {res} .3971477
+                        {txt}Largest       Std. dev.     {res}   .19613
+{txt}75%    {res} .5462371       .8367993
+{txt}90%    {res} .6952771       .8368947       {txt}Variance      {res}  .038467
+{txt}95%    {res} .7616237       .8368947       {txt}Skewness      {res} .4634977
+{txt}99%    {res} .8213217       .8569773       {txt}Kurtosis      {res}  2.12405
+
+
+
+****************************************************** 
+Step 1: Identification of the optimal number of blocks 
+Use option detail if you want more detailed output 
+****************************************************** 
+
+
+{txt}The final number of blocks is 8
+
+This number of blocks ensures that the mean propensity score
+is not different for treated and controls in each blocks
+
+
+
+{res}********************************************************** 
+Step 2: Test of balancing property of the propensity score 
+Use option detail if you want more detailed output 
+********************************************************** 
+
+Variable hukou is not balanced in block 2
+
+Variable age is not balanced in block 2
+
+Variable age is not balanced in block 3
+
+Variable age is not balanced in block 5
+
+Variable fmedu2 is not balanced in block 6
+
+Variable hukou is not balanced in block 7
+
+Variable sibling is not balanced in block 7
+
+{err}The balancing property is not satisfied 
+
+Try a different specification of the propensity score 
+
+  {txt}Inferior {c |}
+  of block {c |}      是否上大学
+of pscore  {c |}        否         是 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+         0 {c |}{res}       692        112 {txt}{c |}{res}       804 
+{txt}        .2 {c |}{res}       370         86 {txt}{c |}{res}       456 
+{txt}       .25 {c |}{res}       263        111 {txt}{c |}{res}       374 
+{txt}        .3 {c |}{res}       374        258 {txt}{c |}{res}       632 
+{txt}        .4 {c |}{res}       314        247 {txt}{c |}{res}       561 
+{txt}        .5 {c |}{res}       252        307 {txt}{c |}{res}       559 
+{txt}        .6 {c |}{res}       213        439 {txt}{c |}{res}       652 
+{txt}        .8 {c |}{res}        16         83 {txt}{c |}{res}        99 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}     2,494      1,643 {txt}{c |}{res}     4,137 
+{txt}Note: the common support option has been selected
+
+
+{res}******************************************* 
+End of the algorithm to estimate the pscore 
+******************************************* 
+{txt}
+{com}. 
+. drop ps strata comsup
+{txt}
+{com}. gen hukouage=hukou*age
+{txt}
+{com}. pscore college hukou hukouage age age2 gender race sibling fmedu2 fmedu3, pscore(ps) blockid(strata) logit comsup
+
+
+
+{res}**************************************************** 
+Algorithm to estimate the propensity score 
+**************************************************** 
+
+
+The treatment is college
+
+     {txt}是否上 {c |}
+       大学 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+         否 {c |}{res}      2,494       60.29       60.29
+{txt}         是 {c |}{res}      1,643       39.71      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      4,137      100.00
+
+
+
+Estimation of the propensity score 
+
+{txt}Iteration 0:  Log likelihood = {res}-2779.3946
+{txt}Iteration 1:  Log likelihood = {res}-2429.5513
+{txt}Iteration 2:  Log likelihood = {res} -2422.173
+{txt}Iteration 3:  Log likelihood = {res}-2422.1088
+{txt}Iteration 4:  Log likelihood = {res}-2422.1087
+
+{txt}Logistic regression                               Number of obs   = {res}      4137
+                                                  {txt}LR chi2({res}9{txt})      = {res}    714.57
+                                                  {txt}Prob > chi2     = {res}    0.0000
+{txt}Log likelihood = {res}-2422.1087                       {txt}Pseudo R2       = {res}    0.1285
+
+{txt}{hline 13}{c TT}{hline 64}
+     college {c |} Coefficient  Std. err.      z    P>|z|     [95% conf. interval]
+{hline 13}{c +}{hline 64}
+       hukou {c |}  {res} .7612414   .3489558     2.18   0.029     .0773006    1.445182
+    {txt}hukouage {c |}  {res} -.010548   .0087546    -1.20   0.228    -.0277067    .0066107
+         {txt}age {c |}  {res} .1150714   .0429697     2.68   0.007     .0308523    .1992905
+        {txt}age2 {c |}  {res}-.0024131    .000549    -4.40   0.000    -.0034892    -.001337
+      {txt}gender {c |}  {res}-.0093303   .0708578    -0.13   0.895     -.148209    .1295483
+        {txt}race {c |}  {res}-.1836443   .1558151    -1.18   0.239    -.4890363    .1217476
+     {txt}sibling {c |}  {res} .2137055   .1100417     1.94   0.052    -.0019724    .4293833
+      {txt}fmedu2 {c |}  {res} .8039633   .0889304     9.04   0.000     .6296628    .9782638
+      {txt}fmedu3 {c |}  {res}  .198138    .095117     2.08   0.037     .0117121    .3845639
+       {txt}_cons {c |}  {res}-1.281155   .8326789    -1.54   0.124    -2.913175     .350866
+{txt}{hline 13}{c BT}{hline 64}
+
+
+
+{res}Note: the common support option has been selected
+The region of common support is [.07981392, .83238747]
+
+
+
+Description of the estimated propensity score 
+in region of common support 
+
+                 {txt}Estimated propensity score
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res} .0913784       .0798139
+{txt} 5%    {res} .1134165       .0798139
+{txt}10%    {res} .1397529       .0798139       {txt}Obs         {res}      4,137
+{txt}25%    {res} .2179474       .0798139       {txt}Sum of wgt. {res}      4,137
+
+{txt}50%    {res} .4006644                      {txt}Mean          {res} .3971477
+                        {txt}Largest       Std. dev.     {res} .1977145
+{txt}75%    {res}  .530137       .8223759
+{txt}90%    {res} .6705877       .8264575       {txt}Variance      {res}  .039091
+{txt}95%    {res} .7619456       .8264575       {txt}Skewness      {res} .2716646
+{txt}99%    {res} .8007715       .8323875       {txt}Kurtosis      {res} 2.080826
+
+
+
+****************************************************** 
+Step 1: Identification of the optimal number of blocks 
+Use option detail if you want more detailed output 
+****************************************************** 
+
+
+{txt}The final number of blocks is 9
+
+This number of blocks ensures that the mean propensity score
+is not different for treated and controls in each blocks
+
+
+
+{res}********************************************************** 
+Step 2: Test of balancing property of the propensity score 
+Use option detail if you want more detailed output 
+********************************************************** 
+
+
+{txt}The balancing property is satisfied 
+
+
+This table shows the inferior bound, the number of treated
+and the number of controls for each block 
+
+  Inferior {c |}
+  of block {c |}      是否上大学
+of pscore  {c |}        否         是 {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+  .0798139 {c |}{res}       775        121 {txt}{c |}{res}       896 
+{txt}        .2 {c |}{res}       252         55 {txt}{c |}{res}       307 
+{txt}       .25 {c |}{res}       215         85 {txt}{c |}{res}       300 
+{txt}        .3 {c |}{res}       334        220 {txt}{c |}{res}       554 
+{txt}        .4 {c |}{res}       480        393 {txt}{c |}{res}       873 
+{txt}        .5 {c |}{res}       194        213 {txt}{c |}{res}       407 
+{txt}        .6 {c |}{res}       168        285 {txt}{c |}{res}       453 
+{txt}        .7 {c |}{res}        69        223 {txt}{c |}{res}       292 
+{txt}        .8 {c |}{res}         7         48 {txt}{c |}{res}        55 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}     2,494      1,643 {txt}{c |}{res}     4,137 
+{txt}Note: the common support option has been selected
+
+
+{res}******************************************* 
+End of the algorithm to estimate the pscore 
+******************************************* 
+{txt}
+{com}. 
+. atts lninc college, pscore(ps) blockid(strata) comsup
+
+
+
+{col 1}{txt}ATT estimation with the Stratification method
+{col 1}Analytical standard errors
+
+{hline 57}
+{col 1}n. treat.{col 13}n. contr.{col 25}      ATT{col 37}Std. Err.{col 49}        t
+{hline 57}
+
+{col 1}{res}     1643{col 13}     2494{col 25}    0.691{col 37}    0.043{col 49}   15.984
+
+{txt}{hline 57}
+
+{com}. 
+. *干预效应的异质性
+. hte sm lninc college hukou hukouage age age2 gender race sibling fmedu2 fmedu3, logit comsup
+{res}
+{txt}{col 56}Number of obs ={res}    4137
+{txt}{hline 13}{c TT}{hline 64}
+       lninc {c |}      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+{hline 13}{c +}{hline 64}
+{res}TE by strata{txt} {c |}                                                                
+           1 {c |}  {res} 1.127695   .1261502     8.94   0.000     .8804449    1.374945
+           {txt}2 {c |}  {res} 1.022366   .1455883     7.02   0.000      .737018    1.307714
+           {txt}3 {c |}  {res} 1.060989   .1569723     6.76   0.000     .7533288    1.368649
+           {txt}4 {c |}  {res} .7679974   .0852362     9.01   0.000     .6009374    .9350574
+           {txt}5 {c |}  {res} .5875918   .0806062     7.29   0.000     .4296066     .745577
+           {txt}6 {c |}  {res} .5250521    .112322     4.67   0.000      .304905    .7451992
+           {txt}7 {c |}  {res} .6410306   .0995247     6.44   0.000     .4459658    .8360953
+           {txt}8 {c |}  {res} .6611019   .1463207     4.52   0.000     .3743187    .9478852
+           {txt}9 {c |}  {res}  .216667   .3767465     0.58   0.565    -.5217426    .9550766
+{txt}{hline 13}{c +}{hline 64}
+{res}Linear trend{txt} {c |}                                                                
+      _slope {c |}  {res}-.0853021   .0192192    -4.44   0.000     -.122971   -.0476333
+       {txt}_cons {c |}  {res} 1.141173   .0992395    11.50   0.000     .9466673    1.335679
+{txt}{hline 13}{c BT}{hline 64}
+TE = treatment effect
+{res}{txt}
+{com}. 
+. hte ms lninc college hukou hukouage age age2 gender race sibling fmedu2 fmedu3, logit common noscatter lpolyci
+{txt}(running psmatch2 ...)
+{res}
+{txt}{col 1}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:4,137}
+{txt}{col 57}{lalign 13:LR chi2({res:9})}{col 70} = {res}{ralign 6:714.57}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}{col 1}{lalign 14:Log likelihood}{col 15} = {res}{ralign 10:-2422.1087}{txt}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.1285}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     college{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}hukou {c |}{col 14}{res}{space 2} .7612414{col 26}{space 2} .3489558{col 37}{space 1}    2.18{col 46}{space 3}0.029{col 54}{space 4} .0773006{col 67}{space 3} 1.445182
+{txt}{space 4}hukouage {c |}{col 14}{res}{space 2} -.010548{col 26}{space 2} .0087546{col 37}{space 1}   -1.20{col 46}{space 3}0.228{col 54}{space 4}-.0277067{col 67}{space 3} .0066107
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .1150714{col 26}{space 2} .0429697{col 37}{space 1}    2.68{col 46}{space 3}0.007{col 54}{space 4} .0308523{col 67}{space 3} .1992905
+{txt}{space 8}age2 {c |}{col 14}{res}{space 2}-.0024131{col 26}{space 2}  .000549{col 37}{space 1}   -4.40{col 46}{space 3}0.000{col 54}{space 4}-.0034892{col 67}{space 3} -.001337
+{txt}{space 6}gender {c |}{col 14}{res}{space 2}-.0093303{col 26}{space 2} .0708578{col 37}{space 1}   -0.13{col 46}{space 3}0.895{col 54}{space 4} -.148209{col 67}{space 3} .1295484
+{txt}{space 8}race {c |}{col 14}{res}{space 2}-.1836443{col 26}{space 2} .1558151{col 37}{space 1}   -1.18{col 46}{space 3}0.239{col 54}{space 4}-.4890363{col 67}{space 3} .1217476
+{txt}{space 5}sibling {c |}{col 14}{res}{space 2} .2137055{col 26}{space 2} .1100417{col 37}{space 1}    1.94{col 46}{space 3}0.052{col 54}{space 4}-.0019724{col 67}{space 3} .4293833
+{txt}{space 6}fmedu2 {c |}{col 14}{res}{space 2} .8039633{col 26}{space 2} .0889304{col 37}{space 1}    9.04{col 46}{space 3}0.000{col 54}{space 4} .6296628{col 67}{space 3} .9782638
+{txt}{space 6}fmedu3 {c |}{col 14}{res}{space 2}  .198138{col 26}{space 2}  .095117{col 37}{space 1}    2.08{col 46}{space 3}0.037{col 54}{space 4} .0117121{col 67}{space 3} .3845639
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-1.281155{col 26}{space 2} .8326789{col 37}{space 1}   -1.54{col 46}{space 3}0.124{col 54}{space 4}-2.913175{col 67}{space 3}  .350866
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}{hline 28}{c TT}{hline 59}
+        Variable     Sample {c |}    Treated     Controls   Difference         S.E.   T-stat
+{hline 28}{c +}{hline 59}
+           lninc  Unmatched {c |}{res} 10.1768011   9.35318907   .823612033    .03653383    22.54
+{txt}{col 17}        ATT {c |}{res} 10.1782293   9.42346546    .75476386     .0881435     8.56
+{txt}{col 17}        ATU {c |}{res} 9.35318907   10.1910798   .837890778            .        .
+{txt}{col 17}        ATE {c |}{col 56}{res} .804937755            .        .
+{txt}{hline 28}{c +}{hline 59}
+Note: S.E. does not take into account that the propensity score is estimated.
+
+ psmatch2: {c |}   psmatch2: Common
+ Treatment {c |}        support
+assignment {c |} Off suppo  On suppor {c |}     Total
+{hline 11}{c +}{hline 22}{c +}{hline 10}
+ Untreated {c |}{res}         0      2,494 {txt}{c |}{res}     2,494 
+{txt}   Treated {c |}{res}         5      1,638 {txt}{c |}{res}     1,643 
+{txt}{hline 11}{c +}{hline 22}{c +}{hline 10}
+     Total {c |}{res}         5      4,132 {txt}{c |}{res}     4,137 
+{txt}(compiling HTE graph ...)
+{res}{txt}
+{com}. hte sd lninc college hukou hukouage age age2 gender race sibling fmedu2 fmedu3, logit comsup
+{res}{txt}
+{com}. 
+. *倾向值加权（手动实现）
+. qui logit college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3
+{txt}
+{com}. predict p
+{txt}(option {bf:pr} assumed; Pr(college))
+
+{com}. 
+. gen w_ate=1/p if college==1
+{txt}(2,494 missing values generated)
+
+{com}. replace w_ate=1/(1-p) if college==0
+{txt}(2,494 real changes made)
+
+{com}. 
+. gen w_att=1 if college==1
+{txt}(2,494 missing values generated)
+
+{com}. replace w_att=p/(1-p) if college==0
+{txt}(2,494 real changes made)
+
+{com}. 
+. gen w_atu=(1-p)/p if college==1
+{txt}(2,494 missing values generated)
+
+{com}. replace w_atu=1 if college==0
+{txt}(2,494 real changes made)
+
+{com}. 
+. reg lninc college [pw=w_ate], vce(cluster provcd)
+{txt}(sum of wgt is 8,296.73905217648)
+
+Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   238.29
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1157
+                                                {txt}Root MSE          =    {res} 1.1086
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2}  .801988{col 26}{space 2} .0519531{col 37}{space 1}   15.44{col 46}{space 3}0.000{col 54}{space 4}  .694762{col 67}{space 3} .9092139
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.405058{col 26}{space 2} .1124885{col 37}{space 1}   83.61{col 46}{space 3}0.000{col 54}{space 4} 9.172893{col 67}{space 3} 9.637223
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college [pw=w_att], vce(cluster provcd)
+{txt}(sum of wgt is 3,285.49713142961)
+
+Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   184.39
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.0890
+                                                {txt}Root MSE          =    {res} 1.1085
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .6929841{col 26}{space 2} .0510332{col 37}{space 1}   13.58{col 46}{space 3}0.000{col 54}{space 4} .5876567{col 67}{space 3} .7983114
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.483817{col 26}{space 2} .1180324{col 37}{space 1}   80.35{col 46}{space 3}0.000{col 54}{space 4}  9.24021{col 67}{space 3} 9.727424
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. reg lninc college [pw=w_atu], vce(cluster provcd)
+{txt}(sum of wgt is 5,011.24193204939)
+
+Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}   237.54
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1348
+                                                {txt}Root MSE          =    {res}  1.107
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .8735978{col 26}{space 2} .0566819{col 37}{space 1}   15.41{col 46}{space 3}0.000{col 54}{space 4} .7566121{col 67}{space 3} .9905836
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 9.353189{col 26}{space 2} .1084703{col 37}{space 1}   86.23{col 46}{space 3}0.000{col 54}{space 4} 9.129317{col 67}{space 3} 9.577061
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *倾向值加权（teffects ipw）
+. teffects ipw (lninc) (college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3)
+{txt}note: {bf:1.hukou} omitted because of collinearity.
+note: {bf:age} omitted because of collinearity.
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 3.679e-21}  
+Iteration 1:{space 2}EE criterion = {res: 5.271e-31}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: inverse-probability weights}
+{txt:Outcome model}{col 16}:{res: weighted mean}
+{txt:Treatment model}{col 16}:{res: logit}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2}  .801988{col 26}{space 2} .0379528{col 37}{space 1}   21.13{col 46}{space 3}0.000{col 54}{space 4} .7276019{col 67}{space 3} .8763741
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.405058{col 26}{space 2} .0271151{col 37}{space 1}  346.86{col 46}{space 3}0.000{col 54}{space 4} 9.351913{col 67}{space 3} 9.458203
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects ipw (lninc) (college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3), atet
+{txt}note: {bf:1.hukou} omitted because of collinearity.
+note: {bf:age} omitted because of collinearity.
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 3.679e-21}  
+Iteration 1:{space 2}EE criterion = {res: 1.176e-31}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: inverse-probability weights}
+{txt:Outcome model}{col 16}:{res: weighted mean}
+{txt:Treatment model}{col 16}:{res: logit}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATET         {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .6929841{col 26}{space 2} .0417058{col 37}{space 1}   16.62{col 46}{space 3}0.000{col 54}{space 4} .6112421{col 67}{space 3}  .774726
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.483817{col 26}{space 2} .0358907{col 37}{space 1}  264.24{col 46}{space 3}0.000{col 54}{space 4} 9.413472{col 67}{space 3} 9.554162
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. *平衡性检验
+. reg age college [pw=w_ate], vce(cluster provcd)
+{txt}(sum of wgt is 8,296.73905217648)
+
+Linear regression                               Number of obs     = {res}     4,137
+                                                {txt}F(1, 24)          =  {res}     0.08
+                                                {txt}Prob > F          = {res}    0.7796
+                                                {txt}R-squared         = {res}    0.0001
+                                                {txt}Root MSE          =    {res} 9.1311
+
+{txt}{ralign 78:(Std. err. adjusted for {res:25} clusters in {res:provcd})}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}         age{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}college {c |}{col 14}{res}{space 2} .1454856{col 26}{space 2} .5140792{col 37}{space 1}    0.28{col 46}{space 3}0.780{col 54}{space 4}-.9155217{col 67}{space 3} 1.206493
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 39.65485{col 26}{space 2} .4101642{col 37}{space 1}   96.68{col 46}{space 3}0.000{col 54}{space 4} 38.80831{col 67}{space 3} 40.50138
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. qui teffects ipw (lninc) (college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3)
+{txt}
+{com}. tebalance summarize
+
+{txt}{p 0 0 2}Covariate balance summary{p_end}
+
+{res}{col 16}{text}          Raw{col 29}     Weighted
+{res}{col 1}{text}{hline 15}{hline 13}{hline 13}
+{col 1}{text}Number of obs ={col 16}{result}{space 3}     4,137{col 29}{space 3}   4,137.0
+{col 1}{text}Treated obs   ={col 16}{result}{space 3}     1,643{col 29}{space 3}   2,074.4
+{col 1}{text}Control obs   ={col 16}{result}{space 3}     2,494{col 29}{space 3}   2,062.6
+{col 1}{text}{hline 15}{hline 13}{hline 13}
+
+{res}{col 1}{text}{hline 16}{c TT}{hline 24}{hline 24}
+{col 17}{text}{c |}Standardized differences{col 42}          Variance ratio
+{res}{col 17}{text}{c |}        Raw{col 30}   Weighted{col 42}          Raw{col 54}   Weighted
+{res}{col 1}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
+{col 1}{text}          hukou{col 17}{c |}{result}{space 2} .2397965{col 30}{space 2}   .01079{col 42}{space 4} 1.082133{col 54}{space 2} 1.004144
+{col 1}{text}            age{col 17}{c |}{result}{space 2}-.7815923{col 30}{space 2} .0159334{col 42}{space 4}  .816613{col 54}{space 2} 1.034943
+{col 17}{text}{c |}
+{res}{col 1}{text}          hukou#{col 17}{c |}
+{res}{col 1}{text}            age{col 17}{c |}
+{res}{col 1}{text}      城镇户口{col 17}{c |}{result}{space 2} .0759021{col 30}{space 2} .0149513{col 42}{space 4} .7676175{col 54}{space 2} 1.022716
+{col 17}{text}{c |}
+{res}{col 1}{text}            age#{col 17}{c |}
+{res}{col 1}{text}            age{col 17}{c |}{result}{space 2}-.7903714{col 30}{space 2} .0196792{col 42}{space 4} .7091451{col 54}{space 2} 1.050748
+{col 17}{text}{c |}
+{res}{col 1}{text}         gender{col 17}{c |}{result}{space 2}-.0820793{col 30}{space 2} .0237794{col 42}{space 4} 1.025374{col 54}{space 2} .9914028
+{col 1}{text}           race{col 17}{c |}{result}{space 2}-.0477992{col 30}{space 2}-.0021336{col 42}{space 4} 1.211041{col 54}{space 2} 1.008475
+{col 1}{text}        sibling{col 17}{c |}{result}{space 2} .3643434{col 30}{space 2} .0024262{col 42}{space 4} 2.011046{col 54}{space 2} 1.004868
+{col 1}{text}         fmedu2{col 17}{c |}{result}{space 2} .5419858{col 30}{space 2}-.0040888{col 42}{space 4} 2.039276{col 54}{space 2} .9943991
+{col 1}{text}         fmedu3{col 17}{c |}{result}{space 2}-.2528053{col 30}{space 2}-.0025766{col 42}{space 4} .6928676{col 54}{space 2} .9964834
+{col 1}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
+{res}{txt}
+{com}. tebalance density age
+{res}{txt}
+{com}. tebalance overid, nolog 
+{res}
+{txt}Overidentification test for covariate balance
+H0: Covariates are balanced
+
+{col 10}chi2({res}10{txt}){col 23}= {res} 24.7885
+{txt}{col 10}Prob > chi2{col 23}=   {res}0.0058
+{txt}
+{com}. tebalance overid, bconly nolog 
+{res}
+{txt}Overidentification test for covariate balance
+H0: Covariates are balanced
+
+{col 10}chi2({res}8{txt}){col 23}= {res} 15.0045
+{txt}{col 10}Prob > chi2{col 23}=   {res}0.0591
+{txt}
+{com}. 
+. *双重稳健估计(ipwra)
+. teffects ipwra (lninc hukou age gender race sibling fmedu2 fmedu3) ///
+>                (college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3)
+{txt}note: {bf:1.hukou} omitted because of collinearity.
+note: {bf:age} omitted because of collinearity.
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 3.679e-21}  
+Iteration 1:{space 2}EE criterion = {res: 8.189e-31}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: IPW regression adjustment}
+{txt:Outcome model}{col 16}:{res: linear}
+{txt:Treatment model}{col 16}:{res: logit}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7980164{col 26}{space 2} .0377585{col 37}{space 1}   21.13{col 46}{space 3}0.000{col 54}{space 4}  .724011{col 67}{space 3} .8720217
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.404692{col 26}{space 2} .0271286{col 37}{space 1}  346.67{col 46}{space 3}0.000{col 54}{space 4} 9.351521{col 67}{space 3} 9.457863
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. teffects aipw (lninc hukou age gender race sibling fmedu2 fmedu3) ///
+>               (college hukou hukou##c.age c.age##c.age gender race sibling fmedu2 fmedu3)
+{txt}note: {bf:1.hukou} omitted because of collinearity.
+note: {bf:age} omitted because of collinearity.
+
+{res}{txt}Iteration 0:{space 2}EE criterion = {res: 3.679e-21}  
+Iteration 1:{space 2}EE criterion = {res: 4.434e-31}  
+{res}
+{txt}Treatment-effects estimation{col 49}Number of obs {col 67}= {res}     4,137
+{txt:Estimator}{col 16}:{res: augmented IPW}
+{txt:Outcome model}{col 16}:{res: linear by ML}
+{txt:Treatment model}{col 16}:{res: logit}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}       lninc{col 14}{c |} Coefficient{col 26}  std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ATE          {txt}{c |}
+{space 5}college {c |}
+{space 1}(是 vs 否)  {c |}{col 14}{res}{space 2} .7972419{col 26}{space 2} .0378972{col 37}{space 1}   21.04{col 46}{space 3}0.000{col 54}{space 4} .7229646{col 67}{space 3} .8715191
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}POmean       {txt}{c |}
+{space 5}college {c |}
+{space 9}否  {c |}{col 14}{res}{space 2} 9.405056{col 26}{space 2}  .027155{col 37}{space 1}  346.35{col 46}{space 3}0.000{col 54}{space 4} 9.351833{col 67}{space 3} 9.458279
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Desktop\第7章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}16 Jul 2024, 09:39:42
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

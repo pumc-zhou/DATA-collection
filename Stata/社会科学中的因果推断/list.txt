@@ -1,0 +1,68 @@
+Folder PATH listing for volume soft
+Volume serial number is 78F7-B8F4
+E:.
+│  list.txt
+│  readme.md
+│  
+├─命令
+│      simulation.do
+│      第10章.do
+│      第11章.do
+│      第12章.do
+│      第4章.do
+│      第5章.do
+│      第6章.do
+│      第7章.do
+│      第8章.do
+│      第9章.do
+│      
+├─数据
+│      ada.dta
+│      antisocial.dta
+│      birthweight.dta
+│      cfps2010.dta
+│      education.dta
+│      euro.dta
+│      grade.dta
+│      grunfeld.dta
+│      mus08cigar.dta
+│      raw.dta
+│      rdrobust_senate.dta
+│      retirement.dta
+│      returns.dta
+│      simulation.dta
+│      smoking.dta
+│      so2.dta
+│      wagepan.dta
+│      
+├─答案
+│      第10章答案.do
+│      第11章答案.do
+│      第12章答案.do
+│      第4章答案.do
+│      第5章答案.do
+│      第6章答案.do
+│      第7章答案.do
+│      第8章答案.do
+│      第9章答案.do
+│      
+└─输出
+        第10章.pdf
+        第10章.smcl
+        第11章.do
+        第11章.pdf
+        第12章.do
+        第12章.pdf
+        第4章.pdf
+        第4章.smcl
+        第5章.pdf
+        第5章.smcl
+        第6章.pdf
+        第6章.smcl
+        第7章.pdf
+        第7章.smcl
+        第8章.pdf
+        第8章.smcl
+        第9章.pdf
+        第9章.smcl
+        

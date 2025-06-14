@@ -1,0 +1,654 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第九章.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Jul 2024, 10:15:54
+
+{com}. do "C:\Users\XuQi\Desktop\第9章.do", nostop
+{txt}
+{com}. ****精确断点
+. use "C:\Users\XuQi\Desktop\rdrobust_senate.dta", clear
+{txt}
+{com}. 
+. *图形分析
+. rdplot vote margin
+{res}
+RD Plot with evenly spaced mimicking variance number of bins using spacings estimators.
+
+{txt}{ralign 21: Cutoff c = 0}{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c{col 54}{txt}Number of obs  = {res}      1297
+{txt}{hline 22}{c +}{hline 22}{col 54}Kernel         = {res}{ralign 10:Uniform}
+{txt}{ralign 21:Number of obs}{col 22} {c |} {col 23}{res}      595{col 37}      702
+{txt}{ralign 21:Eff. Number of obs}{col 22} {c |} {col 23}{res}      595{col 37}      702
+{txt}{ralign 21:Order poly. fit (p)}{col 22} {c |} {col 23}{res}        4{col 37}        4
+{txt}{ralign 21:BW poly. fit (h)}{col 22} {c |} {col 23}{res}  100.000{col 37}  100.000
+{txt}{ralign 21:Number of bins scale}{col 22} {c |} {col 23}{res}    1.000{col 37}    1.000
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 22}{c TT}{hline 22}
+{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:Bins selected}{col 22} {c |} {col 23}{res}       15{col 37}       35
+{txt}{ralign 21:Average bin length}{col 22} {c |} {col 23}{res}    6.667{col 37}    2.857
+{txt}{ralign 21:Median bin length}{col 22} {c |} {col 23}{res}    6.667{col 37}    2.857
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:IMSE-optimal bins}{col 22} {c |} {col 23}{res}        8{col 37}        9
+{txt}{ralign 21:Mimicking Var. bins}{col 22} {c |} {col 23}{res}       15{col 37}       35
+{txt}{hline 22}{c +}{hline 22}
+{lalign 1:Rel. to IMSE-optimal:}{col 22} {c |} 
+{ralign 21:Implied scale}{col 22} {c |} {col 23}{res}    1.875{col 37}    3.889
+{txt}{ralign 21:WIMSE var. weight}{col 22} {c |} {col 23}{res}    0.132{col 37}    0.017
+{txt}{ralign 21:WIMSE bias weight}{col 22} {c |} {col 23}{res}    0.868{col 37}    0.983
+{txt}{hline 22}{c BT}{hline 22}
+
+{res}{txt}
+{com}. 
+. *计算最优带宽
+. rdbwselect vote margin, all
+{res}
+Bandwidth estimators for sharp RD local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = }{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      595{col 34}      702{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Min of margin}{col 19} {c |} {col 21}{res} -100.000{col 34}    0.036
+{txt}{ralign 18:Max of margin}{col 19} {c |} {col 21}{res}   -0.079{col 34}  100.000
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 30}{c TT}{hline 29}
+{col 19} {c |} {col 30}BW est. (h){col 50} {c |} {col 60}BW bias (b)
+{ralign 18:Method}{col 19} {c |} {col 22}Left of {res}c{col 40}{txt}Right of {res}c{txt}{col 50} {c |} {col 53}Left of {res}c{col 70}{txt}Right of {res}c
+{txt}{hline 19}{c +}{hline 30}{c +}{hline 29}
+{ralign 18:mserd}{col 19} {c |} {col 22}{res}   17.754{col 41}   17.754{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   28.028
+{txt}{ralign 18:msetwo}{col 19} {c |} {col 22}{res}   16.170{col 41}   18.126{txt}{col 50} {c |} {col 51}{res}   27.104{col 71}   29.344
+{txt}{ralign 18:msesum}{col 19} {c |} {col 22}{res}   18.365{col 41}   18.365{txt}{col 50} {c |} {col 51}{res}   31.319{col 71}   31.319
+{txt}{ralign 18:msecomb1}{col 19} {c |} {col 22}{res}   17.754{col 41}   17.754{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   28.028
+{txt}{ralign 18:msecomb2}{col 19} {c |} {col 22}{res}   17.754{col 41}   18.126{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   29.344
+{txt}{hline 19}{c +}{hline 30}{c +}{hline 29}
+{ralign 18:cerrd}{col 19} {c |} {col 22}{res}   12.407{col 41}   12.407{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   28.028
+{txt}{ralign 18:certwo}{col 19} {c |} {col 22}{res}   11.299{col 41}   12.667{txt}{col 50} {c |} {col 51}{res}   27.104{col 71}   29.344
+{txt}{ralign 18:cersum}{col 19} {c |} {col 22}{res}   12.834{col 41}   12.834{txt}{col 50} {c |} {col 51}{res}   31.319{col 71}   31.319
+{txt}{ralign 18:cercomb1}{col 19} {c |} {col 22}{res}   12.407{col 41}   12.407{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   28.028
+{txt}{ralign 18:cercomb2}{col 19} {c |} {col 22}{res}   12.407{col 41}   12.667{txt}{col 50} {c |} {col 51}{res}   28.028{col 71}   29.344
+{txt}{hline 19}{c BT}{hline 30}{c BT}{hline 29}
+
+{com}. 
+. *参数估计和统计推断
+. rdrobust vote margin
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      595{col 34}      702{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      360{col 34}      323{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   17.754{col 34}   17.754
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   28.028{col 34}   28.028
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.633{col 34}    0.633
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} 7.4141{col 33} 1.4587{col 43}5.0826{col 52}0.000{col 60}  4.5551{col 73} 10.2732
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}4.3110{col 52}0.000{col 60}  4.0937{col 73} 10.9193
+{txt}{hline 19}{c BT}{hline 60}
+
+{com}. 
+. *稳健性检验
+. rdrobust vote margin, bwselect(cerrd)  //改变最优带宽的计算方法
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:cerrd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      595{col 34}      702{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      284{col 34}      248{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   12.407{col 34}   12.407
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   28.028{col 34}   28.028
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.443{col 34}    0.443
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} 7.6316{col 33} 1.6801{col 43}4.5424{col 52}0.000{col 60}  4.3387{col 73} 10.9244
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}4.1735{col 52}0.000{col 60} 4.07422{col 73} 11.2892
+{txt}{hline 19}{c BT}{hline 60}
+
+{com}. rdrobust vote margin, kernel(uniform)  //使用矩形核
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      595{col 34}      702{col 55}{txt}Kernel        = {res}{ralign 10:Uniform}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      271{col 34}      235{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   11.597{col 34}   11.597
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   22.944{col 34}   22.944
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.505{col 34}    0.505
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} 7.2025{col 33} 1.6129{col 43}4.4656{col 52}0.000{col 60} 4.04127{col 73} 10.3637
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}4.0999{col 52}0.000{col 60} 3.96341{col 73} 11.2235
+{txt}{hline 19}{c BT}{hline 60}
+
+{com}. 
+. *矩形核条件下通过regress命令再现rdrobust的结果
+. gen d=1 if margin>=0 & margin<.
+{txt}(640 missing values generated)
+
+{com}. replace d=0 if margin<0
+{txt}(640 real changes made)
+
+{com}. 
+. reg vote c.margin##d if margin<=11.597 & margin>=-11.597
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       506
+{txt}{hline 13}{c +}{hline 34}   F(3, 502)       = {res}    46.12
+{txt}       Model {c |} {res} 12291.5156         3  4097.17187   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 44599.4682       502  88.8435621   {txt}R-squared       ={res}    0.2161
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2114
+{txt}       Total {c |} {res} 56890.9838       505  112.655413   {txt}Root MSE        =   {res} 9.4257
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        vote{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}margin {c |}{col 14}{res}{space 2}  .239721{col 26}{space 2} .1801027{col 37}{space 1}    1.33{col 46}{space 3}0.184{col 54}{space 4} -.114127{col 67}{space 3}  .593569
+{txt}{space 9}1.d {c |}{col 14}{res}{space 2} 7.202475{col 26}{space 2}  1.63353{col 37}{space 1}    4.41{col 46}{space 3}0.000{col 54}{space 4} 3.993076{col 67}{space 3} 10.41187
+{txt}{space 12} {c |}
+{space 2}d#c.margin {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}-.0122117{col 26}{space 2} .2557008{col 37}{space 1}   -0.05{col 46}{space 3}0.962{col 54}{space 4}-.5145873{col 67}{space 3} .4901639
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 45.59707{col 26}{space 2} 1.140196{col 37}{space 1}   39.99{col 46}{space 3}0.000{col 54}{space 4} 43.35693{col 67}{space 3} 47.83722
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. tab class, gen(class)
+
+     {txt}Senate {c |}
+      class {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}        455       32.73       32.73
+{txt}          2 {c |}{res}        448       32.23       64.96
+{txt}          3 {c |}{res}        487       35.04      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      1,390      100.00
+{txt}
+{com}. rdrobust vote margin, covs(class2 class3 termshouse termssenate population)   //纳入协变量
+{res}
+Covariate-adjusted Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1108
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      491{col 34}      617{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      314{col 34}      283{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   18.016{col 34}   18.016
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   28.999{col 34}   28.999
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.621{col 34}    0.621
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} 6.8812{col 33} 1.4072{col 43}4.8901{col 52}0.000{col 60} 4.12322{col 73} 9.63924
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}4.2193{col 52}0.000{col 60} 3.75923{col 73} 10.2815
+{txt}{hline 19}{c BT}{hline 60}
+Covariate-adjusted estimates. Additional covariates included: 5
+
+{com}. 
+. rdrobust termshouse margin    //检验协变量在断点处是否连续
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1108
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      491{col 34}      617{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      282{col 34}      257{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   15.657{col 34}   15.657
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   25.431{col 34}   25.431
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.616{col 34}    0.616
+
+Outcome: termshouse. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res}-.17257{col 33} .42515{col 43}-0.4059{col 52}0.685{col 60}-1.00585{col 73} .660715
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}-0.5809{col 52}0.561{col 60}-1.26941{col 73} .689003
+{txt}{hline 19}{c BT}{hline 60}
+
+{com}. rdrobust vote margin, c(25)    //伪断点检验
+{res}{err}Mass points detected in the running variable.
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 25}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}     1000{col 34}      297{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      251{col 34}      135{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   17.640{col 34}   17.640
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   33.326{col 34}   33.326
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.529{col 34}    0.529
+{txt}{ralign 18:Unique obs}{col 19} {c |} {col 21}{res}     1000{col 34}      260
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res}-.56145{col 33} 2.1831{col 43}-0.2572{col 52}0.797{col 60}-4.84023{col 73} 3.71733
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}0.0875{col 52}0.930{col 60}-4.57207{col 73} 4.99919
+{txt}{hline 19}{c BT}{hline 60}
+Estimates adjusted for mass points in the running variable.
+
+{com}. rddensity margin  //检验配置变量是否连续
+{res}Computing data-driven bandwidth selectors.
+
+Point estimates and standard errors have been adjusted for repeated observations.
+(Use option {it:nomasspoints} to suppress this adjustment.)
+
+RD Manipulation test using local polynomial density estimation.
+
+{txt}{ralign 9: c = }{res}    0.000{col 19} {c |}{col 22}{txt}Left of c{col 33}Right of c{col 53}Number of obs = {res}        1390
+{txt}{hline 19}{c +}{hline 22}{col 53}Model         = {res}{ralign 12:unrestricted}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      640{col 34}      750{col 53}{txt}BW method     = {res}{ralign 12:comb}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      408{col 34}      460{col 53}{txt}Kernel        = {res}{ralign 12:triangular}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        2{col 34}        2{col 53}{txt}VCE method    = {res}{ralign 12:jackknife}
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        3{col 34}        3
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   19.841{col 34}   27.119
+
+Running variable: margin.
+{txt}{hline 19}{c TT}{hline 22}
+{ralign 18:Method}{col 19} {c |} {col 23}    T{col 38}P>|T|
+{hline 19}{c +}{hline 22}
+{ralign 18:Robust}{col 19} {c |} {col 21}{res}  -0.8753{col 34}   0.3814
+{txt}{hline 19}{c BT}{hline 22}
+
+{res}P-values of binomial tests.{txt} (H0: prob = .5)
+{hline 19}{c TT}{hline 22}{c TT}{hline 10}
+{ralign 18: Window Length / 2}{col 20}{c |}{ralign 9: <c}{col 33}{ralign 9: >=c}{col 43}{c |}{col 49}P>|T|
+{hline 19}{c +}{hline 22}{c +}{hline 10}
+{res}{col 10}    0.430{col 20}{c |}        8{col 33}       12{col 43}{c |}{col 45}   0.5034
+{col 10}    0.861{col 20}{c |}       17{col 33}       25{col 43}{c |}{col 45}   0.2800
+{col 10}    1.291{col 20}{c |}       25{col 33}       34{col 43}{c |}{col 45}   0.2976
+{col 10}    1.722{col 20}{c |}       45{col 33}       47{col 43}{c |}{col 45}   0.9170
+{col 10}    2.152{col 20}{c |}       51{col 33}       55{col 43}{c |}{col 45}   0.7709
+{col 10}    2.583{col 20}{c |}       66{col 33}       65{col 43}{c |}{col 45}   1.0000
+{col 10}    3.013{col 20}{c |}       79{col 33}       71{col 43}{c |}{col 45}   0.5678
+{col 10}    3.444{col 20}{c |}       94{col 33}       86{col 43}{c |}{col 45}   0.6020
+{col 10}    3.874{col 20}{c |}      105{col 33}       94{col 43}{c |}{col 45}   0.4785
+{col 10}    4.305{col 20}{c |}      115{col 33}      107{col 43}{c |}{col 45}   0.6386
+{txt}{hline 19}{c BT}{hline 22}{c BT}{hline 10}
+{res}{txt}
+{com}. 
+. 
+. *多项式回归法
+. gen margin2=margin^2
+{txt}
+{com}. gen margin3=margin^3
+{txt}
+{com}. gen margin4=margin^4
+{txt}
+{com}. 
+. qui reg vote c.margin##d if margin<=50 & margin>=-50
+{txt}
+{com}. est store m1
+{txt}
+{com}. 
+. qui reg vote (c.margin c.margin2)##d if margin<=50 & margin>=-50
+{txt}
+{com}. est store m2
+{txt}
+{com}. 
+. qui reg vote (c.margin c.margin2 c.margin3)##d if margin<=50 & margin>=-50
+{txt}
+{com}. est store m3
+{txt}
+{com}. 
+. qui reg vote (c.margin c.margin2 c.margin3 c.margin4)##d if margin<=50 & margin>=-50
+{txt}
+{com}. est store m4
+{txt}
+{com}. 
+. esttab m1 m2 m3 m4, aic bic keep(1.d)
+{res}
+{txt}{hline 76}
+{txt}                      (1)             (2)             (3)             (4)   
+{txt}                     vote            vote            vote            vote   
+{txt}{hline 76}
+{txt}1.d         {res}        5.729***        7.703***        8.189***        6.999** {txt}
+            {res} {ralign 12:{txt:(}5.37{txt:)}}    {ralign 12:{txt:(}5.15{txt:)}}    {ralign 12:{txt:(}4.21{txt:)}}    {ralign 12:{txt:(}2.91{txt:)}}   {txt}
+{txt}{hline 76}
+{txt}N           {res}         1127            1127            1127            1127   {txt}
+{txt}AIC         {res}       8576.9          8576.8          8578.3          8581.6   {txt}
+{txt}BIC         {res}       8597.1          8607.0          8618.6          8631.8   {txt}
+{txt}{hline 76}
+{txt}t statistics in parentheses
+{txt}* p<0.05, ** p<0.01, *** p<0.001
+
+{com}. 
+. rdrobust vote margin, h(50) p(2) kernel(uniform)   //通过rdrobust实现多项式回归法
+{res}
+Sharp RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 0}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}      1297
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:Manual}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}      595{col 34}      702{col 55}{txt}Kernel        = {res}{ralign 10:Uniform}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}      565{col 34}      562{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        3{col 34}        3
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}   50.000{col 34}   50.000
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}   50.000{col 34}   50.000
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    1.000{col 34}    1.000
+
+Outcome: vote. Running variable: margin.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} 7.7031{col 33} 1.3703{col 43}5.6215{col 52}0.000{col 60} 5.01738{col 73} 10.3889
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}4.6771{col 52}0.000{col 60} 4.75704{col 73}   11.62
+{txt}{hline 19}{c BT}{hline 60}
+
+{com}. 
+. ****模糊断点
+. use "C:\Users\XuQi\Desktop\retirement.dta", clear
+{txt}
+{com}. 
+. *图形分析
+. rdplot retire age, c(60)
+{res}{err}Mass points detected in the running variable.
+{res}
+RD Plot with evenly spaced mimicking variance number of bins using polynomial regression.
+
+{txt}{ralign 21: Cutoff c = 60}{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c{col 54}{txt}Number of obs  = {res}     31641
+{txt}{hline 22}{c +}{hline 22}{col 54}Kernel         = {res}{ralign 10:Uniform}
+{txt}{ralign 21:Number of obs}{col 22} {c |} {col 23}{res}    17009{col 37}    14632
+{txt}{ralign 21:Eff. Number of obs}{col 22} {c |} {col 23}{res}    17009{col 37}    14632
+{txt}{ralign 21:Order poly. fit (p)}{col 22} {c |} {col 23}{res}        4{col 37}        4
+{txt}{ralign 21:BW poly. fit (h)}{col 22} {c |} {col 23}{res}    5.000{col 37}    5.000
+{txt}{ralign 21:Number of bins scale}{col 22} {c |} {col 23}{res}    1.000{col 37}    1.000
+
+Outcome: retire. Running variable: age.
+{txt}{hline 22}{c TT}{hline 22}
+{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:Bins selected}{col 22} {c |} {col 23}{res}      308{col 37}      323
+{txt}{ralign 21:Average bin length}{col 22} {c |} {col 23}{res}    0.016{col 37}    0.015
+{txt}{ralign 21:Median bin length}{col 22} {c |} {col 23}{res}    0.016{col 37}    0.015
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:IMSE-optimal bins}{col 22} {c |} {col 23}{res}       12{col 37}       11
+{txt}{ralign 21:Mimicking Var. bins}{col 22} {c |} {col 23}{res}      308{col 37}      323
+{txt}{hline 22}{c +}{hline 22}
+{lalign 1:Rel. to IMSE-optimal:}{col 22} {c |} 
+{ralign 21:Implied scale}{col 22} {c |} {col 23}{res}   25.667{col 37}   29.364
+{txt}{ralign 21:WIMSE var. weight}{col 22} {c |} {col 23}{res}    0.000{col 37}    0.000
+{txt}{ralign 21:WIMSE bias weight}{col 22} {c |} {col 23}{res}    1.000{col 37}    1.000
+{txt}{hline 22}{c BT}{hline 22}
+
+{res}{txt}
+{com}. rdplot health age, c(60)
+{res}{err}Mass points detected in the running variable.
+{res}
+RD Plot with evenly spaced mimicking variance number of bins using polynomial regression.
+
+{txt}{ralign 21: Cutoff c = 60}{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c{col 54}{txt}Number of obs  = {res}     31641
+{txt}{hline 22}{c +}{hline 22}{col 54}Kernel         = {res}{ralign 10:Uniform}
+{txt}{ralign 21:Number of obs}{col 22} {c |} {col 23}{res}    17009{col 37}    14632
+{txt}{ralign 21:Eff. Number of obs}{col 22} {c |} {col 23}{res}    17009{col 37}    14632
+{txt}{ralign 21:Order poly. fit (p)}{col 22} {c |} {col 23}{res}        4{col 37}        4
+{txt}{ralign 21:BW poly. fit (h)}{col 22} {c |} {col 23}{res}    5.000{col 37}    5.000
+{txt}{ralign 21:Number of bins scale}{col 22} {c |} {col 23}{res}    1.000{col 37}    1.000
+
+Outcome: health. Running variable: age.
+{txt}{hline 22}{c TT}{hline 22}
+{col 22} {c |} {col 23}Left of {res}c{col 36}{txt}Right of {res}c
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:Bins selected}{col 22} {c |} {col 23}{res}      290{col 37}      321
+{txt}{ralign 21:Average bin length}{col 22} {c |} {col 23}{res}    0.017{col 37}    0.016
+{txt}{ralign 21:Median bin length}{col 22} {c |} {col 23}{res}    0.017{col 37}    0.016
+{txt}{hline 22}{c +}{hline 22}
+{ralign 21:IMSE-optimal bins}{col 22} {c |} {col 23}{res}        5{col 37}        4
+{txt}{ralign 21:Mimicking Var. bins}{col 22} {c |} {col 23}{res}      290{col 37}      321
+{txt}{hline 22}{c +}{hline 22}
+{lalign 1:Rel. to IMSE-optimal:}{col 22} {c |} 
+{ralign 21:Implied scale}{col 22} {c |} {col 23}{res}   58.000{col 37}   80.250
+{txt}{ralign 21:WIMSE var. weight}{col 22} {c |} {col 23}{res}    0.000{col 37}    0.000
+{txt}{ralign 21:WIMSE bias weight}{col 22} {c |} {col 23}{res}    1.000{col 37}    1.000
+{txt}{hline 22}{c BT}{hline 22}
+
+{res}{txt}
+{com}. 
+. *计算最优带宽
+. rdbwselect health age, all c(60) fuzzy(retire)
+{res}{err}Mass points detected in the running variable.
+
+{res}Bandwidth estimators for fuzzy RD local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = }{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}     31641
+{txt}{hline 19}{c +}{hline 22}{col 55}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}    17009{col 34}    14632{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Min of age}{col 19} {c |} {col 21}{res}   55.000{col 34}   60.000
+{txt}{ralign 18:Max of age}{col 19} {c |} {col 21}{res}   59.917{col 34}   65.000
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:Unique obs}{col 19} {c |} {col 21}{res}       60{col 34}       61
+
+Outcome: health. Running variable: age. Treatment Status: retire.
+{txt}{hline 19}{c TT}{hline 30}{c TT}{hline 29}
+{col 19} {c |} {col 30}BW est. (h){col 50} {c |} {col 60}BW bias (b)
+{ralign 18:Method}{col 19} {c |} {col 22}Left of {res}c{col 40}{txt}Right of {res}c{txt}{col 50} {c |} {col 53}Left of {res}c{col 70}{txt}Right of {res}c
+{txt}{hline 19}{c +}{hline 30}{c +}{hline 29}
+{ralign 18:mserd}{col 19} {c |} {col 22}{res}    1.589{col 41}    1.589{txt}{col 50} {c |} {col 51}{res}    3.092{col 71}    3.092
+{txt}{ralign 18:msetwo}{col 19} {c |} {col 22}{res}    1.613{col 41}    1.441{txt}{col 50} {c |} {col 51}{res}    2.521{col 71}    2.464
+{txt}{ralign 18:msesum}{col 19} {c |} {col 22}{res}    1.438{col 41}    1.438{txt}{col 50} {c |} {col 51}{res}    2.279{col 71}    2.279
+{txt}{ralign 18:msecomb1}{col 19} {c |} {col 22}{res}    1.438{col 41}    1.438{txt}{col 50} {c |} {col 51}{res}    2.279{col 71}    2.279
+{txt}{ralign 18:msecomb2}{col 19} {c |} {col 22}{res}    1.589{col 41}    1.441{txt}{col 50} {c |} {col 51}{res}    2.521{col 71}    2.464
+{txt}{hline 19}{c +}{hline 30}{c +}{hline 29}
+{ralign 18:cerrd}{col 19} {c |} {col 22}{res}    0.947{col 41}    0.947{txt}{col 50} {c |} {col 51}{res}    3.092{col 71}    3.092
+{txt}{ralign 18:certwo}{col 19} {c |} {col 22}{res}    0.961{col 41}    0.858{txt}{col 50} {c |} {col 51}{res}    2.521{col 71}    2.464
+{txt}{ralign 18:cersum}{col 19} {c |} {col 22}{res}    0.856{col 41}    0.856{txt}{col 50} {c |} {col 51}{res}    2.279{col 71}    2.279
+{txt}{ralign 18:cercomb1}{col 19} {c |} {col 22}{res}    0.856{col 41}    0.856{txt}{col 50} {c |} {col 51}{res}    2.279{col 71}    2.279
+{txt}{ralign 18:cercomb2}{col 19} {c |} {col 22}{res}    0.947{col 41}    0.858{txt}{col 50} {c |} {col 51}{res}    2.521{col 71}    2.464
+{txt}{hline 19}{c BT}{hline 30}{c BT}{hline 29}
+Estimates adjusted for mass points in the running variable.
+
+{com}. 
+. *参数估计和统计推断
+. rdrobust health age, c(60) fuzzy(retire) 
+{res}{err}Mass points detected in the running variable.
+{res}
+Fuzzy RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 60}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}     31641
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}    17009{col 34}    14632{col 55}{txt}Kernel        = {res}{ralign 10:Triangular}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}     4696{col 34}     5116{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}    1.589{col 34}    1.589
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}    3.092{col 34}    3.092
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.514{col 34}    0.514
+{txt}{ralign 18:Unique obs}{col 19} {c |} {col 21}{res}       60{col 34}       61
+
+First-stage estimates. Outcome: retire. Running variable: age.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} .08847{col 33} .02108{col 43}4.1971{col 52}0.000{col 60} .047155{col 73} .129779
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}3.3356{col 52}0.001{col 60} .032345{col 73} .124509
+{txt}{hline 19}{c BT}{hline 60}
+
+{res}Treatment effect estimates. Outcome: health. Running variable: age. Treatment Status: retire.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res}-.32084{col 33} .16117{col 43}-1.9906{col 52}0.047{col 60} -.63673{col 73}-.004941
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}-1.9458{col 52}0.052{col 60}-.699906{col 73} .002536
+{txt}{hline 19}{c BT}{hline 60}
+Estimates adjusted for mass points in the running variable.
+
+{com}. 
+. *换用矩形核
+. rdrobust health age, c(60) fuzzy(retire) kernel(uniform)  
+{res}{err}Mass points detected in the running variable.
+{res}
+Fuzzy RD estimates using local polynomial regression.
+
+{txt}{ralign 18: Cutoff c = 60}{col 19} {c |} {col 21}Left of {res}c{col 33}{txt}Right of {res}c{col 55}{txt}Number of obs = {res}     31641
+{txt}{hline 19}{c +}{hline 22}{col 55}BW type       = {res}{ralign 10:mserd}
+{txt}{ralign 18:Number of obs}{col 19} {c |} {col 21}{res}    17009{col 34}    14632{col 55}{txt}Kernel        = {res}{ralign 10:Uniform}
+{txt}{ralign 18:Eff. Number of obs}{col 19} {c |} {col 21}{res}     3785{col 34}     4243{col 55}{txt}VCE method    = {res}{ralign 10:NN}
+{txt}{ralign 18:Order est. (p)}{col 19} {c |} {col 21}{res}        1{col 34}        1
+{txt}{ralign 18:Order bias (q)}{col 19} {c |} {col 21}{res}        2{col 34}        2
+{txt}{ralign 18:BW est. (h)}{col 19} {c |} {col 21}{res}    1.252{col 34}    1.252
+{txt}{ralign 18:BW bias (b)}{col 19} {c |} {col 21}{res}    2.969{col 34}    2.969
+{txt}{ralign 18:rho (h/b)}{col 19} {c |} {col 21}{res}    0.422{col 34}    0.422
+{txt}{ralign 18:Unique obs}{col 19} {c |} {col 21}{res}       60{col 34}       61
+
+First-stage estimates. Outcome: retire. Running variable: age.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res} .08996{col 33} .02108{col 43}4.2681{col 52}0.000{col 60} .048647{col 73} .131266
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}3.4258{col 52}0.001{col 60} .033683{col 73} .123756
+{txt}{hline 19}{c BT}{hline 60}
+
+{res}Treatment effect estimates. Outcome: health. Running variable: age. Treatment Status: retire.
+{txt}{hline 19}{c TT}{hline 60}
+{ralign 18:Method}{col 19} {c |} {col 24}Coef.{col 33}Std. Err.{col 46}z{col 52}P>|z|{col 61}[95% Conf. Interval]
+{hline 19}{c +}{hline 60}
+{ralign 18:Conventional}{col 19} {c |} {col 22}{res}-.29349{col 33} .15762{col 43}-1.8619{col 52}0.063{col 60}-.602423{col 73} .015451
+{txt}{ralign 18:Robust}{col 19} {c |} {col 22}{res}    -{col 33}    -{col 43}-1.8177{col 52}0.069{col 60}-.647953{col 73} .024406
+{txt}{hline 19}{c BT}{hline 60}
+Estimates adjusted for mass points in the running variable.
+
+{com}. 
+. *矩形核条件下通过ivregress命令再现rdrobust的结果
+. gen z=1 if age>=60 & age<.
+{txt}(17,009 missing values generated)
+
+{com}. replace z=0 if age<60
+{txt}(17,009 real changes made)
+
+{com}. 
+. replace age=age-60    //配置变量对中
+{txt}(31,641 real changes made)
+
+{com}. 
+. ivregress 2sls health (retire=z) age c.age#z if age>=-1.252 & age<=1.252
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}     8,028
+{txt}{col 1}{col 51}Wald chi2({res}3{txt}){col 67}= {res}     31.59
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}         .
+{txt}{col 51}Root MSE{col 67}=    {res} .31553
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      health{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}retire {c |}{col 14}{res}{space 2}-.2934861{col 26}{space 2} .1593392{col 37}{space 1}   -1.84{col 46}{space 3}0.065{col 54}{space 4}-.6057853{col 67}{space 3} .0188131
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0119949{col 26}{space 2} .0239413{col 37}{space 1}    0.50{col 46}{space 3}0.616{col 54}{space 4}-.0349293{col 67}{space 3} .0589191
+{txt}{space 12} {c |}
+{space 5}z#c.age {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0082678{col 26}{space 2} .0184432{col 37}{space 1}    0.45{col 46}{space 3}0.654{col 54}{space 4}-.0278803{col 67}{space 3} .0444159
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 1.100541{col 26}{space 2} .1106045{col 37}{space 1}    9.95{col 46}{space 3}0.000{col 54}{space 4} .8837602{col 67}{space 3} 1.317322
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:retire}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:age 1.z#c.age z}{p_end}
+
+{com}. 
+. *多项式回归
+. gen age2=age^2
+{txt}
+{com}. gen age3=age^3
+{txt}
+{com}. gen age4=age^4
+{txt}
+{com}. 
+. qui reg health c.age##z if age<=3 & age>=-3
+{txt}
+{com}. est store m1
+{txt}
+{com}. 
+. qui reg health (c.age c.age2)##z if age<=3 & age>=-3
+{txt}
+{com}. est store m2
+{txt}
+{com}. 
+. qui reg health (c.age c.age2 c.age3)##z if age<=3 & age>=-3
+{txt}
+{com}. est store m3
+{txt}
+{com}. 
+. qui reg health (c.age c.age2 c.age3 c.age4)##z if age<=3 & age>=-3
+{txt}
+{com}. est store m4
+{txt}
+{com}. 
+. esttab m1 m2 m3 m4, aic bic keep(1.z)
+{res}
+{txt}{hline 76}
+{txt}                      (1)             (2)             (3)             (4)   
+{txt}                   health          health          health          health   
+{txt}{hline 76}
+{txt}1.z         {res}      -0.0328***      -0.0258*        -0.0284         -0.0401   {txt}
+            {res} {ralign 12:{txt:(}-3.77{txt:)}}    {ralign 12:{txt:(}-1.97{txt:)}}    {ralign 12:{txt:(}-1.62{txt:)}}    {ralign 12:{txt:(}-1.80{txt:)}}   {txt}
+{txt}{hline 76}
+{txt}N           {res}        18405           18405           18405           18405   {txt}
+{txt}AIC         {res}       7330.6          7333.1          7336.8          7339.9   {txt}
+{txt}BIC         {res}       7361.9          7380.0          7399.3          7418.1   {txt}
+{txt}{hline 76}
+{txt}t statistics in parentheses
+{txt}* p<0.05, ** p<0.01, *** p<0.001
+
+{com}. 
+. ivregress 2sls health (retire=z) age c.age#z if age<=3 & age>=-3
+{res}
+{txt}{col 1}Instrumental variables 2SLS regression{col 51}Number of obs{col 67}= {res}    18,405
+{txt}{col 1}{col 51}Wald chi2({res}3{txt}){col 67}= {res}    127.49
+{txt}{col 1}{col 51}Prob > chi2{col 67}= {res}    0.0000
+{txt}{col 1}{col 51}R-squared{col 67}= {res}         .
+{txt}{col 51}Root MSE{col 67}=    {res} .30355
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      health{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 6}retire {c |}{col 14}{res}{space 2}-.2343489{col 26}{space 2} .0639179{col 37}{space 1}   -3.67{col 46}{space 3}0.000{col 54}{space 4}-.3596257{col 67}{space 3}-.1090722
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0051383{col 26}{space 2} .0065482{col 37}{space 1}    0.78{col 46}{space 3}0.433{col 54}{space 4}-.0076959{col 67}{space 3} .0179725
+{txt}{space 12} {c |}
+{space 5}z#c.age {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} .0033769{col 26}{space 2} .0051373{col 37}{space 1}    0.66{col 46}{space 3}0.511{col 54}{space 4} -.006692{col 67}{space 3} .0134458
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  1.05926{col 26}{space 2} .0446121{col 37}{space 1}   23.74{col 46}{space 3}0.000{col 54}{space 4} .9718218{col 67}{space 3} 1.146698
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 12 154}Endogenous: {res:retire}{p_end}
+{p 0 12 154}Exogenous:{space 1} {res:age 1.z#c.age z}{p_end}
+
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XuQi\Documents\第九章.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Jul 2024, 10:16:48
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
